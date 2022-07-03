@@ -20,7 +20,7 @@ export default () => {
   }, [])
 
   return (
-    <ImageBackground source={require('../../assets/1.png')} style={{ flex: 1 }}>
+    <ImageBackground source={require('../../../assets/1.png')} style={{ flex: 1 }}>
       <Container>
         <LoadingIcon size="large" color="#ffffff" />
       </Container>
