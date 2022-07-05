@@ -15,17 +15,27 @@ import {
 import SignInput from '../../components/SignInput'
 import { useNavigation } from '@react-navigation/native'
 
+import { auth } from '../../../firebase'
+
 export default () => {
+
 
   const navigation = useNavigation();
 
-  const [nameField, setNameField] = useState('');
-  const [emailField, setEmailField] = useState('');
-  const [passwordField, setPasswordField] = useState('');
+  const [name, setNameField] = useState('');
+  const [email, setEmailField] = useState('');
+  const [password, setPasswordField] = useState('');
 
-  const handleSignClick = () => {
+  const handleSignUpClick = () => {
+    auth
+    .createUserWithEmailAndPassword(email, password)
+    .then(userCredentials => {
+      const user = userCredentials.user;
+      console.log("Resgistrado com email: ", user.email);
+    })
+    .catch(error => alert(error.message))
 
-  }
+}
 
   const handleRegisterClick = () => {
     navigation.reset({
@@ -39,26 +49,26 @@ export default () => {
       <InputArea>
         <SignInput
           placeholder="Digite seu nome"
-          value={nameField}
+          value={name}
           onChangeText={t => setNameField(t)}
         />
 
         <SignInput
           placeholder="Digite seu email"
-          value={emailField}
+          value={email}
           onChangeText={t => setEmailField(t)}
         />
 
         <SignInput
           placeholder="Digite sua senha"
-          value={passwordField}
+          value={password}
           onChangeText={t => setPasswordField(t)}
           password={true}
         />
 
 
 
-        <CustomButton onPress={handleSignClick}>
+        <CustomButton onPress={handleSignUpClick}>
           <CustomButtonText>Cadastrar</CustomButtonText>
         </CustomButton>
 

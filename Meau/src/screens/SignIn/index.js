@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import {
   Container,
   WelcomeSign,
@@ -14,16 +13,33 @@ import {
 
 import SignInput from '../../components/SignInput'
 import { useNavigation } from '@react-navigation/native'
+import { auth } from '../../../firebase'
 
 export default () => {
 
   const navigation = useNavigation();
 
-  const [emailField, setEmailField] = useState('');
-  const [passwordField, setPasswordField] = useState('');
+  const [email, setEmailField] = useState('');
+  const [password, setPasswordField] = useState('');
+
+  useEffect(() => {
+      const unsubscribe = auth.onAuthStateChanged(user => {
+        if (user) {
+          navigation.navigate("Home")
+        }
+      })
+
+      return unsubscribe;
+  }, [])
 
   const handleSignClick = () => {
-
+    auth
+    .signInWithEmailAndPassword(email, password)
+    .then(userCredentials => {
+      const user = userCredentials.user;
+      console.log('Logado com o email: ', user.email);
+    })
+    .catch(error => alert(error.message))
   }
 
   const handleRegisterClick = () => {
@@ -38,14 +54,14 @@ export default () => {
       <InputArea>
         <SignInput
           placeholder="Digite seu e-mail"
-          value={emailField}
+          value={email}
           onChangeText={t => setEmailField(t)}
           
         />
 
         <SignInput
           placeholder="Digite sua senha"
-          value={passwordField}
+          value={password}
           onChangeText={t => setPasswordField(t)}
           password={true}
         />
