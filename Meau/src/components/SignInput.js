@@ -22,10 +22,11 @@ export default ({placeholder, value, onChangeText, password}) => {
         <InputArea>
             
             <Input
+                secureTextEntry={password}
                 placeholder={placeholder}
                 value={value}
                 onChangeText={onChangeText}
-                secureTextEntry={password}
+                
             />
         </InputArea>
     );
