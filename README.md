@@ -4,7 +4,7 @@
 
 ## Projeto: Aplicativo Meau
 
-### Links: [Drive com informações do App](https://drive.google.com/drive/folders/1dAip-lf7qF3K07nTp5UjhrA_xj-NCf1L)
+### Links: [Drive com informações do App](https://drive.google.com/drive/folders/15TGfLCMfs-lSO_mYpfqplN8Bdl_qf_MF?usp=sharing)
 
 <b>...</b>
 
