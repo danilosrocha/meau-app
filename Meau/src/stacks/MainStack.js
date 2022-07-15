@@ -5,6 +5,8 @@ import Preload from '../screens/Preload';
 import SignIn from '../screens/SignIn';
 import SignUp from '../screens/SignUp';
 import Home from '../screens/Home';
+import UpdateUserData from '../screens/UpdateUserData';
+
 
 const Stack = createStackNavigator();
 
@@ -19,5 +21,6 @@ export default () => (
         <Stack.Screen name="SignIn" component={SignIn}/>
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="Home" component={Home}/>
+        <Stack.Screen name="UpdateUserData" component={UpdateUserData}/>
     </Stack.Navigator>
 );
