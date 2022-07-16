@@ -51,7 +51,3 @@ export const SignMessageButtonTextBold = styled.Text`
     font-weight: bold;
     margin-left: 5px;
 `;
-<<<<<<< HEAD
-
-=======
->>>>>>> b33dee797fab2f7c0b5b7cde8656ef517544d70a
