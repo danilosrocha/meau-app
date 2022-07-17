@@ -29,6 +29,13 @@ export default () => {
             .catch(error => alert(error.message))
     }
 
+    const handleUpdate = () => {
+        auth
+            
+                navigation.replace("UpdateUserData")
+          
+    }
+
     return (
         <Container>
             <WelcomeSign>
@@ -41,6 +48,11 @@ export default () => {
                 </CustomButton>
             </InputArea>
 
+            <InputArea>
+                <CustomButton onPress={handleUpdate}>
+                    <CustomButtonText>Atualizar seu cadastro</CustomButtonText>
+                </CustomButton>
+            </InputArea>
 
         </Container>
     );

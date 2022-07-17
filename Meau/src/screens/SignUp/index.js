@@ -32,6 +32,9 @@ export default () => {
     .then(userCredentials => {
       const user = userCredentials.user;
       console.log("Resgistrado com email: ", user.email);
+      navigation.reset({
+      routes: [{ name: 'Home' }]
+                });
     })
     .catch(error => alert(error.message))
 
