@@ -30,30 +30,30 @@ export default () => {
   const [birth, setBirthField] = useState('');
 
   const handleUpdateClick = () => {
-        auth
-        const colect= db.collection("UserData")
-        const myDoc= colect.doc(auth.currentUser?.uid)
-        
-        const data={
-            "nome":name,
-            "telefone":fone,
-            "cidade":city,
-            "endereco":adress,
-            "dataNascimento":birth
-        }
-        myDoc.set(data)
-        .then(()=>{
-                alert("documento atualizado")
-               navigation.reset({
-                routes: [{ name: 'Home' }]
-                });
-            }).catch(error => alert(error.message))
-            
+    auth
+    const colect = db.collection("UserData")
+    const myDoc = colect.doc(auth.currentUser?.uid)
 
-}
+    const data = {
+      "nome": name,
+      "telefone": fone,
+      "cidade": city,
+      "endereco": adress,
+      "dataNascimento": birth
+    }
+    myDoc.set(data)
+      .then(() => {
+        alert("documento atualizado")
+        navigation.reset({
+          routes: [{ name: 'Home' }]
+        });
+      }).catch(error => alert(error.message))
+
+
+  }
 
   const handleRegisterClick = () => {
-  auth
+    auth
     navigation.reset({
       routes: [{ name: 'Home' }]
     });
