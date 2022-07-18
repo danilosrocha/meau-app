@@ -24,7 +24,6 @@ export default () => {
       <Container>
         <LoadingIcon size="large" color="#ffffff" />
       </Container>
-
     </ImageBackground>
   );
 }

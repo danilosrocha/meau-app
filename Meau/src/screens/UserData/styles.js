@@ -3,45 +3,31 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
     background-color: #58BD97;
-    width: 100%;
+    flex: 1;
     justify-content: center;
     align-items: center;
-    flex: 1;
-`;
-
-export const SimpleText = styled.Text`
-    font-size: 20px;
-    color: #000000;
-    margin-top: 20px;
 `;
 
 export const WelcomeSign = styled.Text`
-    font-size: 24px;
+    font-size: 20px;
     color: #000000;
     margin-top: 60px;
-`;
-
-export const InputArea = styled.View`
-    width: 100%;
-    padding: 40px;
-    justify-content: center;
-    align-items: center;
+    height: 60px;
 `;
 
 export const ViewArea = styled.View`
     width: 100%;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
+    padding: 40px;
 `;
 
 export const CustomButton = styled.TouchableOpacity`
-    width: 100%;
+    height: 60px;
     background-color: #fff
     border-radius: 30px;
     justify-content: center;
     align-items: center;
-    height: 60px;
+    margin-bottom: 20px;
+
 `;
 export const CustomButtonText = styled.Text`
     fontSize: 18px;
@@ -66,4 +52,3 @@ export const SignMessageButtonTextBold = styled.Text`
     font-weight: bold;
     margin-left: 5px;
 `;
-

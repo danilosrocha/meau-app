@@ -49,7 +49,7 @@ export default () => {
   return (
     <Container>
 
-      <WelcomeSign>Bem vindo à tela de cadastro!</WelcomeSign>
+      <WelcomeSign>Faça seu cadastro!</WelcomeSign>
       
       <SimpleText>Etapa 1</SimpleText>
     

@@ -37,6 +37,10 @@ export default () => {
 
     }
 
+    const handleViewData = () => {
+        navigation.navigate("UserData")
+    }
+
     return (
         <Container>
             <WelcomeSign>
@@ -45,7 +49,7 @@ export default () => {
 
             <InputArea>
 
-                <CustomButton onPress={handleUpdate}>
+                <CustomButton onPress={handleViewData}>
                     <CustomButtonText>Visualizar seus dados</CustomButtonText>
                 </CustomButton>
 

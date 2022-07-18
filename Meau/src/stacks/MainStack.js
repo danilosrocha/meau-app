@@ -7,7 +7,7 @@ import SignUp_1 from '../screens/SignUp/index_1';
 import SignUp_2 from '../screens/SignUp/index_2';
 import Home from '../screens/Home';
 import UpdateUserData from '../screens/UpdateUserData';
-
+import UserData from '../screens/UserData';
 
 const Stack = createStackNavigator();
 
@@ -24,5 +24,6 @@ export default () => (
         <Stack.Screen name="SignUp_2" component={SignUp_2}/>
         <Stack.Screen name="Home" component={Home}/>
         <Stack.Screen name="UpdateUserData" component={UpdateUserData}/>
+        <Stack.Screen name="UserData" component={UserData}/>
     </Stack.Navigator>
 );

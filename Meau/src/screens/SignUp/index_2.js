@@ -7,6 +7,7 @@ import {
   InputArea,
   CustomButton,
   CustomButtonText,
+  ViewArea,
   SignMessageButton,
   SignMessageButtonText,
   SignMessageButtonTextBold
@@ -60,56 +61,59 @@ export default () => {
   return (
     <Container>
 
-      <WelcomeSign>Etapa 2</WelcomeSign>
+      <ViewArea>
 
-      <ScrollView style={styles.scrool}>
+        <SimpleText>Etapa 2</SimpleText>
 
-        <InputArea>
-          <SignInput
-            placeholder="Nome"
-            value={name}
-            onChangeText={t => setNameField(t)}
-          />
+        <ScrollView style={styles.scrool}>
 
-          <SignInput
-            placeholder="Telefone"
-            value={fone}
-            onChangeText={t => setFoneField(t)}
-          />
+          <InputArea>
 
-          <SignInput
-            placeholder="Cidade"
-            value={city}
-            onChangeText={t => setCityField(t)}
-          />
+            <SignInput
+              placeholder="Nome"
+              value={name}
+              onChangeText={t => setNameField(t)}
+            />
 
-          <SignInput
-            placeholder="Endereço"
-            value={adress}
-            onChangeText={t => setAdressField(t)}
-          />
+            <SignInput
+              placeholder="Telefone"
+              value={fone}
+              onChangeText={t => setFoneField(t)}
+            />
 
-          <SignInput
-            placeholder="Data de nascimento"
-            value={birth}
-            onChangeText={t => setBirthField(t)}
-          />
+            <SignInput
+              placeholder="Cidade"
+              value={city}
+              onChangeText={t => setCityField(t)}
+            />
 
-          <SignInput
-            placeholder="..."
-            value={birth}
-            onChangeText={t => setBirthField(t)}
-          />
+            <SignInput
+              placeholder="Endereço"
+              value={adress}
+              onChangeText={t => setAdressField(t)}
+            />
 
-          <CustomButton onPress={handleUpdateClick}>
-            <CustomButtonText>Cadastrar</CustomButtonText>
-          </CustomButton>
+            <SignInput
+              placeholder="Data de nascimento"
+              value={birth}
+              onChangeText={t => setBirthField(t)}
+            />
 
-          <SimpleText>Email: {auth.currentUser?.email}</SimpleText>
-          
-        </InputArea>
+            <SignInput
+              placeholder="..."
+              value={birth}
+              onChangeText={t => setBirthField(t)}
+            />
 
-      </ScrollView>
+            <CustomButton onPress={handleUpdateClick}>
+              <CustomButtonText>Cadastrar</CustomButtonText>
+            </CustomButton>
+
+            <SimpleText>Email: {auth.currentUser?.email}</SimpleText>
+
+          </InputArea>
+        </ScrollView>
+      </ViewArea>
 
     </Container>
   );
