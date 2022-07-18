@@ -20,7 +20,6 @@ import { db } from '../../../firebase'
 
 export default () => {
 
-
   const navigation = useNavigation();
 
   const [name, setNameField] = useState('');
@@ -52,20 +51,24 @@ export default () => {
 
   }
 
-  const handleRegisterClick = () => {
-    auth
-    navigation.reset({
-      routes: [{ name: 'Home' }]
-    });
+  const handleCancelClick = () => {
+    navigation.navigate('Home');
   }
+  
   return (
     <Container>
-      <WelcomeSign>Bem vindo ao Meau!</WelcomeSign>
+      <WelcomeSign>Atualize seus dados!</WelcomeSign>
 
       <InputArea>
+      
+        <SignInput
+          placeholder="Digite seu nome"
+          value={name}
+          onChangeText={t => setNameField(t)}
+        />
 
         <SignInput
-          placeholder="Digite seu telefono"
+          placeholder="Digite seu telefone"
           value={fone}
           onChangeText={t => setFoneField(t)}
         />
@@ -83,7 +86,7 @@ export default () => {
         />
 
         <SignInput
-          placeholder="Digite a data de seu nascimento"
+          placeholder="Digite sua data de nascimento"
           value={birth}
           onChangeText={t => setBirthField(t)}
         />
@@ -94,7 +97,7 @@ export default () => {
 
       </InputArea>
       <Text>Email: {auth.currentUser?.email}</Text>
-      <SignMessageButton onPress={handleRegisterClick}>
+      <SignMessageButton onPress={handleCancelClick}>
         <SignMessageButtonText>Cancelar</SignMessageButtonText>
       </SignMessageButton>
     </Container>

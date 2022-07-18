@@ -8,11 +8,17 @@ export const Container = styled.SafeAreaView`
     align-items: center;
 `;
 
+export const SimpleText = styled.Text`
+    font-size: 22px;
+    color: #000000;
+    margin-top: 60px;
+`;
+
 export const WelcomeSign = styled.Text`
     font-size: 20px;
     color: #000000;
-    margin-top: 60px;
     height: 60px;
+    margin-top: 40px;
 `;
 
 export const InputArea = styled.View`

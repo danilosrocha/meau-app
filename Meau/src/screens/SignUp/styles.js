@@ -8,8 +8,14 @@ export const Container = styled.SafeAreaView`
     align-items: center;
 `;
 
-export const WelcomeSign = styled.Text`
+export const SimpleText = styled.Text`
     font-size: 20px;
+    color: #000000;
+    margin-top: 20px;
+`;
+
+export const WelcomeSign = styled.Text`
+    font-size: 24px;
     color: #000000;
     margin-top: 60px;
     height: 60px;
@@ -18,15 +24,17 @@ export const WelcomeSign = styled.Text`
 export const InputArea = styled.View`
     width: 100%;
     padding: 40px;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const CustomButton = styled.TouchableOpacity`
-    height: 60px;
+    width: 100%;
     background-color: #fff
     border-radius: 30px;
     justify-content: center;
     align-items: center;
-
+    height: 60px;
 `;
 export const CustomButtonText = styled.Text`
     fontSize: 18px;

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Text, View } from 'react-native'
 import {
   Container,
+  SimpleText,
   WelcomeSign,
   InputArea,
   CustomButton,
@@ -28,17 +29,17 @@ export default () => {
 
   const handleSignUpClick = () => {
     auth
-    .createUserWithEmailAndPassword(email, password)
-    .then(userCredentials => {
-      const user = userCredentials.user;
-      console.log("Resgistrado com email: ", user.email);
-      navigation.reset({
-      routes: [{ name: 'Home' }]
-                });
-    })
-    .catch(error => alert(error.message))
+      .createUserWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.log("Resgistrado com email: ", user.email);
+        navigation.reset({
+          routes: [{ name: 'SignUp_2' }]
+        });
+      })
+      .catch(error => alert(error.message))
 
-}
+  }
 
   const handleRegisterClick = () => {
     navigation.reset({
@@ -47,32 +48,28 @@ export default () => {
   }
   return (
     <Container>
-      <WelcomeSign>Bem vindo ao Meau!</WelcomeSign>
 
+      <WelcomeSign>Bem vindo à tela de cadastro!</WelcomeSign>
+      
+      <SimpleText>Etapa 1</SimpleText>
+    
       <InputArea>
-        <SignInput
-          placeholder="Digite seu nome"
-          value={name}
-          onChangeText={t => setNameField(t)}
-        />
 
         <SignInput
-          placeholder="Digite seu email"
+          placeholder="Email"
           value={email}
           onChangeText={t => setEmailField(t)}
         />
 
         <SignInput
-          placeholder="Digite sua senha"
+          placeholder="Senha"
           value={password}
           onChangeText={t => setPasswordField(t)}
           password={true}
         />
 
-
-
         <CustomButton onPress={handleSignUpClick}>
-          <CustomButtonText>Cadastrar</CustomButtonText>
+          <CustomButtonText>Continuar</CustomButtonText>
         </CustomButton>
 
       </InputArea>

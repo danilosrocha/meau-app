@@ -9,7 +9,7 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const WelcomeSign = styled.Text`
-    font-size: 20px;
+    font-size: 24px;
     color: #000000;
     margin-top: 60px;
     height: 60px;
