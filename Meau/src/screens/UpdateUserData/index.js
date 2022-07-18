@@ -15,8 +15,7 @@ import {
 import SignInput from '../../components/SignInput'
 import { useNavigation } from '@react-navigation/native'
 import { doc, setDoc } from "firebase/firestore";
-import { auth } from '../../../firebase'
-import { db } from '../../../firebase'
+import { auth, db } from '../../../firebase'
 
 export default () => {
 
@@ -34,6 +33,8 @@ export default () => {
     const myDoc = colect.doc(auth.currentUser?.uid)
 
     const data = {
+      "id": auth.currentUser?.uid,
+      "email": auth.currentUser?.email,
       "nome": name,
       "telefone": fone,
       "cidade": city,

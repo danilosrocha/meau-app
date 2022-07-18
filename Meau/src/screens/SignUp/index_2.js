@@ -37,6 +37,8 @@ export default () => {
     const myDoc = colect.doc(auth.currentUser?.uid)
 
     const data = {
+      "id": auth.currentUser?.uid,
+      "email": auth.currentUser?.email,
       "nome": name,
       "telefone": fone,
       "cidade": city,

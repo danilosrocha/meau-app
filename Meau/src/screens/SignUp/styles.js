@@ -37,14 +37,14 @@ export const ViewArea = styled.View`
 
 export const CustomButton = styled.TouchableOpacity`
     width: 100%;
-    background-color: #fff
+    background-color: #fff;
     border-radius: 30px;
     justify-content: center;
     align-items: center;
     height: 60px;
 `;
 export const CustomButtonText = styled.Text`
-    fontSize: 18px;
+    font-size: 18px;
     color: #000000;
 `;
 

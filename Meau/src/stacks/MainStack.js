@@ -7,7 +7,7 @@ import SignUp_1 from '../screens/SignUp/index_1';
 import SignUp_2 from '../screens/SignUp/index_2';
 import Home from '../screens/Home';
 import UpdateUserData from '../screens/UpdateUserData';
-import UserData from '../screens/UserData';
+import UserData from '../screens/UserData/index';
 
 const Stack = createStackNavigator();
 
