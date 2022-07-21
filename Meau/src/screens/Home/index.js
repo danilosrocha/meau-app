@@ -25,8 +25,20 @@ export default () => {
             .signOut()
             .then(() => {
                 navigation.replace("SignIn")
+                console.log('Deslogado');
             })
             .catch(error => alert(error.message))
+    }
+
+    const handleUpdate = () => {
+        auth
+
+        navigation.replace("UpdateUserData")
+
+    }
+
+    const handleViewData = () => {
+        navigation.navigate("UserData")
     }
 
     return (
@@ -36,11 +48,20 @@ export default () => {
             </WelcomeSign>
 
             <InputArea>
+
+                <CustomButton onPress={handleViewData}>
+                    <CustomButtonText>Visualizar seus dados</CustomButtonText>
+                </CustomButton>
+
+                <CustomButton onPress={handleUpdate}>
+                    <CustomButtonText>Atualizar seu cadastro</CustomButtonText>
+                </CustomButton>
+
                 <CustomButton onPress={handleSignOut}>
                     <CustomButtonText>Sign Out</CustomButtonText>
                 </CustomButton>
-            </InputArea>
 
+            </InputArea>
 
         </Container>
     );

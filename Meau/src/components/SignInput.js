@@ -8,6 +8,7 @@ const InputArea = styled.View`
     background-color: #4444;
     border-radius: 30px;
     padding-left: 15px;
+    flex-direction: row;
     align-items: center;
     margin-bottom: 15px;
 `;
@@ -15,17 +16,19 @@ const InputArea = styled.View`
 const Input = styled.TextInput`
     flex: 1;
     font-size: 16px;
+    margin-left: 10px;
 `;
 
 export default ({placeholder, value, onChangeText, password}) => {
     return (
         <InputArea>
-            
+
             <Input
+                secureTextEntry={password}
                 placeholder={placeholder}
                 value={value}
                 onChangeText={onChangeText}
-                secureTextEntry={password}
+                
             />
         </InputArea>
     );

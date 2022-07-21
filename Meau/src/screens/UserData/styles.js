@@ -8,6 +8,13 @@ export const Container = styled.SafeAreaView`
     align-items: center;
 `;
 
+export const FlatList = styled.FlatList`
+    border-radius: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 30px;
+`;
+
 export const WelcomeSign = styled.Text`
     font-size: 20px;
     color: #000000;
@@ -15,20 +22,22 @@ export const WelcomeSign = styled.Text`
     height: 60px;
 `;
 
-export const InputArea = styled.View`
+export const ViewArea = styled.View`
     width: 100%;
-    padding: 40px;
+    padding: 20px;
 `;
 
 export const CustomButton = styled.TouchableOpacity`
     height: 60px;
     background-color: #fff;
+    margin-left: 25px;
+    margin-right: 25px;
     border-radius: 30px;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-
 `;
+
 export const CustomButtonText = styled.Text`
     font-size: 18px;
     color: #000000;

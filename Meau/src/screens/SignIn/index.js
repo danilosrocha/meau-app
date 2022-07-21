@@ -44,7 +44,7 @@ export default () => {
 
   const handleRegisterClick = () => {
     navigation.reset({
-      routes: [{ name: 'SignUp' }]
+      routes: [{ name: 'SignUp_1' }]
     });
   }
   return (
