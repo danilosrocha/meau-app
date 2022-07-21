@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { ToastAndroid } from 'react-native'
 import {
   Container,
   WelcomeSign,
@@ -38,6 +39,10 @@ export default () => {
     .then(userCredentials => {
       const user = userCredentials.user;
       console.log('Logado com o email: ', user.email);
+      ToastAndroid.show(
+        "Que tal adotar um bichinho hoje?",
+        ToastAndroid.LONG,
+      )
     })
     .catch(error => alert(error.message))
   }

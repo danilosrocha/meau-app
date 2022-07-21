@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert } from 'react-native'
+import { Alert, ToastAndroid } from 'react-native'
 import {
     Container,
     WelcomeSign,
@@ -26,11 +26,11 @@ export default () => {
         .then((querySnapshot) =>{
             let temporyData = []
             querySnapshot.forEach((doc) =>{
-                
                 if (doc.id == idUser) {
                     if (doc.data().nome == "") {
                         navigation.navigate("UpdateUserData")
                         Alert.alert("Faltam dados para conta!")
+
                     } else {
                         const user = {
                             cidade: doc.data().cidade,
@@ -57,6 +57,10 @@ export default () => {
 
     const handleHome = () => {
         navigation.navigate("Home")
+        ToastAndroid.show(
+            "Lembre-se de manter seu cadastro atualizado!",
+            ToastAndroid.LONG,
+        )
     }
 
     const renderItem = ({ item }) => (
