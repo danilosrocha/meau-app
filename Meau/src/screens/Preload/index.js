@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 export default () => {
 
   const navigation = useNavigation();
+  
 
   useEffect(() => {
     token = 0;
@@ -13,7 +14,7 @@ export default () => {
 
     } else {
       setTimeout(function () {
-        navigation.navigate('SignIn');
+        navigation.navigate('Profile');
       }, 1000);
     }
 

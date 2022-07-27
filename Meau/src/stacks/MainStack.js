@@ -8,12 +8,13 @@ import SignUp_2 from '../screens/SignUp/index_2';
 import Home from '../screens/Home';
 import UpdateUserData from '../screens/UpdateUserData';
 import UserData from '../screens/UserData/index';
+import Profile from '../screens/Profile';
 
 const Stack = createStackNavigator();
 
 export default () => (
     <Stack.Navigator
-        initialRouteName='Preload'
+        initialRouteName='Profile'
         screenOptions={{
             headerShown: false
         }}
@@ -25,5 +26,6 @@ export default () => (
         <Stack.Screen name="Home" component={Home}/>
         <Stack.Screen name="UpdateUserData" component={UpdateUserData}/>
         <Stack.Screen name="UserData" component={UserData}/>
+        <Stack.Screen name="Profile" component={Profile}/>
     </Stack.Navigator>
 );
