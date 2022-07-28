@@ -56,12 +56,8 @@ export default () => {
 
             <InputArea>
 
-                <CustomButton onPress={handleViewData}>
-                    <CustomButtonText>Visualizar seus dados</CustomButtonText>
-                </CustomButton>
-
                 <CustomButton onPress={handleUpdate}>
-                    <CustomButtonText>Atualizar seu cadastro</CustomButtonText>
+                    <CustomButtonText>Visualizar perfil</CustomButtonText>
                 </CustomButton>
 
 

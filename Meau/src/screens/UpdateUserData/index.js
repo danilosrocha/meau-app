@@ -1,5 +1,9 @@
-import React, { useState } from 'react'
-import { Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { ScrollView, Alert } from 'react-native'
+import * as ImagePicker from 'expo-image-picker';
+import { useNavigation } from '@react-navigation/native'
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from '../../../firebase'
 import {
   Container,
   WelcomeSign,
@@ -8,14 +12,10 @@ import {
   CustomButtonText,
   SignMessageButton,
   SignMessageButtonText,
-  SignMessageButtonTextBold
-
+  ContentImg,
+  Avatar,
 } from './styles'
-
 import SignInput from '../../components/SignInput'
-import { useNavigation } from '@react-navigation/native'
-import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from '../../../firebase'
 
 export default () => {
 
@@ -27,6 +27,93 @@ export default () => {
   const [adress, setAdressField] = useState('');
   const [birth, setBirthField] = useState('');
 
+  /*USER DATA*/
+  const handleImageUser = () => {
+    Alert.alert(
+      "Selecione",
+      "Informe de onde você quer pegar a foto",
+      [
+        {
+          text: "Galeria",
+          onPress: () => pickImageFromGalery(),
+          style: "default"
+        },
+        {
+          text: "Camera",
+          onPress: () => pickImageFromCamera(),
+          style: "default"
+        }
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => console.log('tratar depois...')
+      }
+    )
+  }
+
+  const pickImageFromGalery = async () => {
+    console.log("-----> Clicou na Galeria")
+    const options = {
+      noData: true,
+      selectionLimit: 1, // Se deixar 1, será permitido apenas uma foto e 0 várias
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+    }
+
+    let result = await ImagePicker.launchImageLibraryAsync(options)
+    console.log(result.uri)
+
+  }
+
+  const pickImageFromCamera = async () => {
+    console.log("-----> Clicou na Camera")
+
+    const options = {
+      noData: true,
+    }
+
+    let result = await ImagePicker.launchCameraAsync(options)
+    console.log(result.uri)
+  }
+  /*USER DATA*/
+
+  /*USER DATA*/
+  const idUser = auth.currentUser?.uid;
+  const [data, setData] = useState([]);
+
+  const getUsers = () => {
+    db
+      .collection("UserData")
+      .get()
+      .then((querySnapshot) => {
+        let temporyData = []
+        querySnapshot.forEach((doc) => {
+          if (doc.id == idUser) {
+            if (doc.data().nome == "") {
+              navigation.navigate("UpdateUserData")
+              Alert.alert("Faltam dados para conta!")
+            } else {
+              const user = {
+                cidade: doc.data().cidade,
+                dataNascimento: doc.data().dataNascimento,
+                email: doc.data().email,
+                endereco: doc.data().endereco,
+                nome: doc.data().nome,
+                telefone: doc.data().telefone,
+              }
+              setData(user)
+            }
+          }
+        });
+      });
+  };
+
+  useEffect(() => {
+    console.log("Entrei aqui")
+    getUsers();
+  }, []);
+
+  /*USER DATA*/
   const handleUpdateClick = () => {
     auth
     const colect = db.collection("UserData")
@@ -41,66 +128,74 @@ export default () => {
       "endereco": adress,
       "dataNascimento": birth
     }
+
     myDoc.set(data)
       .then(() => {
-        alert("documento atualizado")
-        navigation.reset({
-          routes: [{ name: 'Home' }]
-        });
+        Alert.alert("Informação", "Dados atualizado")
       }).catch(error => alert(error.message))
-
-
   }
 
   const handleCancelClick = () => {
     navigation.navigate('Home');
   }
-  
+
   return (
     <Container>
-      <WelcomeSign>Atualize seus dados!</WelcomeSign>
+
+      <ContentImg onPress={() => handleImageUser()}>
+        <Avatar
+          source={{ uri: "https://sdama.org/wp-content/themes/sama/img/fallback-profile.jpg" }}
+        />
+      </ContentImg>
 
       <InputArea>
-      
+
+        <SignMessageButtonText>Nome</SignMessageButtonText>
         <SignInput
-          placeholder="Digite seu nome"
+          placeholder={data.nome}
           value={name}
           onChangeText={t => setNameField(t)}
         />
 
+        <SignMessageButtonText>Tefelone</SignMessageButtonText>
         <SignInput
-          placeholder="Digite seu telefone"
+          placeholder={data.telefone}
           value={fone}
           onChangeText={t => setFoneField(t)}
         />
 
+        <SignMessageButtonText>Cidade</SignMessageButtonText>
         <SignInput
-          placeholder="Digite sua cidade"
+          placeholder={data.cidade}
           value={city}
           onChangeText={t => setCityField(t)}
         />
 
+        <SignMessageButtonText>Endereço</SignMessageButtonText>
         <SignInput
-          placeholder="Digite seu endereço"
+          placeholder={data.endereco}
           value={adress}
           onChangeText={t => setAdressField(t)}
         />
 
+        <SignMessageButtonText>Data de nascimento</SignMessageButtonText>
         <SignInput
-          placeholder="Digite sua data de nascimento"
+          placeholder={data.dataNascimento}
           value={birth}
           onChangeText={t => setBirthField(t)}
         />
 
         <CustomButton onPress={handleUpdateClick}>
-          <CustomButtonText>Atualizar dados</CustomButtonText>
+          <CustomButtonText>Salvar</CustomButtonText>
         </CustomButton>
 
+        <SignMessageButton onPress={handleCancelClick}>
+          <SignMessageButtonText>Voltar para tela inicial</SignMessageButtonText>
+        </SignMessageButton>
+
       </InputArea>
-      <Text>Email: {auth.currentUser?.email}</Text>
-      <SignMessageButton onPress={handleCancelClick}>
-        <SignMessageButtonText>Cancelar</SignMessageButtonText>
-      </SignMessageButton>
+
+
     </Container>
   );
 }
