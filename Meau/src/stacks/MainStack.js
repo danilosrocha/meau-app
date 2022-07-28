@@ -9,16 +9,21 @@ import Home from '../screens/Home';
 import UpdateUserData from '../screens/UpdateUserData';
 import UserData from '../screens/UserData/index';
 import Profile from '../screens/Profile';
+import UpdatePet from '../screens/UpdatePet';
+import MeusAnimais from '../screens/MeusAnimais';
+
 
 const Stack = createStackNavigator();
 
 export default () => (
     <Stack.Navigator
-        initialRouteName='Profile'
+        initialRouteName='SignIn'
         screenOptions={{
             headerShown: false
         }}
     >
+        <Stack.Screen name="MeusAnimais" component={MeusAnimais}/>
+        <Stack.Screen name="UpdatePet" component={UpdatePet}/>
         <Stack.Screen name="Preload" component={Preload}/>
         <Stack.Screen name="SignIn" component={SignIn}/>
         <Stack.Screen name="SignUp_1" component={SignUp_1}/>

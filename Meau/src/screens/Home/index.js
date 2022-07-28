@@ -37,6 +37,13 @@ export default () => {
 
     }
 
+    const handleMeuPet = () => {
+        auth
+
+        navigation.replace("MeusAnimais")
+
+    }
+
     const handleViewData = () => {
         navigation.navigate("UserData")
     }
@@ -55,6 +62,11 @@ export default () => {
 
                 <CustomButton onPress={handleUpdate}>
                     <CustomButtonText>Atualizar seu cadastro</CustomButtonText>
+                </CustomButton>
+
+
+                <CustomButton onPress={handleMeuPet}>
+                    <CustomButtonText>Meus pet</CustomButtonText>
                 </CustomButton>
 
                 <CustomButton onPress={handleSignOut}>

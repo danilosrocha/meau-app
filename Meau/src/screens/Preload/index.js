@@ -14,7 +14,7 @@ export default () => {
 
     } else {
       setTimeout(function () {
-        navigation.navigate('Profile');
+        navigation.navigate('SignIn');
       }, 1000);
     }
 
