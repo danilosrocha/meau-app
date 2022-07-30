@@ -10,7 +10,7 @@ import {
   InputArea,
   CustomButton,
   CustomButtonText,
-  SignMessageButton,
+  InputText,
   SignMessageButtonText,
   ContentImg,
   Avatar,
@@ -30,6 +30,11 @@ export default () => {
 
   const [avatar, setAvatar] = useState();
 
+  /*USER DATA*/
+
+  const handleUpload = (event) => {
+    event.preventDefault()
+  }
   /*USER DATA*/
   const handleImageUser = () => {
     Alert.alert(
@@ -64,8 +69,10 @@ export default () => {
     }
 
     let result = await ImagePicker.launchImageLibraryAsync(options)
-    setAvatar(result.uri)
-    console.log(result.uri)
+
+    setAvatar({uri: result.uri})
+    handleUpload()
+    console.log(result)
 
   }
 
@@ -149,43 +156,43 @@ export default () => {
     <Container>
       <ScrollViewProfile>
 
-        <ContentImg onPress={() => handleImageUser()}>
-          <Avatar
-            source={{ uri: "https://sdama.org/wp-content/themes/sama/img/fallback-profile.jpg" }}
-          />
-        </ContentImg>
-
         <InputArea>
 
-          <SignMessageButtonText>Nome</SignMessageButtonText>
+          <ContentImg onPress={() => handleImageUser()}>
+            <Avatar
+              source={{ uri: avatar ? avatar.uri: "https://sdama.org/wp-content/themes/sama/img/fallback-profile.jpg" }}
+            />
+          </ContentImg>
+
+          <InputText>Nome</InputText>
           <SignInput
             placeholder={data.nome}
             value={name}
             onChangeText={t => setNameField(t)}
           />
 
-          <SignMessageButtonText>Tefelone</SignMessageButtonText>
+          <InputText>Tefelone</InputText>
           <SignInput
             placeholder={data.telefone}
             value={fone}
             onChangeText={t => setFoneField(t)}
           />
 
-          <SignMessageButtonText>Cidade</SignMessageButtonText>
+          <InputText>Cidade</InputText>
           <SignInput
             placeholder={data.cidade}
             value={city}
             onChangeText={t => setCityField(t)}
           />
 
-          <SignMessageButtonText>Endereço</SignMessageButtonText>
+          <InputText>Endereço</InputText>
           <SignInput
             placeholder={data.endereco}
             value={adress}
             onChangeText={t => setAdressField(t)}
           />
 
-          <SignMessageButtonText>Data de nascimento</SignMessageButtonText>
+          <InputText>Data de nascimento</InputText>
           <SignInput
             placeholder={data.dataNascimento}
             value={birth}

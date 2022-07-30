@@ -21,6 +21,7 @@ function RoutesTab() {
             initialRouteName='Home'
             screenOptions={{
                 headerShown: true,
+                
                 unmountOnBlur: true
             }}
         >
@@ -36,7 +37,7 @@ function RoutesTab() {
 export default () => (
 
     <Stack.Navigator
-        initialRouteName='SignIn'
+        initialRouteName='Preload'
     >
         <Stack.Group
             screenOptions={{

@@ -7,10 +7,10 @@ const InputArea = styled.View`
     height: 60px;
     background-color: #4444;
     border-radius: 30px;
-    padding-left: 15px;
+    padding-left: 10px;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 `;
 
 const Input = styled.TextInput`

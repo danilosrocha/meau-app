@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
 import { Alert } from 'react-native'
 import {
     Container,
@@ -7,6 +6,7 @@ import {
     CustomButton,
     CustomButtonText,
     FlatList,
+    TitleText,
 
 } from './styles'
 
@@ -22,70 +22,67 @@ export default () => {
 
     const handleUpdatePet = () => {
         auth
-
         navigation.navigate("UpdatePet")
-
     }
+
     const idUser = auth.currentUser?.uid;
     const [data, setData] = useState([]);
     const getUsers = () => {
         db
-        .collection("Pet")
-        .get()
-        .then((querySnapshot) =>{
-            let temporyData = []
-            querySnapshot.forEach((doc) =>{
-                if(idUser==doc.data().DonoId){
-                    const user = {
-                        sexo: doc.data().sexo,
-                        idade: doc.data().idade,
-                        porte: doc.data().porte,
-                        especie: doc.data().especie,
-                        nome: doc.data().nome,
+            .collection("Pet")
+            .get()
+            .then((querySnapshot) => {
+                let temporyData = []
+                querySnapshot.forEach((doc) => {
+                    if (idUser == doc.data().DonoId) {
+                        const user = {
+                            sexo: doc.data().sexo,
+                            idade: doc.data().idade,
+                            porte: doc.data().porte,
+                            especie: doc.data().especie,
+                            nome: doc.data().nome,
+                        }
+                        temporyData.push(user)
                     }
-                    temporyData.push(user)   
-                }
+                });
+                setData(temporyData)
             });
-            setData(temporyData)
-        });
     };
 
 
     useEffect(() => {
         getUsers();
-    }, []);    
+    }, []);
 
     const handleHome = () => {
         navigation.navigate("Home")
     }
 
+
     const renderItem = ({ item }) => (
-         <Item item={item} />
+        <Item item={item} />
     )
 
     console.log(data)
-    
+
     return (
         <Container>
 
             <ViewArea>
-                
+                <TitleText>Lista de meus animais</TitleText>
                 <FlatList
-                    data = {data}
-                    renderItem = {renderItem}
+                    data={data}
+                    renderItem={renderItem}
+                    contentContainerStyle={{justifyContent: 'center'}}
                 />
-
-
-            </ViewArea>
-
-            <CustomButton onPress={handleUpdatePet}>
+                <CustomButton onPress={handleUpdatePet}>
                     <CustomButtonText>Adicionar pet</CustomButtonText>
-            </CustomButton>
+                </CustomButton>
 
-            <CustomButton onPress={handleHome}>
-                <CustomButtonText>Voltar para página inicial</CustomButtonText>
-            </CustomButton>
-            
+                <CustomButton onPress={handleHome}>
+                    <CustomButtonText>Voltar para página inicial</CustomButtonText>
+                </CustomButton>
+            </ViewArea>
 
         </Container>
     );
