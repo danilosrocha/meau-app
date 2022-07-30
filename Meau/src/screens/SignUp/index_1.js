@@ -29,11 +29,12 @@ export default () => {
   const handleSignUpClick = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
-    navigation.reset({
-      routes: [{ name: 'SignUp_2' }]
-
-    })
-
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.log("Resgistrado com email: ", user.email);
+        navigation.navigate("SignUp_2")
+      })
+      .catch(error => alert(error.message))
   }
 
   const handleBackClick = () => {

@@ -3,7 +3,7 @@ import { ScrollView, Alert } from 'react-native'
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native'
 import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from '../../../firebase'
+import { auth, db, storage } from '../../../firebase'
 import {
   Container,
   WelcomeSign,
@@ -29,12 +29,26 @@ export default () => {
   const [birth, setBirthField] = useState('');
 
   const [avatar, setAvatar] = useState();
+  const [imgUrl, setImgURL] = useState();
+
 
   /*USER DATA*/
 
-  const handleUpload = (event) => {
-    event.preventDefault()
-  }
+  // const handleUpload = (file) => {
+  //   const uploadTask = storage.ref(`fotos/${file}`).put(file)
+
+  //   uploadTask.on('state_changed', (snapshot) => {
+  //     console.log("Upload Image")
+  //   }, (error) => {
+  //     console.log(error)
+  //   }, () => {
+  //     getDownloadURL(uploadTask.snapshot.ref).then(url => {
+  //       setImgURL(url)
+  //     })
+  //   }
+  //   )
+  // }
+  
   /*USER DATA*/
   const handleImageUser = () => {
     Alert.alert(
@@ -70,8 +84,8 @@ export default () => {
 
     let result = await ImagePicker.launchImageLibraryAsync(options)
 
-    setAvatar({uri: result.uri})
-    handleUpload()
+    setAvatar({ uri: result.uri })
+    // handleUpload(avatar)
     console.log(result)
 
   }
@@ -121,7 +135,6 @@ export default () => {
   };
 
   useEffect(() => {
-    console.log("Entrei aqui")
     getUsers();
   }, []);
 
@@ -160,7 +173,7 @@ export default () => {
 
           <ContentImg onPress={() => handleImageUser()}>
             <Avatar
-              source={{ uri: avatar ? avatar.uri: "https://sdama.org/wp-content/themes/sama/img/fallback-profile.jpg" }}
+              source={{ uri: avatar ? avatar.uri : "https://sdama.org/wp-content/themes/sama/img/fallback-profile.jpg" }}
             />
           </ContentImg>
 

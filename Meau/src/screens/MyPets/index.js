@@ -49,21 +49,13 @@ export default () => {
             });
     };
 
-
     useEffect(() => {
         getUsers();
     }, []);
 
-    const handleHome = () => {
-        navigation.navigate("Home")
-    }
-
-
     const renderItem = ({ item }) => (
         <Item item={item} />
     )
-
-    console.log(data)
 
     return (
         <Container>
@@ -79,9 +71,7 @@ export default () => {
                     <CustomButtonText>Adicionar pet</CustomButtonText>
                 </CustomButton>
 
-                <CustomButton onPress={handleHome}>
-                    <CustomButtonText>Voltar para página inicial</CustomButtonText>
-                </CustomButton>
+
             </ViewArea>
 
         </Container>

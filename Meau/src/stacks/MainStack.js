@@ -21,13 +21,12 @@ function RoutesTab() {
             initialRouteName='Home'
             screenOptions={{
                 headerShown: true,
-                
                 unmountOnBlur: true
             }}
         >
-            <Tab.Screen name="Profile" component={Profile} />
+            <Tab.Screen name="Meu Perfil" component={Profile} />
             <Tab.Screen name="MyPets" component={MyPets} />
-            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Inicio" component={Home} />
             <Tab.Screen name="UpdatePet" component={UpdatePet} />
             <Tab.Screen name='Config' component={Config} />
         </Tab.Navigator>
@@ -49,16 +48,6 @@ export default () => (
             <Stack.Screen name="SignUp_1" component={SignUp_1} />
             <Stack.Screen name="SignUp_2" component={SignUp_2} />
             <Stack.Screen name="Home" component={RoutesTab} />
-            
-        </Stack.Group>
-
-            <Tab.Screen name="Profile" component={Profile} />
-            
-        <Stack.Group
-            screenOptions={{
-                headerShown: true
-            }}
-        >
             
         </Stack.Group>
 
