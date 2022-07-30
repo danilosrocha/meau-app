@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components/native'
 
 
-const ButtonView = styled.View`
+const FlatlistView = styled.View`
     flex: 1;
     width: 100%;
     height: 100%;
@@ -23,18 +23,20 @@ const TextTitle = styled.Text`
     font-weight: bold;
 `;
 
-export default ({item}) =>{
+export default ({ item }) => {
 
     return (
-        <ButtonView>
-            <TextTitle>Dados do Animal</TextTitle>
+        <FlatlistView>
+
+            <TextParam>- - - - - - - - - - - - -</TextParam>
             <TextParam>Nome: {item.nome}</TextParam>
             <TextParam>Idade: {item.idade}</TextParam>
             <TextParam>Especie: {item.especie}</TextParam>
             <TextParam>Porte: {item.porte}</TextParam>
             <TextParam>Sexo: {item.sexo}</TextParam>
-        </ButtonView>
-        
+
+        </FlatlistView>
+
     )
-  }
+}
 

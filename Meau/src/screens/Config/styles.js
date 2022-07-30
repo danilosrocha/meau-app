@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
@@ -8,13 +7,6 @@ export const Container = styled.SafeAreaView`
     align-items: center;
 `;
 
-export const FlatList = styled.FlatList`
-    border-radius: 30px;
-    margin-bottom: 20px;
-    width: 100%;
-    padding: 30px;
-`;
-
 export const WelcomeSign = styled.Text`
     font-size: 20px;
     color: #000000;
@@ -22,22 +14,20 @@ export const WelcomeSign = styled.Text`
     height: 60px;
 `;
 
-export const ViewArea = styled.View`
+export const InputArea = styled.View`
     width: 100%;
-    padding: 20px;
+    padding: 40px;
 `;
 
 export const CustomButton = styled.TouchableOpacity`
     height: 60px;
     background-color: #fff;
-    margin-left: 25px;
-    margin-right: 25px;
     border-radius: 30px;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-`;
 
+`;
 export const CustomButtonText = styled.Text`
     font-size: 18px;
     color: #000000;
@@ -48,16 +38,4 @@ export const SignMessageButton = styled.TouchableOpacity`
     justify-content: center;
     margin-top: 50px;
     margin-bottom: 20px;
-`;
-
-export const SignMessageButtonText = styled.Text`
-    font-size: 16px;
-    color: #000000;
-`;
-
-export const SignMessageButtonTextBold = styled.Text`
-    font-size: 16px;
-    color: #000000;
-    font-weight: bold;
-    margin-left: 5px;
 `;

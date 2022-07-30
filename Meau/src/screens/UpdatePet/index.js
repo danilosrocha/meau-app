@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
-import { Text, ScrollView, StyleSheet } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import {
   Container,
-  WelcomeSign,
   SimpleText,
   InputArea,
   CustomButton,
   CustomButtonText,
   ViewArea,
-  SignMessageButton,
-  SignMessageButtonText,
-  SignMessageButtonTextBold
+  ScrollViewPet,
 
 } from './styles'
 
@@ -19,7 +16,7 @@ import { useNavigation } from '@react-navigation/native'
 import { doc, setDoc } from "firebase/firestore"
 import { auth } from '../../../firebase'
 import { db } from '../../../firebase'
-import {Picker} from '@react-native-picker/picker'
+import { Picker } from '@react-native-picker/picker'
 
 export default () => {
 
@@ -48,32 +45,25 @@ export default () => {
     myDoc.set(data)
       .then(() => {
         alert("Lista de Animais atualizada com sucesso!")
-        navigation.reset({
-          routes: [{ name: 'Home' }]
-        });
+        navigation.navigate("Home")
       }).catch(error => alert(error.message))
   }
 
   const handleRegisterClick = () => {
     auth
-    navigation.reset({
-      routes: [{ name: 'Home' }]
-    });
+    navigation.navigate("Home")
   }
   const Cancel = () => {
     auth
-    navigation.reset({
-      routes: [{ name: 'Home' }]
-    });
+    navigation.navigate("Home")
   }
   return (
     <Container>
 
-      <ViewArea>
+      <ScrollViewPet>
+        <ViewArea>
 
-        <SimpleText>Adicione os dados do pet</SimpleText>
-
-        <ScrollView style={styles.scrool}>
+          <SimpleText>Adicione os dados do pet</SimpleText>
 
           <InputArea>
 
@@ -85,69 +75,64 @@ export default () => {
 
             <Text>selecione o sexo do animal</Text>
             <Picker
-                style={{height : 50, width : 150}}
-                selectedValue={sex}
-                onValueChange={(itemValue, itemIndex) =>
+              style={{ height: 50, width: 150 }}
+              selectedValue={sex}
+              onValueChange={(itemValue, itemIndex) =>
                 setSexField(itemValue)}
             >
-                <Picker.Item label="Macho" value="Macho" />
-                <Picker.Item label="Femea" value="Femea" />
+              <Picker.Item label="Macho" value="Macho" />
+              <Picker.Item label="Femea" value="Femea" />
             </Picker>
 
             <Text>selecione a especie do animal</Text>
             <Picker
-                style={{height : 50, width : 200}}
-                selectedValue={specie}
-                onValueChange={(itemValue, itemIndex) =>
+              style={{ height: 50, width: 200 }}
+              selectedValue={specie}
+              onValueChange={(itemValue, itemIndex) =>
                 setSpecieField(itemValue)}
             >
-                <Picker.Item label="Cachorro" value="Cachorro" />
-                <Picker.Item label="Gato" value="Gato" />
+              <Picker.Item label="Cachorro" value="Cachorro" />
+              <Picker.Item label="Gato" value="Gato" />
             </Picker>
 
             <Text>selecione o porte do animal</Text>
             <Picker
-                style={{height : 50, width : 200}}
-                selectedValue={size}
-                onValueChange={(itemValue, itemIndex) =>
+              style={{ height: 50, width: 200 }}
+              selectedValue={size}
+              onValueChange={(itemValue, itemIndex) =>
                 setSizeField(itemValue)}
             >
-                <Picker.Item label="Pequeno" value="Pequeno" />
-                <Picker.Item label="Médio" value="Médio" />
-                <Picker.Item label="Grande" value="Grande" />
+              <Picker.Item label="Pequeno" value="Pequeno" />
+              <Picker.Item label="Médio" value="Médio" />
+              <Picker.Item label="Grande" value="Grande" />
             </Picker>
 
             <Text>selecione a idade do animal</Text>
             <Picker
-                style={{height : 50, width : 200}}
-                selectedValue={age}
-                onValueChange={(itemValue, itemIndex) =>
+              style={{ height: 50, width: 200 }}
+              selectedValue={age}
+              onValueChange={(itemValue, itemIndex) =>
                 setAgeField(itemValue)}
             >
-                <Picker.Item label="Filhote" value="Filhote" />
-                <Picker.Item label="Adulto" value="Adulto" />
-                <Picker.Item label="Idoso" value="Idoso" />
+              <Picker.Item label="Filhote" value="Filhote" />
+              <Picker.Item label="Adulto" value="Adulto" />
+              <Picker.Item label="Idoso" value="Idoso" />
             </Picker>
 
 
             <CustomButton onPress={handleUpdateClick}>
-              <CustomButtonText>Adicionar pet</CustomButtonText>
+              <CustomButtonText>Cadastrar pet</CustomButtonText>
             </CustomButton>
             <CustomButton onPress={Cancel}>
               <CustomButtonText>Cancelar</CustomButtonText>
             </CustomButton>
-            
 
           </InputArea>
-        </ScrollView>
-      </ViewArea>
+
+        </ViewArea>
+
+      </ScrollViewPet>
 
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  scrool: {
-    alignSelf: 'stretch',
-  }
-});

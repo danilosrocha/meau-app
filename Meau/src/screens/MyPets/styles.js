@@ -8,34 +8,43 @@ export const Container = styled.SafeAreaView`
     align-items: center;
 `;
 
-export const SimpleText = styled.Text`
-    font-size: 22px;
-    color: #000000;
-    margin-top: 60px;
+export const FlatList = styled.FlatList`
+    border-radius: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
 `;
 
-export const WelcomeSign = styled.Text`
+export const SimpleText = styled.Text`
     font-size: 20px;
     color: #000000;
+    margin-top: 60px;
     height: 60px;
-    margin-top: 40px;
+    text-align: center;    
 `;
 
-export const InputArea = styled.View`
+export const ViewArea = styled.View`
     width: 100%;
-    padding: 40px;
+    height: 60%;
+    padding: 20px;
 `;
 
 export const CustomButton = styled.TouchableOpacity`
     height: 60px;
+    width: 100%;
     background-color: #fff;
+    margin-left: 25px;
+    margin-right: 25px;
     border-radius: 30px;
     justify-content: center;
     align-items: center;
-
+    margin-bottom: 20px;
 `;
+
 export const CustomButtonText = styled.Text`
     font-size: 18px;
+    
     color: #000000;
 `;
 
@@ -57,4 +66,3 @@ export const SignMessageButtonTextBold = styled.Text`
     font-weight: bold;
     margin-left: 5px;
 `;
-

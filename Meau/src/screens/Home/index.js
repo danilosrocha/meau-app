@@ -5,11 +5,7 @@ import {
     WelcomeSign,
     InputArea,
     CustomButton,
-    CustomButtonText,
-    SignMessageButton,
-    SignMessageButtonText,
-    SignMessageButtonTextBold
-
+    CustomButtonText
 } from './styles'
 
 import { useNavigation } from '@react-navigation/native'
@@ -20,32 +16,16 @@ export default () => {
 
     const navigation = useNavigation();
 
-    const handleSignOut = () => {
-        auth
-            .signOut()
-            .then(() => {
-                navigation.replace("SignIn")
-                console.log('Deslogado');
-            })
-            .catch(error => alert(error.message))
-    }
-
     const handleUpdate = () => {
         auth
-
-        navigation.replace("UpdateUserData")
-
-    }
-
-    const handleMeuPet = () => {
-        auth
-
-        navigation.replace("MeusAnimais")
-
-    }
-
-    const handleViewData = () => {
         navigation.navigate("Profile")
+
+    }
+
+    const handleMyPet = () => {
+        auth
+        navigation.navigate("MyPets")
+
     }
 
     return (
@@ -56,21 +36,12 @@ export default () => {
 
             <InputArea>
 
-                <CustomButton onPress={handleViewData}>
-                    <CustomButtonText>Visualizar seus dados</CustomButtonText>
-                </CustomButton>
-
                 <CustomButton onPress={handleUpdate}>
-                    <CustomButtonText>Atualizar seu cadastro</CustomButtonText>
+                    <CustomButtonText>Visualizar perfil</CustomButtonText>
                 </CustomButton>
 
-
-                <CustomButton onPress={handleMeuPet}>
+                <CustomButton onPress={handleMyPet}>
                     <CustomButtonText>Meus pet</CustomButtonText>
-                </CustomButton>
-
-                <CustomButton onPress={handleSignOut}>
-                    <CustomButtonText>Sign Out</CustomButtonText>
                 </CustomButton>
 
             </InputArea>

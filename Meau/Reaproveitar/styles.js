@@ -27,6 +27,15 @@ export const ViewArea = styled.View`
     padding: 20px;
 `;
 
+export const InputArea = styled.View`
+    width: 100%;
+    padding: 40px;
+`;
+
+export const ScrollArea = styled.ScrollView`
+    width: 100%;
+`;
+
 export const CustomButton = styled.TouchableOpacity`
     height: 60px;
     background-color: #fff;

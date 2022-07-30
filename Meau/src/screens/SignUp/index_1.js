@@ -32,51 +32,57 @@ export default () => {
       .then(userCredentials => {
         const user = userCredentials.user;
         console.log("Resgistrado com email: ", user.email);
-        navigation.reset({
-          routes: [{ name: 'SignUp_2' }]
-        });
+        navigation.navigate('SignUp_2')
+        // navigation.reset({
+        //   routes: [{ name: 'SignUp_2' }]
+        // });
       })
       .catch(error => alert(error.message))
 
   }
 
   const handleRegisterClick = () => {
-    navigation.reset({
-      routes: [{ name: 'SignIn' }]
-    });
-  }
-  return (
-    <Container>
+    navigation.navigate('SignIn')
+  };
 
-      <WelcomeSign>Faça seu cadastro!</WelcomeSign>
-      
-      <SimpleText>Etapa 1</SimpleText>
-    
-      <InputArea>
 
-        <SignInput
-          placeholder="Email"
-          value={email}
-          onChangeText={t => setEmailField(t)}
-        />
+// const handleRegisterClick = () => {
+//   navigation.reset({
+//     routes: [{ name: 'SignIn' }]
+//   });
+// }
+return (
+  <Container>
 
-        <SignInput
-          placeholder="Senha"
-          value={password}
-          onChangeText={t => setPasswordField(t)}
-          password={true}
-        />
+    <WelcomeSign>Faça seu cadastro!</WelcomeSign>
 
-        <CustomButton onPress={handleSignUpClick}>
-          <CustomButtonText>Continuar</CustomButtonText>
-        </CustomButton>
+    <SimpleText>Etapa 1</SimpleText>
 
-      </InputArea>
+    <InputArea>
 
-      <SignMessageButton onPress={handleRegisterClick}>
-        <SignMessageButtonText>Já possui uma conta?</SignMessageButtonText>
-        <SignMessageButtonTextBold>Faça Login</SignMessageButtonTextBold>
-      </SignMessageButton>
-    </Container>
-  );
+      <SignInput
+        placeholder="Email"
+        value={email}
+        onChangeText={t => setEmailField(t)}
+      />
+
+      <SignInput
+        placeholder="Senha"
+        value={password}
+        onChangeText={t => setPasswordField(t)}
+        password={true}
+      />
+
+      <CustomButton onPress={handleSignUpClick}>
+        <CustomButtonText>Continuar</CustomButtonText>
+      </CustomButton>
+
+    </InputArea>
+
+    <SignMessageButton onPress={handleRegisterClick}>
+      <SignMessageButtonText>Já possui uma conta?</SignMessageButtonText>
+      <SignMessageButtonTextBold>Faça Login</SignMessageButtonTextBold>
+    </SignMessageButton>
+  </Container>
+);
 }

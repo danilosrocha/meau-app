@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
+/* VIEW */
 export const Container = styled.SafeAreaView`
     background-color: #58BD97;
     width: 100%;
@@ -9,6 +10,14 @@ export const Container = styled.SafeAreaView`
     flex: 1;
 `;
 
+export const ScrollViewPet = styled.ScrollView`
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    padding: 30px;
+`;
+
+/* TEXT */
 export const SimpleText = styled.Text`
     font-size: 20px;
     color: #000000;
@@ -28,12 +37,15 @@ export const InputArea = styled.View`
     align-items: center;
 `;
 
+/* BUTTON */
 export const ViewArea = styled.View`
     width: 100%;
     padding: 10px;
     justify-content: center;
     align-items: center;
 `;
+
+
 
 export const CustomButton = styled.TouchableOpacity`
     width: 100%;
@@ -56,15 +68,4 @@ export const SignMessageButton = styled.TouchableOpacity`
     margin-bottom: 20px;
 `;
 
-export const SignMessageButtonText = styled.Text`
-    font-size: 16px;
-    color: #000000;
-`;
-
-export const SignMessageButtonTextBold = styled.Text`
-    font-size: 16px;
-    color: #000000;
-    font-weight: bold;
-    margin-left: 5px;
-`;
 

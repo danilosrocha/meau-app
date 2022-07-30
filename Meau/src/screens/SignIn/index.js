@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { ToastAndroid } from 'react-native'
 import {
   Container,
   WelcomeSign,
@@ -39,19 +38,22 @@ export default () => {
     .then(userCredentials => {
       const user = userCredentials.user;
       console.log('Logado com o email: ', user.email);
-      ToastAndroid.show(
-        "Que tal adotar um bichinho hoje?",
-        ToastAndroid.LONG,
-      )
     })
     .catch(error => alert(error.message))
   }
 
   const handleRegisterClick = () => {
+    navigation.navigate("SignUp_1")
+  };
+  
+/*
+  const handleRegisterClick = () => {
     navigation.reset({
       routes: [{ name: 'SignUp_1' }]
     });
   }
+*/ 
+
   return (
     <Container>
       <WelcomeSign>Bem vindo ao Meau!</WelcomeSign>
