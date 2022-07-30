@@ -36,7 +36,7 @@ function RoutesTab() {
 export default () => (
 
     <Stack.Navigator
-        initialRouteName='Preload'
+        initialRouteName='SignIn'
     >
         <Stack.Group
             screenOptions={{

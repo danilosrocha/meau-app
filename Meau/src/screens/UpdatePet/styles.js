@@ -14,14 +14,45 @@ export const ScrollViewPet = styled.ScrollView`
     width: 100%;
     height: 100%;
     flex: 1;
-    padding: 30px;
+    padding: 15px;
+    
+`;
+
+export const InputArea = styled.View`
+    width: 100%;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const ViewArea = styled.View`
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
 `;
 
 /* TEXT */
+
 export const SimpleText = styled.Text`
     font-size: 20px;
     color: #000000;
     margin-top: 20px;
+`;
+
+export const SimpleTextBold = styled.Text`
+    font-size: 20px;
+    color: #000000;
+    margin-top: 20px;
+    font-weight: bold;
+`;
+
+export const TitleTextBold = styled.Text`
+    font-size: 22px;
+    color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
 `;
 
 export const WelcomeSign = styled.Text`
@@ -30,22 +61,24 @@ export const WelcomeSign = styled.Text`
     margin-top: 60px;
 `;
 
-export const InputArea = styled.View`
-    width: 100%;
-    padding: 40px;
-    justify-content: center;
-    align-items: center;
+export const CustomButtonText = styled.Text`
+    font-size: 18px;
+    color: #000000;
+`;
+
+export const SignMessageButtonText = styled.Text`
+    font-size: 16px;
+    color: #000000;
+`;
+
+export const SignMessageButtonTextBold = styled.Text`
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+    margin-left: 5px;
 `;
 
 /* BUTTON */
-export const ViewArea = styled.View`
-    width: 100%;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-`;
-
-
 
 export const CustomButton = styled.TouchableOpacity`
     width: 100%;
@@ -56,12 +89,8 @@ export const CustomButton = styled.TouchableOpacity`
     height: 60px;
     margin-bottom: 20px;
 `;
-export const CustomButtonText = styled.Text`
-    font-size: 18px;
-    color: #000000;
-`;
 
-export const SignMessageButton = styled.TouchableOpacity`
+export const MessageButton = styled.TouchableOpacity`
     flex-direction: row;
     justify-content: center;
     margin-top: 50px;

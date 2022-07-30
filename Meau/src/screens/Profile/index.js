@@ -28,6 +28,8 @@ export default () => {
   const [adress, setAdressField] = useState('');
   const [birth, setBirthField] = useState('');
 
+  const [avatar, setAvatar] = useState();
+
   /*USER DATA*/
   const handleImageUser = () => {
     Alert.alert(
@@ -62,6 +64,7 @@ export default () => {
     }
 
     let result = await ImagePicker.launchImageLibraryAsync(options)
+    setAvatar(result.uri)
     console.log(result.uri)
 
   }
@@ -74,6 +77,7 @@ export default () => {
     }
 
     let result = await ImagePicker.launchCameraAsync(options)
+    setAvatar(result.uri)
     console.log(result.uri)
   }
   /*USER DATA*/
