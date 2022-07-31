@@ -97,4 +97,19 @@ export const MessageButton = styled.TouchableOpacity`
     margin-bottom: 20px;
 `;
 
+export const ContentImg = styled.TouchableOpacity`
+    height: 120px; 
+    width: 120px; 
+    border-radius: 100px;  
+    margin-bottom: 20px;
+`;
+
+/* IMAGE */
+
+export const PetPicture = styled.Image`
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+    
+`;
 

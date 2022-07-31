@@ -30,6 +30,7 @@ export default () => {
     auth
     const colect = db.collection("UserData")
     const myDoc = colect.doc(auth.currentUser?.uid)
+    const profilePicture = "https://sdama.org/wp-content/themes/sama/img/fallback-profile.jpg"
 
     const data = {
       "id": auth.currentUser?.uid,
@@ -38,23 +39,18 @@ export default () => {
       "telefone": fone,
       "cidade": city,
       "endereco": adress,
-      "dataNascimento": birth
+      "dataNascimento": birth,
+      "fotoUsuario": profilePicture
     }
     myDoc.set(data)
       .then(() => {
         alert("conta criada!")
         navigation.reset({
-          routes: [{ name: 'Home' }]
+          routes: [{ name: 'RoutesTab' }]
         });
       }).catch(error => alert(error.message))
   }
 
-  const handleRegisterClick = () => {
-    auth
-    navigation.reset({
-      routes: [{ name: 'Home' }]
-    });
-  }
   return (
     <Container>
 

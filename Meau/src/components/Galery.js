@@ -33,18 +33,7 @@ export default () => {
 
   const [avatar, setAvatar] = useState();
 
-  async function handleUpload(file) {
-    console.log("-----> Eu sou o file", file)
-    const blob = await (await fetch('file://' + file)).blob()
-    // console.log("----> Eu sou Blob", blob)
-    const uploadTask = storage.ref(idUser + '/').put(blob, {contentType: file.type})
 
-    uploadTask.on('state_changed', (snapshot) => {
-      console.log("Upload Image")
-    }, (error) => {
-      console.log(error)
-    })
-  }
 
   const handleImageUser = () => {
     Alert.alert(
@@ -98,6 +87,19 @@ export default () => {
     
     handleUpload(result.uri)
 
+  }
+
+  async function handleUpload(file) {
+    console.log("-----> Eu sou o file", file)
+    const blob = await (await fetch('file://' + file)).blob()
+    // console.log("----> Eu sou Blob", blob)
+    const uploadTask = storage.ref(idUser + '/').put(blob, {contentType: file.type})
+
+    uploadTask.on('state_changed', (snapshot) => {
+      console.log("Upload Image")
+    }, (error) => {
+      console.log(error)
+    })
   }
 
   return (

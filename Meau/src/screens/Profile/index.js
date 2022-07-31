@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { auth, db, storage } from '../../../firebase'
+import * as ImagePicker from 'expo-image-picker';
+
 import {
   Container,
   InputArea,
@@ -9,9 +11,11 @@ import {
   CustomButtonText,
   InputText,
   ScrollViewProfile,
+  ContentImg,
+  Avatar
 } from './styles'
 import SignInput from '../../components/SignInput'
-import Galery from '../../components/Galery';
+
 
 export default () => {
 
@@ -24,10 +28,13 @@ export default () => {
   const [adress, setAdressField] = useState('');
   const [birth, setBirthField] = useState('');
 
+  const [avatar, setAvatar] = useState();
+
   /*USER DATA*/
 
   const [data, setData] = useState([]);
-
+  const [profilePicture, setProfilePicture] = useState();
+  
   const getUsers = () => {
     db
       .collection("UserData")
@@ -40,6 +47,7 @@ export default () => {
               // navigation.navigate("UpdateUserData")
               Alert.alert("Faltam dados para conta!") //Padronizar alerts
             } else {
+              setProfilePicture(doc.data().fotoUsuario)
               const user = {
                 cidade: doc.data().cidade,
                 dataNascimento: doc.data().dataNascimento,
@@ -47,6 +55,7 @@ export default () => {
                 endereco: doc.data().endereco,
                 nome: doc.data().nome,
                 telefone: doc.data().telefone,
+
               }
               setData(user)
             }
@@ -57,8 +66,18 @@ export default () => {
 
   useEffect(() => {
     getUsers();
+    let imageRef = storage.ref('profilePicture/' + idUser + '/');
+    imageRef
+      .getDownloadURL()
+      .then((url) => {
+        setProfilePicture(url);
 
-  }, []);
+      })
+      .catch((e) => console.log('getting downloadURL of image error => ', e));
+
+    console.log(idUser)
+    console.log(imageRef)
+  }, [])
 
 
   /*USER DATA*/
@@ -74,7 +93,8 @@ export default () => {
       "telefone": fone,
       "cidade": city,
       "endereco": adress,
-      "dataNascimento": birth
+      "dataNascimento": birth,
+      "fotoUsuario": profilePicture
     }
 
     myDoc.set(data)
@@ -84,12 +104,86 @@ export default () => {
       }).catch(error => alert(error.message))
   }
 
+  /* ------------------------------------------------------------*/
+
+  const handleImageUser = () => {
+    Alert.alert(
+      "Selecione",
+      "Informe de onde você quer pegar a foto",
+      [
+        {
+          text: "Galeria",
+          onPress: () => pickImageFromGalery(),
+          style: "default"
+        },
+        {
+          text: "Camera",
+          onPress: () => pickImageFromCamera(),
+          style: "default"
+        }
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => console.log('----> Ação cancelada')
+      }
+    )
+  }
+
+  const pickImageFromGalery = async () => {
+    console.log("-----> Clicou na Galeria")
+    const options = {
+      noData: true,
+      selectionLimit: 1, // Se deixar 1, será permitido apenas uma foto e 0 várias
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+    }
+
+    let result = await ImagePicker.launchImageLibraryAsync(options)
+
+    setAvatar({ uri: result.uri })
+
+    handleUpload(result.uri)
+  }
+
+
+  const pickImageFromCamera = async () => {
+    console.log("-----> Clicou na Camera")
+
+    const options = {
+      noData: true,
+    }
+
+    let result = await ImagePicker.launchCameraAsync(options)
+    setAvatar({ uri: result.uri })
+
+    handleUpload(result.uri)
+
+  }
+
+  async function handleUpload(file) {
+    console.log("-----> Eu sou o file", file)
+    const blob = await (await fetch('file://' + file)).blob()
+    // console.log("----> Eu sou Blob", blob)
+    const uploadTask = storage.ref('profilePicture/' + idUser + '/').put(blob, { contentType: file.type })
+
+    uploadTask.on('state_changed', (snapshot) => {
+      console.log("Upload Image")
+    }, (error) => {
+      console.log(error)
+    })
+  }
+
+
   return (
     <Container>
       <ScrollViewProfile>
 
         <InputArea>
-          <Galery></Galery>
+          <ContentImg onPress={() => handleImageUser()}>
+            <Avatar
+              source={{ uri: avatar ? avatar.uri : profilePicture }}
+            />
+          </ContentImg>
 
           <InputText>Nome</InputText>
           <SignInput
