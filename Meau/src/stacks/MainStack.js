@@ -24,7 +24,7 @@ function RoutesTab() {
                 unmountOnBlur: true
             }}
         >
-            <Tab.Screen name="Meu Perfil" component={Profile} />
+            <Tab.Screen name="Profile" component={Profile} />
             <Tab.Screen name="MyPets" component={MyPets} />
             <Tab.Screen name="Inicio" component={Home} />
             <Tab.Screen name="UpdatePet" component={UpdatePet} />
@@ -40,14 +40,25 @@ export default () => (
     >
         <Stack.Group
             screenOptions={{
-                headerShown: false
+                headerShown: false,
+                unmountOnBlur: true
             }}
         >
             <Stack.Screen name="Preload" component={Preload} />
             <Stack.Screen name="SignIn" component={SignIn} />
             <Stack.Screen name="SignUp_1" component={SignUp_1} />
             <Stack.Screen name="SignUp_2" component={SignUp_2} />
-            <Stack.Screen name="Home" component={RoutesTab} />
+            <Stack.Screen name="RoutesTab" component={RoutesTab} />
+            
+        </Stack.Group>
+
+        <Stack.Group
+            screenOptions={{
+                headerShown: true
+            }}
+        >   
+            <Tab.Screen name="Profile" component={RoutesTab} />
+
             
         </Stack.Group>
 

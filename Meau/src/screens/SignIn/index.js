@@ -25,7 +25,9 @@ export default () => {
   useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
-          navigation.navigate("Home")
+          navigation.reset({
+            routes: [{ name: 'RoutesTab' }]
+          });
         }
       })
 
@@ -43,7 +45,9 @@ export default () => {
   }
 
   const handleRegisterClick = () => {
-    navigation.navigate("SignUp_1")
+    navigation.reset({
+      routes: [{ name: 'SignUp_1' }]
+    });
   };
   
 /*

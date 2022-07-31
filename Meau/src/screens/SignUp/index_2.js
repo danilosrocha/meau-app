@@ -12,7 +12,6 @@ import {
 
 import SignInput from '../../components/SignInput'
 import { useNavigation } from '@react-navigation/native'
-import { doc, setDoc } from "firebase/firestore";
 import { auth } from '../../../firebase'
 import { db } from '../../../firebase'
 

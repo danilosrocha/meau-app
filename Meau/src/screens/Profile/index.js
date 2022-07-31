@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, Alert } from 'react-native'
-import * as ImagePicker from 'expo-image-picker';
+import { Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { doc, setDoc } from "firebase/firestore";
 import { auth, db, storage } from '../../../firebase'
 import {
   Container,
-  WelcomeSign,
   InputArea,
   CustomButton,
   CustomButtonText,
   InputText,
-  SignMessageButtonText,
-  ContentImg,
-  Avatar,
   ScrollViewProfile,
 } from './styles'
 import SignInput from '../../components/SignInput'
+import Galery from '../../components/Galery';
 
 export default () => {
 
   const navigation = useNavigation();
+  const idUser = auth.currentUser.uid;
 
   const [name, setNameField] = useState('');
   const [fone, setFoneField] = useState('');
@@ -28,83 +24,8 @@ export default () => {
   const [adress, setAdressField] = useState('');
   const [birth, setBirthField] = useState('');
 
-  const [avatar, setAvatar] = useState();
-  const [imgUrl, setImgURL] = useState();
-
-
   /*USER DATA*/
 
-  // const handleUpload = (file) => {
-  //   const uploadTask = storage.ref(`fotos/${file}`).put(file)
-
-  //   uploadTask.on('state_changed', (snapshot) => {
-  //     console.log("Upload Image")
-  //   }, (error) => {
-  //     console.log(error)
-  //   }, () => {
-  //     getDownloadURL(uploadTask.snapshot.ref).then(url => {
-  //       setImgURL(url)
-  //     })
-  //   }
-  //   )
-  // }
-  
-  /*USER DATA*/
-  const handleImageUser = () => {
-    Alert.alert(
-      "Selecione",
-      "Informe de onde você quer pegar a foto",
-      [
-        {
-          text: "Galeria",
-          onPress: () => pickImageFromGalery(),
-          style: "default"
-        },
-        {
-          text: "Camera",
-          onPress: () => pickImageFromCamera(),
-          style: "default"
-        }
-      ],
-      {
-        cancelable: true,
-        onDismiss: () => console.log('tratar depois...')
-      }
-    )
-  }
-
-  const pickImageFromGalery = async () => {
-    console.log("-----> Clicou na Galeria")
-    const options = {
-      noData: true,
-      selectionLimit: 1, // Se deixar 1, será permitido apenas uma foto e 0 várias
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-    }
-
-    let result = await ImagePicker.launchImageLibraryAsync(options)
-
-    setAvatar({ uri: result.uri })
-    // handleUpload(avatar)
-    console.log(result)
-
-  }
-
-  const pickImageFromCamera = async () => {
-    console.log("-----> Clicou na Camera")
-
-    const options = {
-      noData: true,
-    }
-
-    let result = await ImagePicker.launchCameraAsync(options)
-    setAvatar(result.uri)
-    console.log(result.uri)
-  }
-  /*USER DATA*/
-
-  /*USER DATA*/
-  const idUser = auth.currentUser?.uid;
   const [data, setData] = useState([]);
 
   const getUsers = () => {
@@ -136,7 +57,9 @@ export default () => {
 
   useEffect(() => {
     getUsers();
+
   }, []);
+
 
   /*USER DATA*/
   const handleUpdateClick = () => {
@@ -157,12 +80,8 @@ export default () => {
     myDoc.set(data)
       .then(() => {
         Alert.alert("Informação", "Dados atualizado")
-        navigation.navigate("Home")
+        navigation.navigate("RoutesTab")
       }).catch(error => alert(error.message))
-  }
-
-  const handleCancelClick = () => {
-    navigation.navigate('Home');
   }
 
   return (
@@ -170,12 +89,7 @@ export default () => {
       <ScrollViewProfile>
 
         <InputArea>
-
-          <ContentImg onPress={() => handleImageUser()}>
-            <Avatar
-              source={{ uri: avatar ? avatar.uri : "https://sdama.org/wp-content/themes/sama/img/fallback-profile.jpg" }}
-            />
-          </ContentImg>
+          <Galery></Galery>
 
           <InputText>Nome</InputText>
           <SignInput

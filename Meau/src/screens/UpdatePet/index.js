@@ -47,7 +47,7 @@ export default () => {
     myDoc.set(data)
       .then(() => {
         alert("Lista de Animais atualizada com sucesso!")
-        navigation.navigate("Home")
+        navigation.navigate("MyPets")
       }).catch(error => alert(error.message))
   }
 
