@@ -19,7 +19,7 @@ export default () => {
 
   const handleUpdatePet = () => {
     auth;
-    navigation.navigate("UpdatePet");
+    navigation.navigate("Cadastrar Pet");
   };
 
   const idUser = auth.currentUser?.uid;
