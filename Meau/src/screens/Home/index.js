@@ -44,6 +44,7 @@ export default () => {
             especie: doc.data().especie,
             nome: doc.data().nome,
             id: doc.data().id,
+            fotoPet: doc.data().fotoPet
           };
           console.log("----> User id", user.id);
           temporyData.push(user);
