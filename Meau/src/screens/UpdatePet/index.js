@@ -30,6 +30,7 @@ export default () => {
   const [specie, setSpecieField] = useState("Cachorro");
   const [size, setSizeField] = useState("Pequeno");
   const [age, setAgeField] = useState("Filhote");
+  const [adoptionStatus, setAdoptionStatus] = useState(true);
   const [petAvatar, setPetAvatar] = useState();
   const [fileName, setFileName] = useState();
   const [petProfilePicture, setPetProfilePicture] = useState();
@@ -52,8 +53,9 @@ export default () => {
       fotoPet: petProfilePicture,
       id: idPet,
       fileNamePicture: fileName,
+      adoptionStatus: adoptionStatus,
     };
-    console.log("Sou o id do pet pelo data", data.id);
+
     myDoc
       .set(data)
       .then(() => {
@@ -130,14 +132,12 @@ export default () => {
       .ref("profilePetPicture/" + donoID + "/" + fileName)
       .put(blob);
 
-    console.log("Ate aqui ta check");
-
     uploadTask.on(
       "state_changed",
       (snapshot) => {
         console.log("Upload Image");
         if (snapshot.bytesTransferred !== 0) {
-          getUrlImage(donoID, fileName)
+          getUrlImage(donoID, fileName);
         }
       },
       (error) => {
@@ -212,6 +212,16 @@ export default () => {
             <Picker.Item label="Filhote" value="Filhote" />
             <Picker.Item label="Adulto" value="Adulto" />
             <Picker.Item label="Idoso" value="Idoso" />
+          </Picker>
+
+          <SimpleTextBold>Animal para adoção?</SimpleTextBold>
+          <Picker
+            selectedValue={adoptionStatus}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) => setAdoptionStatus(itemValue)}
+          >
+            <Picker.Item label="True" value={true} />
+            <Picker.Item label="False" value={false} />
           </Picker>
 
           <CustomButton onPress={handleRegisterClick}>

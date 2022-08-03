@@ -37,17 +37,18 @@ export default () => {
       .then((querySnapshot) => {
         let temporyData = [];
         querySnapshot.forEach((doc) => {
-          const user = {
-            sexo: doc.data().sexo,
-            idade: doc.data().idade,
-            porte: doc.data().porte,
-            especie: doc.data().especie,
-            nome: doc.data().nome,
-            id: doc.data().id,
-            fotoPet: doc.data().fotoPet
-          };
-          console.log("----> User id", user.id);
-          temporyData.push(user);
+          if (doc.data().adoptionStatus == true) {
+            const user = {
+              sexo: doc.data().sexo,
+              idade: doc.data().idade,
+              porte: doc.data().porte,
+              especie: doc.data().especie,
+              nome: doc.data().nome,
+              id: doc.data().id,
+              fotoPet: doc.data().fotoPet,
+            };
+            temporyData.push(user);
+          }
         });
         setData(temporyData);
       });

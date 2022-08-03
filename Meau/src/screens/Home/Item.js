@@ -33,7 +33,7 @@ export default ({ item }) => {
   return (
     <FlatlistView>
       {!!item.fotoPet && <ImagePet source={{ uri: item.fotoPet }} />}
-      <TextParam>Nome: {item.nome}</TextParam>
+      <TextParam>{item.nome}</TextParam>
 
     </FlatlistView>
   );
