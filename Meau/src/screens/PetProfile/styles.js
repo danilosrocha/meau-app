@@ -99,7 +99,8 @@ export const MessageButton = styled.TouchableOpacity`
 export const CustomButtonPicture = styled.TouchableOpacity`
   height: 100px;
   width: 90%;
-  border-radius: 10px;
+  border-radius: 30px;
+  margin-bottom: 20px;
   background-color: #fff;
   align-items: center;
   justify-content: center;

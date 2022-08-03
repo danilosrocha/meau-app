@@ -40,7 +40,7 @@ export default () => {
   const handleRegisterClick = () => {
     auth;
     const colect = db.collection("Pet");
-    const myDoc = colect.doc();
+    const myDoc = colect.doc(idPet);
     // const petPicture = "https://static.thenounproject.com/png/703110-200.png"
 
     const data = {
@@ -60,14 +60,14 @@ export default () => {
       .set(data)
       .then(() => {
         alert("Lista de Animais atualizada com sucesso!");
-        navigation.navigate("MyPets");
+        navigation.navigate("Meus Pets");
       })
       .catch((error) => alert(error.message));
   };
 
   const handleCancelClick = () => {
     auth;
-    navigation.navigate("Home");
+    navigation.navigate("Inicio");
   };
 
   const handlePictureResgister = () => {
