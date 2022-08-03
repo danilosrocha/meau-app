@@ -97,11 +97,13 @@ export const MessageButton = styled.TouchableOpacity`
     margin-bottom: 20px;
 `;
 
-export const ContentImg = styled.TouchableOpacity`
-    height: 120px; 
-    width: 120px; 
-    border-radius: 100px;  
-    margin-bottom: 20px;
+export const CustomButtonPicture = styled.TouchableOpacity`
+    height: 100px; 
+    width: 90%; 
+    border-radius: 10px;  
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
 `;
 
 /* IMAGE */
