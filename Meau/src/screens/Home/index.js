@@ -37,7 +37,7 @@ export default () => {
       .then((querySnapshot) => {
         let temporyData = [];
         querySnapshot.forEach((doc) => {
-          if (doc.data().adoptionStatus == true) {
+          if (doc.data().statusAdocao == true) {
             const user = {
               sexo: doc.data().sexo,
               idade: doc.data().idade,

@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { auth, db, storage } from "../../../firebase";
+import * as ImagePicker from "expo-image-picker";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+import { Picker } from "@react-native-picker/picker";
+
 import {
   Container,
   InputArea,
@@ -14,30 +20,61 @@ import {
   CustomButtonPicture,
   PetPicture,
 } from "./styles";
-
 import SignInput from "../../components/SignInput";
-import { useNavigation } from "@react-navigation/native";
-import { Picker } from "@react-native-picker/picker";
-import { Alert } from "react-native";
-import { auth, db, storage } from "../../../firebase";
-import * as ImagePicker from "expo-image-picker";
 
-export default () => {
+export default (object) => {
   const navigation = useNavigation();
 
-  const [name, setNameField] = useState();
-  const [sex, setSexField] = useState("Macho");
-  const [specie, setSpecieField] = useState("Cachorro");
-  const [size, setSizeField] = useState("Pequeno");
-  const [age, setAgeField] = useState("Filhote");
-  const [adoptionStatus, setAdoptionStatus] = useState(true);
-  const [petAvatar, setPetAvatar] = useState();
-  const [fileName, setFileName] = useState();
-  const [petProfilePicture, setPetProfilePicture] = useState();
+  const [name, setNameField] = useState("");
+  const [sex, setSexField] = useState("");
+  const [specie, setSpecieField] = useState("");
+  const [size, setSizeField] = useState("");
+  const [age, setAgeField] = useState("");
+  const [adoptionStatus, setAdoptionStatus] = useState("");
+  const [petAvatar, setPetAvatar] = useState("");
+  const [fileName, setFileName] = useState("");
+  const [petProfilePicture, setPetProfilePicture] = useState("");
+  const [data, setData] = useState([]);
 
-  const idPet = uuidv4();
+  
+  const idPet = object.route.params.idPet
 
-  const handleRegisterClick = () => {
+  console.log(idPet)
+  const getUsers = () => {
+    db.collection("Pet")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.data().id)
+          if (doc.data().id == idPet) {
+            const pet = {
+              donoId: doc.data().donoId,
+              nome: doc.data().nome,
+              sexo: doc.data().sexo,
+              especie: doc.data().especie,
+              porte: doc.data().porte,
+              idade: doc.data().idade,
+              fotoPet: doc.data().fotoPet,
+              id: doc.data().id,
+              fileNamePicture: doc.data().fileNamePicture,
+              statusAdocao: doc.data().statusAdocao,
+            };
+            setNameField(pet.nome);
+            setSexField(pet.sexo);
+            setSpecieField(pet.especie);
+            setSizeField(pet.porte);
+            setAdoptionStatus(pet.statusAdocao);
+            setAgeField(pet.idade);
+            setFileName(pet.fileNamePicture);
+            setPetProfilePicture(pet.fotoPet);
+            setData(pet);
+          }
+        });
+      });
+  };
+
+  /*USER DATA*/
+  const handleUpdateClick = () => {
     auth;
     const colect = db.collection("Pet");
     const myDoc = colect.doc();
@@ -53,22 +90,19 @@ export default () => {
       fotoPet: petProfilePicture,
       id: idPet,
       fileNamePicture: fileName,
-      adoptionStatus: adoptionStatus,
+      statusAdocao: adoptionStatus,
     };
 
     myDoc
       .set(data)
       .then(() => {
-        alert("Lista de Animais atualizada com sucesso!");
-        navigation.navigate("MyPets");
+        Alert.alert("Informação", "Dados atualizado");
+        navigation.navigate("RoutesTab");
       })
       .catch((error) => alert(error.message));
   };
 
-  const handleCancelClick = () => {
-    auth;
-    navigation.navigate("Home");
-  };
+  /* ------------------------------------------------------------*/
 
   const handlePictureResgister = () => {
     Alert.alert(
@@ -156,6 +190,10 @@ export default () => {
       .catch((e) => console.log("getting downloadURL of image error => ", e));
   };
 
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <Container>
       <ScrollViewPet>
@@ -163,7 +201,7 @@ export default () => {
           <TitleTextBold>Adicione os dados do pet</TitleTextBold>
 
           <SignInput
-            placeholder="Nome"
+            placeholder={data.nome}
             value={name}
             onChangeText={(t) => setNameField(t)}
           />
@@ -218,18 +256,16 @@ export default () => {
           <Picker
             selectedValue={adoptionStatus}
             style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) => setAdoptionStatus(itemValue)}
+            onValueChange={(itemValue, itemIndex) =>
+              setAdoptionStatus(itemValue)
+            }
           >
             <Picker.Item label="True" value={true} />
             <Picker.Item label="False" value={false} />
           </Picker>
 
-          <CustomButton onPress={handleRegisterClick}>
+          <CustomButton onPress={handleUpdateClick}>
             <CustomButtonText>Cadastrar pet</CustomButtonText>
-          </CustomButton>
-
-          <CustomButton onPress={handleCancelClick}>
-            <CustomButtonText>Cancelar</CustomButtonText>
           </CustomButton>
         </InputArea>
       </ScrollViewPet>

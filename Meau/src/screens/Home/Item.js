@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
 
 const FlatlistView = styled.TouchableOpacity`
   width: 90%;
@@ -29,9 +30,20 @@ const ImagePet = styled.Image`
   /* aspect-ratio: 2; */
 `;
 
+
+
 export default ({ item }) => {
+
+  const navigation = useNavigation();
+
+  const handlePetClick = (idPet) => {
+    navigation.navigate('Perfil Pet', {
+      idPet: idPet,
+    });
+  }
+
   return (
-    <FlatlistView>
+    <FlatlistView onPress={() => handlePetClick(item.id)}>
       {!!item.fotoPet && <ImagePet source={{ uri: item.fotoPet }} />}
       <TextParam>{item.nome}</TextParam>
 
