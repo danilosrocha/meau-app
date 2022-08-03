@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator()
 function RoutesTab() {
     return (
         <Tab.Navigator
-            initialRouteName='Home'
+            initialRouteName='Inicio'
             screenOptions={{
                 headerShown: true,
                 unmountOnBlur: true
