@@ -43,7 +43,6 @@ export default (object) => {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          console.log(doc.data().id);
           if (doc.data().id == idPet) {
             const pet = {
               donoId: doc.data().donoId,
@@ -95,7 +94,8 @@ export default (object) => {
     myDoc
       .update(data)
       .then(() => {
-        Alert.alert("Informação", "Dados atualizado");
+        Alert.alert("Informação", "Dados do Pet atualizados");
+        navigation.navigate('Meus Pets');
       })
       .catch((error) => alert(error.message));
   };
@@ -190,14 +190,13 @@ export default (object) => {
 
   useEffect(() => {
     getUsers();
-    console.log("Entrei")
   }, []);
 
   return (
     <Container>
       <ScrollViewPet>
         <InputArea>
-          <TitleTextBold>Adicione os dados do pet</TitleTextBold>
+          <TitleTextBold>Atualizar os dados do pet</TitleTextBold>
 
           <SignInput
             placeholder={data.nome}
@@ -209,6 +208,27 @@ export default (object) => {
             <CustomButtonText>Cadastrar Fotos</CustomButtonText>
           </CustomButtonPicture>
 
+          <SimpleTextBold>Selecione a idade do animal</SimpleTextBold>
+          <Picker
+            style={{ height: 50, width: 200 }}
+            selectedValue={age}
+            onValueChange={(itemValue, itemIndex) => setAgeField(itemValue)}
+          >
+            <Picker.Item label="Filhote" value="Filhote" />
+            <Picker.Item label="Adulto" value="Adulto" />
+            <Picker.Item label="Idoso" value="Idoso" />
+          </Picker>
+
+          <SimpleTextBold>Animal para adoção?</SimpleTextBold>
+          <Picker
+            selectedValue={adoptionStatus}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) => setAdoptionStatus(itemValue)}
+          >
+            <Picker.Item label="Disponível" value={true} />
+            <Picker.Item label="Não disponível" value={false} />
+          </Picker>
+
           <CustomButton onPress={() => handleUpdateClick(idPet)}>
             <CustomButtonText>Atualizar dados do pet</CustomButtonText>
           </CustomButton>
@@ -218,58 +238,82 @@ export default (object) => {
   );
 };
 
-{
-  /* <SimpleTextBold>Selecione o sexo do animal</SimpleTextBold>
-<Picker
-  style={{ height: 50, width: 150 }}
-  selectedValue={sex}
-  onValueChange={(itemValue, itemIndex) => setSexField(itemValue)}
->
-  <Picker.Item label="Macho" value="Macho" />
-  <Picker.Item label="Femea" value="Femea" />
-</Picker>
 
-<SimpleTextBold>Selecione a especie do animal</SimpleTextBold>
-<Picker
-  style={{ height: 50, width: 200 }}
-  selectedValue={specie}
-  onValueChange={(itemValue, itemIndex) => setSpecieField(itemValue)}
->
-  <Picker.Item label="Cachorro" value="Cachorro" />
-  <Picker.Item label="Gato" value="Gato" />
-</Picker>
+  /*<Container>
+      <ScrollViewPet>
+        <InputArea>
+          <TitleTextBold>Adicione os dados do pet</TitleTextBold>
 
-<SimpleTextBold>Selecione o porte do animal</SimpleTextBold>
-<Picker
-  style={{ height: 50, width: 200 }}
-  selectedValue={size}
-  onValueChange={(itemValue, itemIndex) => setSizeField(itemValue)}
->
-  <Picker.Item label="Pequeno" value="Pequeno" />
-  <Picker.Item label="Médio" value="Médio" />
-  <Picker.Item label="Grande" value="Grande" />
-</Picker>
+          <SignInput
+            placeholder="Nome"
+            value={name}
+            onChangeText={(t) => setNameField(t)}
+          />
 
-<SimpleTextBold>Selecione a idade do animal</SimpleTextBold>
-<Picker
-  style={{ height: 50, width: 200 }}
-  selectedValue={age}
-  onValueChange={(itemValue, itemIndex) => setAgeField(itemValue)}
->
-  <Picker.Item label="Filhote" value="Filhote" />
-  <Picker.Item label="Adulto" value="Adulto" />
-  <Picker.Item label="Idoso" value="Idoso" />
-</Picker>
+          <CustomButtonPicture onPress={handlePictureResgister}>
+            <CustomButtonText>Cadastrar Fotos</CustomButtonText>
+          </CustomButtonPicture>
 
-<SimpleTextBold>Animal para adoção?</SimpleTextBold>
-<Picker
-  selectedValue={adoptionStatus}
-  style={{ height: 50, width: 150 }}
-  onValueChange={(itemValue, itemIndex) =>
-    setAdoptionStatus(itemValue)
-  }
->
-  <Picker.Item label="True" value={true} />
-  <Picker.Item label="False" value={false} />
-</Picker> */
-}
+          <SimpleTextBold>Selecione o sexo do animal</SimpleTextBold>
+          <Picker
+            style={{ height: 50, width: 150 }}
+            selectedValue={sex}
+            onValueChange={(itemValue, itemIndex) => setSexField(itemValue)}
+          >
+            <Picker.Item label="Macho" value="Macho" />
+            <Picker.Item label="Femea" value="Femea" />
+          </Picker>
+
+          <SimpleTextBold>Selecione a especie do animal</SimpleTextBold>
+          <Picker
+            style={{ height: 50, width: 200 }}
+            selectedValue={specie}
+            onValueChange={(itemValue, itemIndex) => setSpecieField(itemValue)}
+          >
+            <Picker.Item label="Cachorro" value="Cachorro" />
+            <Picker.Item label="Gato" value="Gato" />
+          </Picker>
+
+          <SimpleTextBold>Selecione o porte do animal</SimpleTextBold>
+          <Picker
+            style={{ height: 50, width: 200 }}
+            selectedValue={size}
+            onValueChange={(itemValue, itemIndex) => setSizeField(itemValue)}
+          >
+            <Picker.Item label="Pequeno" value="Pequeno" />
+            <Picker.Item label="Médio" value="Médio" />
+            <Picker.Item label="Grande" value="Grande" />
+          </Picker>
+
+          <SimpleTextBold>Selecione a idade do animal</SimpleTextBold>
+          <Picker
+            style={{ height: 50, width: 200 }}
+            selectedValue={age}
+            onValueChange={(itemValue, itemIndex) => setAgeField(itemValue)}
+          >
+            <Picker.Item label="Filhote" value="Filhote" />
+            <Picker.Item label="Adulto" value="Adulto" />
+            <Picker.Item label="Idoso" value="Idoso" />
+          </Picker>
+
+          <SimpleTextBold>Animal para adoção?</SimpleTextBold>
+          <Picker
+            selectedValue={adoptionStatus}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) => setAdoptionStatus(itemValue)}
+          >
+            <Picker.Item label="True" value={true} />
+            <Picker.Item label="False" value={false} />
+          </Picker>
+
+          <CustomButton onPress={handleRegisterClick}>
+            <CustomButtonText>Cadastrar pet</CustomButtonText>
+          </CustomButton>
+
+          <CustomButton onPress={handleCancelClick}>
+            <CustomButtonText>Cancelar</CustomButtonText>
+          </CustomButton>
+        </InputArea>
+      </ScrollViewPet>
+    </Container> */
+

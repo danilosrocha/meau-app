@@ -13,6 +13,7 @@ import {
   ScrollViewProfile,
   ContentImg,
   Avatar,
+  LoadingIcon,
 } from "./styles";
 import SignInput from "../../components/SignInput";
 
@@ -48,13 +49,13 @@ export default () => {
               endereco: doc.data().endereco,
               nome: doc.data().nome,
               telefone: doc.data().telefone,
-              fotoUsuario: doc.data().fotoUsuario
+              fotoUsuario: doc.data().fotoUsuario,
             };
-            setNameField(user.nome)
-            setFoneField(user.telefone)
-            setCityField(user.cidade)
-            setAdressField(user.endereco)
-            setBirthField(user.dataNascimento)
+            setNameField(user.nome);
+            setFoneField(user.telefone);
+            setCityField(user.cidade);
+            setAdressField(user.endereco);
+            setBirthField(user.dataNascimento);
             setData(user);
           }
         });
@@ -192,6 +193,8 @@ export default () => {
       <ScrollViewProfile>
         <InputArea>
           <ContentImg onPress={() => handleImageUser()}>
+            
+            
             <Avatar source={{ uri: avatar ? avatar.uri : data.fotoUsuario }} />
           </ContentImg>
 

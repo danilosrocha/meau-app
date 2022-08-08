@@ -20,16 +20,6 @@ import Item from "./Item";
 export default () => {
   const navigation = useNavigation();
 
-  const handleUpdate = () => {
-    auth;
-    navigation.navigate("Profile");
-  };
-
-  const handleMyPet = () => {
-    auth;
-    navigation.navigate("MyPets");
-  };
-
   const [data, setData] = useState([]);
   const getUsers = () => {
     db.collection("Pet")
@@ -54,12 +44,11 @@ export default () => {
       });
   };
 
+  const renderItem = ({ item }) => <Item item={item} />;
+  
   useEffect(() => {
     getUsers();
   }, []);
-
-  const renderItem = ({ item }) => <Item item={item} />;
-  console.log(data);
 
   return (
     <Container>

@@ -87,6 +87,8 @@ export const ContentImg = styled.TouchableOpacity`
     width: 120px; 
     border-radius: 100px;  
     margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
 `;
 
 /* IMAGE */
@@ -98,3 +100,6 @@ export const Avatar = styled.Image`
     
 `;
 
+export const LoadingIcon = styled.ActivityIndicator`
+    
+`;

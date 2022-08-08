@@ -12,6 +12,7 @@ import RegisterPet from "../screens/RegisterPet";
 import MyPets from "../screens/MyPets";
 import Config from "../screens/Config";
 import PetProfile from "../screens/PetProfile";
+import AdoptPet from "../screens/AdoptPet";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -47,26 +48,20 @@ export default () => (
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp_1" component={SignUp_1} />
       <Stack.Screen name="SignUp_2" component={SignUp_2} />
-      
       <Stack.Screen name="RoutesTab" component={RoutesTab} />
+      
     </Stack.Group>
 
     <Stack.Group
       screenOptions={{
         headerShown: true,
+        unmountOnBlur: true,
       }}
     >
+      <Stack.Screen name="Adotar Pet" component={AdoptPet} />
       <Stack.Screen name="Perfil Pet" component={PetProfile} />
       <Tab.Screen name="Profile" component={RoutesTab} />
+      
     </Stack.Group>
   </Stack.Navigator>
 );
-
-/*
-<Stack.Screen name="MeusAnimais" component={MeusAnimais} />
-        <Stack.Screen name="UpdatePet" component={UpdatePet} />
-
-        <Stack.Screen name="UpdateUserData" component={UpdateUserData} />
-        <Stack.Screen name="UserData" component={UserData} />
-        <Stack.Screen name="Profile" component={Profile} />
-*/

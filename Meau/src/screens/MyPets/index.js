@@ -41,7 +41,7 @@ export default () => {
               nome: doc.data().nome,
               id: doc.data().id,
               donoId: doc.data().donoId,
-              fotoPet: doc.data().fotoPet
+              fotoPet: doc.data().fotoPet,
             };
             temporyData.push(Pet);
           }
@@ -49,12 +49,12 @@ export default () => {
         setData(temporyData);
       });
   };
-  /*Possivel solucao para imagens*/
+
+  const renderItem = ({ item }) => <Item item={item} />;
+
   useEffect(() => {
     getPets();
   }, []);
-
-  const renderItem = ({ item }) => <Item item={item} />;
 
   return (
     <Container>

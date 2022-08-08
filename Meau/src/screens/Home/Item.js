@@ -37,7 +37,7 @@ export default ({ item }) => {
   const navigation = useNavigation();
 
   const handlePetClick = (idPet) => {
-    navigation.navigate('Perfil Pet', {
+    navigation.navigate('Adotar Pet', {
       idPet: idPet,
     });
   }
