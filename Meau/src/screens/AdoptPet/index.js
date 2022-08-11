@@ -116,7 +116,18 @@ export default (object) => {
           <CustomButtonAdoption>
             <CustomButtonText>{data.nome}</CustomButtonText>
           </CustomButtonAdoption>
-
+          <CustomButtonAdoption>
+            <CustomButtonText>{data.especie}</CustomButtonText>
+          </CustomButtonAdoption>
+          <CustomButtonAdoption>
+            <CustomButtonText>{data.sexo}</CustomButtonText>
+          </CustomButtonAdoption>
+          <CustomButtonAdoption>
+            <CustomButtonText>{data.idade}</CustomButtonText>
+          </CustomButtonAdoption>
+          <CustomButtonAdoption>
+            <CustomButtonText>{data.porte}</CustomButtonText>
+          </CustomButtonAdoption>
           <CustomButton onPress={() => handleAdoptClick(idPet, currentOwner)}>
             <CustomButtonText>Adotar pet</CustomButtonText>
           </CustomButton>
