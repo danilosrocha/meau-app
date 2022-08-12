@@ -8,7 +8,7 @@ import {
   ScrollViewPet,
   CustomButton,
   CustomButtonText,
-  SimpleText,
+  CustomViewPicture,
   SimpleTextBold,
   TitleTextBold,
   CustomButtonPicture,
@@ -31,17 +31,16 @@ export default () => {
   const [size, setSizeField] = useState("Pequeno");
   const [age, setAgeField] = useState("Filhote");
   const [adoptionStatus, setAdoptionStatus] = useState(true);
-  const [petAvatar, setPetAvatar] = useState();
+  const [avatar, setAvatar] = useState();
   const [fileName, setFileName] = useState("padrão");
-  const [petProfilePicture, setPetProfilePicture] = useState("https://static.thenounproject.com/png/703110-200.png");
-
+  const [petProfilePicture, setPetProfilePicture] = useState();
   const idPet = uuidv4();
 
   const handleRegisterClick = () => {
     auth;
     const colect = db.collection("Pet");
     const myDoc = colect.doc(idPet);
-    // const petPicture = "https://static.thenounproject.com/png/703110-200.png"
+    const fotoPet = petProfilePicture ? petProfilePicture: "https://static.thenounproject.com/png/703110-200.png"
 
     const data = {
       donoId: auth.currentUser?.uid,
@@ -50,7 +49,7 @@ export default () => {
       especie: specie,
       porte: size,
       idade: age,
-      fotoPet: petProfilePicture,
+      fotoPet: fotoPet,
       id: idPet,
       fileNamePicture: fileName,
       statusAdocao: adoptionStatus,
@@ -97,14 +96,12 @@ export default () => {
     console.log("-----> Clicou na Galeria");
     const options = {
       noData: true,
-      selectionLimit: 1, // Se deixar 1, será permitido apenas uma foto e 0 várias
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
+      aspect: [4, 3],
     };
 
     let result = await ImagePicker.launchImageLibraryAsync(options);
-
-    setPetAvatar({ uri: result.uri });
 
     handleUpload(result.uri);
   };
@@ -114,10 +111,13 @@ export default () => {
 
     const options = {
       noData: true,
+      saveToPhotos: true,
+      mediaType: 'photo',
+      includeBase64: false,
+      allowsEditing: true,
     };
 
     let result = await ImagePicker.launchCameraAsync(options);
-    setPetAvatar({ uri: result.uri });
 
     handleUpload(result.uri);
   };
@@ -151,6 +151,7 @@ export default () => {
     imageRef
       .getDownloadURL()
       .then((url) => {
+        setAvatar(url)
         setPetProfilePicture(url);
       })
       .catch((e) => console.log("getting downloadURL of image error => ", e));
@@ -168,8 +169,17 @@ export default () => {
             onChangeText={(t) => setNameField(t)}
           />
 
+          <ViewArea>
+            {avatar && (
+              <CustomViewPicture>
+                <PetPicture source={{uri: petProfilePicture}} />
+              </CustomViewPicture>
+            )}
+
+          </ViewArea>
+
           <CustomButtonPicture onPress={handlePictureResgister}>
-            <CustomButtonText>Cadastrar Fotos</CustomButtonText>
+            <CustomButtonText>Cadastrar foto do pet</CustomButtonText>
           </CustomButtonPicture>
 
           <SimpleTextBold>Selecione o sexo do animal</SimpleTextBold>

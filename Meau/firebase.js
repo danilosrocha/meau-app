@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import * as firebase from "firebase";
-import { initializeApp } from "firebase/app";
-import { getStorage } from "firebase/firestore";
+// import "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCAMwZrL0n_8QL2RZV9rrri74EViWCF-oM",
@@ -14,14 +13,15 @@ const firebaseConfig = {
 
 // Initialize Firebase
 let app;
-if( firebase.apps.length === 0) {
-    app = firebase.initializeApp(firebaseConfig);
+if (firebase.apps.length === 0) {
+  app = firebase.initializeApp(firebaseConfig);
 } else {
-    app = firebase.app()
+  app = firebase.app()
 }
 
 const storage = firebase.storage()
 const auth = firebase.auth()
 const db = firebase.firestore()
+// const messaging = firebase.messaging();
 
-export { auth, db, storage};
+export { auth, db, storage };

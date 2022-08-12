@@ -101,5 +101,6 @@ export const Avatar = styled.Image`
 `;
 
 export const LoadingIcon = styled.ActivityIndicator`
-    
+    margin-top: 50px;
+    margin-bottom: 50px
 `;
