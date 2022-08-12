@@ -5,8 +5,6 @@ import styled from "styled-components/native";
 export const Container = styled.SafeAreaView`
   background-color: #58bd97;
   width: 100%;
-  justify-content: center;
-  align-items: center;
   flex: 1;
 `;
 
@@ -14,14 +12,32 @@ export const ScrollViewPet = styled.ScrollView`
   width: 100%;
   height: 100%;
   flex: 1;
-  padding: 15px;
 `;
 
 export const InputArea = styled.View`
   width: 100%;
   flex: 1;
+
+`;
+
+export const InputFields = styled.View`
+  width: 100%;
+  flex: 1;
+  flex-direction: row;
+  align-items: flex-end;
   justify-content: center;
-  align-items: center;
+  
+`;
+
+export const InputField = styled.View`
+  width: 100%;
+  flex: 1;
+  justify-content: center;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 20px;
+  background-color: #4444;
+  
 `;
 
 export const ViewArea = styled.View`
@@ -29,6 +45,14 @@ export const ViewArea = styled.View`
   padding: 10px;
   justify-content: center;
   align-items: center;
+`;
+
+export const Input = styled.TextInput`
+  flex: 1;
+  font-size: 20px;
+  margin-left: 9px;
+  text-align: left;
+  font-weight: bold;
 `;
 
 /* TEXT */
@@ -40,17 +64,16 @@ export const SimpleText = styled.Text`
 `;
 
 export const SimpleTextBold = styled.Text`
-  font-size: 20px;
-  color: #000000;
-  margin-top: 20px;
+  font-size: 16px;
+  color: #fff;
   font-weight: bold;
+  text-align: center;
+  margin-bottom: auto;
 `;
 
 export const TitleTextBold = styled.Text`
-  font-size: 22px;
-  color: #000000;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  font-size: 16px;
+  color: #fff;
   font-weight: bold;
 `;
 
@@ -97,19 +120,17 @@ export const MessageButton = styled.TouchableOpacity`
 `;
 
 export const CustomButtonPicture = styled.TouchableOpacity`
-  height: 100px;
-  width: 90%;
-  border-radius: 30px;
-  margin-bottom: 20px;
-  background-color: #fff;
+  height: 200px;
+  width: 100%;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 /* IMAGE */
 
 export const PetPicture = styled.Image`
-  width: 120px;
-  height: 120px;
-  border-radius: 100px;
+  width: 100%;
+  height: 100%;
 `;
+
