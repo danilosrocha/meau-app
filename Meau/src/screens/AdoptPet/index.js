@@ -71,13 +71,12 @@ export default (object) => {
   /*USER DATA*/
   const handleAdoptClick = (idPet, currentOwner) => {
     auth;
-    const colectHistory = db.collection("History");
-    const colectPet = db.collection("Pet");
-    const adoptionHistory = colectHistory.doc(auth.currentUser?.uid);
-    const myPet = colectPet.doc(idPet);
+    const colectHistory = db.collection("PedidosAdocao");
+    const adoptionHistory = colectHistory.doc();
     const historyData = {
-        donoAtual: auth.currentUser?.uid,
-        donoAntigo: currentOwner,
+        Solicitante: auth.currentUser?.uid,
+        SolicitanteEmail:auth.currentUser?.email,
+        Dono: currentOwner,
         id: idPet,
         statusAdocao: false,
     }
