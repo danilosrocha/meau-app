@@ -75,8 +75,6 @@ export default (object) => {
     const colectPet = db.collection("Pet");
     const adoptionHistory = colectHistory.doc(auth.currentUser?.uid);
     const myPet = colectPet.doc(idPet);
-    console.log("----> Eu sou o id do Pet", idPet)
-    // const petPicture = "https://static.thenounproject.com/png/703110-200.png"
     const historyData = {
         donoAtual: auth.currentUser?.uid,
         donoAntigo: currentOwner,
@@ -84,23 +82,12 @@ export default (object) => {
         statusAdocao: false,
     }
 
-    const data = {
-      donoId: auth.currentUser?.uid,
-      fotoPet: petProfilePicture,
-      id: idPet,
-      fileNamePicture: fileName,
-      statusAdocao: false,
-    };
 
-    myPet
-      .update(data)
-      .then(() => {
-        adoptionHistory.set(historyData).then(() => {
-            Alert.alert("Informação", "Pet adotado");
+    adoptionHistory
+        .set(historyData).then(() => {
+            Alert.alert("Informação", "Pedido de adoção enviado");
             navigation.navigate('Meus Pets')
-        })
-      })
-      .catch((error) => alert(error.message));
+        }).catch((error) => alert(error.message));
   };
 
   useEffect(() => {
