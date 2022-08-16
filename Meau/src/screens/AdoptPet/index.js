@@ -69,7 +69,7 @@ export default (object) => {
   };
 
   /*USER DATA*/
-  const handleAdoptClick = (idPet, currentOwner) => {
+  const handleAdoptClick = (idPet,namePet, currentOwner) => {
     auth;
     const colectHistory = db.collection("PedidosAdocao");
     const adoptionHistory = colectHistory.doc();
@@ -78,6 +78,7 @@ export default (object) => {
         SolicitanteEmail:auth.currentUser?.email,
         Dono: currentOwner,
         id: idPet,
+        petName: namePet,
         statusAdocao: false,
     }
 
@@ -114,7 +115,7 @@ export default (object) => {
           <CustomButtonAdoption>
             <CustomButtonText>{data.porte}</CustomButtonText>
           </CustomButtonAdoption>
-          <CustomButton onPress={() => handleAdoptClick(idPet, currentOwner)}>
+          <CustomButton onPress={() => handleAdoptClick(idPet,data.nome, currentOwner)}>
             <CustomButtonText>Adotar pet</CustomButtonText>
           </CustomButton>
         </InputArea>
