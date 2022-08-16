@@ -14,9 +14,11 @@ import {
   ScrollViewPet,
   CustomButton,
   CustomButtonText,
-  SimpleText,
+  Input,
   SimpleTextBold,
   TitleTextBold,
+  InputFields,
+  InputField,
   CustomButtonPicture,
   PetPicture,
 } from "./styles";
@@ -196,28 +198,60 @@ export default (object) => {
     <Container>
       <ScrollViewPet>
         <InputArea>
-          <TitleTextBold>Atualizar os dados do pet</TitleTextBold>
 
-          <SignInput
+          <CustomButtonPicture onPress={handlePictureResgister}>
+            {!!data.fotoPet && <PetPicture source={{ uri: data.fotoPet }} />}
+          </CustomButtonPicture>
+
+          <Input
             placeholder={data.nome}
             value={name}
             onChangeText={(t) => setNameField(t)}
           />
 
-          <CustomButtonPicture onPress={handlePictureResgister}>
-            <CustomButtonText>Cadastrar Fotos</CustomButtonText>
-          </CustomButtonPicture>
+          <InputFields>
+            <InputField>
+              <TitleTextBold>Sexo</TitleTextBold>
+              <Picker
+                style={{ height: 50, width: 130 }}
+                selectedValue={sex}
+                onValueChange={(itemValue, itemIndex) => setSexField(itemValue)}
+              >
+                <Picker.Item label="Macho" value="Macho" />
+                <Picker.Item label="Femea" value="Femea" />
+              </Picker>
+            </InputField>
 
-          <SimpleTextBold>Selecione a idade do animal</SimpleTextBold>
-          <Picker
-            style={{ height: 50, width: 200 }}
-            selectedValue={age}
-            onValueChange={(itemValue, itemIndex) => setAgeField(itemValue)}
-          >
-            <Picker.Item label="Filhote" value="Filhote" />
-            <Picker.Item label="Adulto" value="Adulto" />
-            <Picker.Item label="Idoso" value="Idoso" />
-          </Picker>
+
+
+            <InputField>
+              <TitleTextBold>Porte</TitleTextBold>
+              <Picker
+                style={{ height: 50, width: 130 }}
+                selectedValue={size}
+                onValueChange={(itemValue, itemIndex) => setSizeField(itemValue)}
+              >
+                <Picker.Item label="Pequeno" value="Pequeno" />
+                <Picker.Item label="Médio" value="Médio" />
+                <Picker.Item label="Grande" value="Grande" />
+              </Picker>
+            </InputField>
+
+
+            <InputField>
+              <TitleTextBold>Idade</TitleTextBold>
+              <Picker
+                style={{ height: 50, width: 130 }}
+                selectedValue={age}
+                onValueChange={(itemValue, itemIndex) => setAgeField(itemValue)}
+              >
+                <Picker.Item label="Filhote" value="Filhote" />
+                <Picker.Item label="Adulto" value="Adulto" />
+                <Picker.Item label="Idoso" value="Idoso" />
+              </Picker>
+            </InputField>
+
+          </InputFields>
 
           <SimpleTextBold>Animal para adoção?</SimpleTextBold>
           <Picker
@@ -239,81 +273,81 @@ export default (object) => {
 };
 
 
-  /*<Container>
-      <ScrollViewPet>
-        <InputArea>
-          <TitleTextBold>Adicione os dados do pet</TitleTextBold>
+/*<Container>
+    <ScrollViewPet>
+      <InputArea>
+        <TitleTextBold>Adicione os dados do pet</TitleTextBold>
 
-          <SignInput
-            placeholder="Nome"
-            value={name}
-            onChangeText={(t) => setNameField(t)}
-          />
+        <SignInput
+          placeholder="Nome"
+          value={name}
+          onChangeText={(t) => setNameField(t)}
+        />
 
-          <CustomButtonPicture onPress={handlePictureResgister}>
-            <CustomButtonText>Cadastrar Fotos</CustomButtonText>
-          </CustomButtonPicture>
+        <CustomButtonPicture onPress={handlePictureResgister}>
+          <CustomButtonText>Cadastrar Fotos</CustomButtonText>
+        </CustomButtonPicture>
 
-          <SimpleTextBold>Selecione o sexo do animal</SimpleTextBold>
-          <Picker
-            style={{ height: 50, width: 150 }}
-            selectedValue={sex}
-            onValueChange={(itemValue, itemIndex) => setSexField(itemValue)}
-          >
-            <Picker.Item label="Macho" value="Macho" />
-            <Picker.Item label="Femea" value="Femea" />
-          </Picker>
+        <SimpleTextBold>Selecione o sexo do animal</SimpleTextBold>
+        <Picker
+          style={{ height: 50, width: 150 }}
+          selectedValue={sex}
+          onValueChange={(itemValue, itemIndex) => setSexField(itemValue)}
+        >
+          <Picker.Item label="Macho" value="Macho" />
+          <Picker.Item label="Femea" value="Femea" />
+        </Picker>
 
-          <SimpleTextBold>Selecione a especie do animal</SimpleTextBold>
-          <Picker
-            style={{ height: 50, width: 200 }}
-            selectedValue={specie}
-            onValueChange={(itemValue, itemIndex) => setSpecieField(itemValue)}
-          >
-            <Picker.Item label="Cachorro" value="Cachorro" />
-            <Picker.Item label="Gato" value="Gato" />
-          </Picker>
+        <SimpleTextBold>Selecione a especie do animal</SimpleTextBold>
+        <Picker
+          style={{ height: 50, width: 200 }}
+          selectedValue={specie}
+          onValueChange={(itemValue, itemIndex) => setSpecieField(itemValue)}
+        >
+          <Picker.Item label="Cachorro" value="Cachorro" />
+          <Picker.Item label="Gato" value="Gato" />
+        </Picker>
 
-          <SimpleTextBold>Selecione o porte do animal</SimpleTextBold>
-          <Picker
-            style={{ height: 50, width: 200 }}
-            selectedValue={size}
-            onValueChange={(itemValue, itemIndex) => setSizeField(itemValue)}
-          >
-            <Picker.Item label="Pequeno" value="Pequeno" />
-            <Picker.Item label="Médio" value="Médio" />
-            <Picker.Item label="Grande" value="Grande" />
-          </Picker>
+        <SimpleTextBold>Selecione o porte do animal</SimpleTextBold>
+        <Picker
+          style={{ height: 50, width: 200 }}
+          selectedValue={size}
+          onValueChange={(itemValue, itemIndex) => setSizeField(itemValue)}
+        >
+          <Picker.Item label="Pequeno" value="Pequeno" />
+          <Picker.Item label="Médio" value="Médio" />
+          <Picker.Item label="Grande" value="Grande" />
+        </Picker>
 
-          <SimpleTextBold>Selecione a idade do animal</SimpleTextBold>
-          <Picker
-            style={{ height: 50, width: 200 }}
-            selectedValue={age}
-            onValueChange={(itemValue, itemIndex) => setAgeField(itemValue)}
-          >
-            <Picker.Item label="Filhote" value="Filhote" />
-            <Picker.Item label="Adulto" value="Adulto" />
-            <Picker.Item label="Idoso" value="Idoso" />
-          </Picker>
+        <SimpleTextBold>Selecione a idade do animal</SimpleTextBold>
+        <Picker
+          style={{ height: 50, width: 200 }}
+          selectedValue={age}
+          onValueChange={(itemValue, itemIndex) => setAgeField(itemValue)}
+        >
+          <Picker.Item label="Filhote" value="Filhote" />
+          <Picker.Item label="Adulto" value="Adulto" />
+          <Picker.Item label="Idoso" value="Idoso" />
+        </Picker>
 
-          <SimpleTextBold>Animal para adoção?</SimpleTextBold>
-          <Picker
-            selectedValue={adoptionStatus}
-            style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) => setAdoptionStatus(itemValue)}
-          >
-            <Picker.Item label="True" value={true} />
-            <Picker.Item label="False" value={false} />
-          </Picker>
+        <SimpleTextBold>Animal para adoção?</SimpleTextBold>
+        <Picker
+          selectedValue={adoptionStatus}
+          style={{ height: 50, width: 150 }}
+          onValueChange={(itemValue, itemIndex) => setAdoptionStatus(itemValue)}
+        >
+          <Picker.Item label="True" value={true} />
+          <Picker.Item label="False" value={false} />
+        </Picker>
 
-          <CustomButton onPress={handleRegisterClick}>
-            <CustomButtonText>Cadastrar pet</CustomButtonText>
-          </CustomButton>
+        <CustomButton onPress={handleRegisterClick}>
+          <CustomButtonText>Cadastrar pet</CustomButtonText>
+        </CustomButton>
 
-          <CustomButton onPress={handleCancelClick}>
-            <CustomButtonText>Cancelar</CustomButtonText>
-          </CustomButton>
-        </InputArea>
-      </ScrollViewPet>
-    </Container> */
+        <CustomButton onPress={handleCancelClick}>
+          <CustomButtonText>Cancelar</CustomButtonText>
+        </CustomButton>
+      </InputArea>
+    </ScrollViewPet>
+  </Container> */
 

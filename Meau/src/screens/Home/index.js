@@ -45,7 +45,7 @@ export default () => {
   };
 
   const renderItem = ({ item }) => <Item item={item} />;
-  
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -57,11 +57,14 @@ export default () => {
           <Text>Email: {auth.currentUser?.email}</Text>
         </WelcomeSign>
         <TitleText>Lista dos animais</TitleText>
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          contentContainerStyle={{ justifyContent: "center" }}
-        />
+        {data && (
+          <FlatList
+            data={data}
+            renderItem={renderItem}
+            contentContainerStyle={{ justifyContent: "center" }}
+          />
+        )}
+
       </ViewArea>
     </Container>
   );

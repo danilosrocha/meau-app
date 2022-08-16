@@ -84,6 +84,12 @@ export const SignMessageButton = styled.TouchableOpacity`
     margin-bottom: 20px;
 `;
 
+export const LoadingIcon = styled.ActivityIndicator`
+    flex: 1;
+    margin-top: 50px;
+    margin-bottom: 50px
+`;
+
 
 
 

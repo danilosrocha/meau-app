@@ -6,6 +6,7 @@ import {
   CustomButtonText,
   FlatList,
   TitleText,
+  LoadingIcon,
 } from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
@@ -23,8 +24,7 @@ export default () => {
   };
 
   const idUser = auth.currentUser?.uid;
-  const [data, setData] = useState([]);
-  const [petProfilePicture, setPetProfilePicture] = useState();
+  const [data, setData] = useState();
 
   const getPets = () => {
     db.collection("Pet")
@@ -53,18 +53,22 @@ export default () => {
   const renderItem = ({ item }) => <Item item={item} />;
 
   useEffect(() => {
-    getPets();
+      getPets()
   }, []);
 
   return (
     <Container>
       <ViewArea>
         <TitleText>Lista de meus animais</TitleText>
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          contentContainerStyle={{ justifyContent: "center" }}
-        />
+        {data 
+          ? <FlatList
+            data={data}
+            renderItem={renderItem}
+            contentContainerStyle={{ justifyContent: "center" }}
+          />
+          : <LoadingIcon size="large" color="#ffffff" />
+        }
+
         <CustomButton onPress={handleUpdatePet}>
           <CustomButtonText>Adicionar pet</CustomButtonText>
         </CustomButton>

@@ -26,10 +26,16 @@ export const InputArea = styled.View`
 `;
 
 export const ViewArea = styled.View`
-    width: 100%;
-    padding: 10px;
+    width: 100%;  
+    flex: 1;
     justify-content: center;
     align-items: center;
+`;
+
+export const CustomViewPicture = styled.View`
+    flex: 1;
+    margin: 5px;
+    margin-bottom: 30px;
 `;
 
 /* TEXT */
@@ -109,9 +115,9 @@ export const CustomButtonPicture = styled.TouchableOpacity`
 /* IMAGE */
 
 export const PetPicture = styled.Image`
-    width: 120px;
-    height: 120px;
-    border-radius: 100px;
-    
+    width: 150px;
+    height: 150px;  
+    border-radius: 20px;
+    margin: 5px ;
 `;
 

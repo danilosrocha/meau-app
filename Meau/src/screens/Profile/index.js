@@ -193,11 +193,9 @@ export default () => {
 
   return (
     <Container>
-      <ScrollViewProfile>
+      < ScrollViewProfile >
         <InputArea>
           <ContentImg onPress={() => handleImageUser()}>
-            
-            
             <Avatar source={{ uri: avatar ? avatar.uri : data.fotoUsuario }} />
           </ContentImg>
 
@@ -241,6 +239,6 @@ export default () => {
           </CustomButton>
         </InputArea>
       </ScrollViewProfile>
-    </Container>
+    </Container >
   );
 };
