@@ -18,16 +18,18 @@ Notifications.setNotificationHandler({
 
 
 export default () => {
-const [data, setData]="";
+const idUser = auth.currentUser.uid;
+const [data, setData]=useState("");
 const getSolicitantes = () => {
     db.collection("PedidosAdocao")
       .get()
       .then((querySnapshot) => {
         let temporyData = [];
         querySnapshot.forEach((doc) => {
-          if (idUser == doc.data().Dono) {
+          if (auth.idUser == doc.data().Dono) {
             const Solicitante = {
               EmailSolicitante: doc.data().SolicitanteEmail,
+              NomeAnimal: doc.data().petName,
             };
             temporyData.push(Solicitante);
           }
