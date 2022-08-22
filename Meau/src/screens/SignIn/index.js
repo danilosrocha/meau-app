@@ -12,6 +12,7 @@ import {
 } from './styles'
 
 import SignInput from '../../components/SignInput'
+
 import { useNavigation } from '@react-navigation/native'
 import { auth } from '../../../firebase'
 

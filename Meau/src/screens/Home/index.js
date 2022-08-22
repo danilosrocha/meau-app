@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Text } from "react-native";
 import {
   Container,
   WelcomeSign,
-  InputArea,
-  CustomButton,
-  CustomButtonText,
   ViewArea,
   FlatList,
   TitleText,
 } from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
+import Notification from '../../Services/Notification'
 
 import { auth, db } from "../../../firebase";
 
@@ -61,7 +59,7 @@ export default () => {
           <FlatList
             data={data}
             renderItem={renderItem}
-            contentContainerStyle={{ justifyContent: "center" }}
+            contentContainerStyle={{ marginHorizontal: 30 }}
           />
         )}
 

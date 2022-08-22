@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 
 const FlatlistView = styled.TouchableOpacity`
-  width: 90%;
+  width: 100%;
   height: 90%;
   flex: 1;
   margin-bottom: 20px;
@@ -11,7 +11,6 @@ const FlatlistView = styled.TouchableOpacity`
   background-color: #4444;
   justify-content: center;
   align-items: center;
-  margin-left: 4%;
 `;
 
 const TextParam = styled.Text`

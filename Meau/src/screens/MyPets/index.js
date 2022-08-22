@@ -13,7 +13,8 @@ import { useNavigation } from "@react-navigation/native";
 
 import { auth, db, storage } from "../../../firebase";
 
-import Item from "./Item";
+import ItemPets from "./ItemPets";
+import ItemEmpty from "./ItemEmpty";
 
 export default () => {
   const navigation = useNavigation();
@@ -50,7 +51,8 @@ export default () => {
       });
   };
 
-  const renderItem = ({ item }) => <Item item={item} />;
+  const renderItem = ({ item }) => <ItemPets item={item} />;
+  const renderEmpty = () => <ItemEmpty/>;
 
   useEffect(() => {
       getPets()
@@ -64,7 +66,8 @@ export default () => {
           ? <FlatList
             data={data}
             renderItem={renderItem}
-            contentContainerStyle={{ justifyContent: "center" }}
+            ListEmptyComponent={renderEmpty}
+            contentContainerStyle={{ marginHorizontal: 30 }}
           />
           : <LoadingIcon size="large" color="#ffffff" />
         }

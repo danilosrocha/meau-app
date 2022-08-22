@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { auth, db, storage } from "../../../firebase";
+import { auth, db } from "../../../firebase";
 import "react-native-get-random-values";
-
+import Notification from '../../Services/Notification'
 
 import {
   Container,
@@ -15,9 +15,9 @@ import {
   TitleTextBold,
   CustomButtonAdoption
 } from "./styles";
-import SignInput from "../../components/SignInput";
 
 export default (object) => {
+
   const navigation = useNavigation();
 
   const [name, setNameField] = useState("");
@@ -31,15 +31,17 @@ export default (object) => {
   const [currentOwner, setCurrentOwner] = useState("");
   const [petProfilePicture, setPetProfilePicture] = useState("");
   const [data, setData] = useState([]);
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [ownerName, setOwnerName] = useState("");
 
+  const requestingUser = auth.currentUser?.email
   const idPet = object.route.params.idPet;
 
-  const getPets = () => {
+  const getPets = async () => {
     db.collection("Pet")
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          console.log(doc.data().id);
           if (doc.data().id == idPet) {
             const pet = {
               donoId: doc.data().donoId,
@@ -63,45 +65,28 @@ export default (object) => {
             setFileName(pet.fileNamePicture);
             setPetProfilePicture(pet.fotoPet);
             setData(pet);
+            getOwnerToken(pet.donoId);      
           }
         });
       });
+      
   };
+
+  const getOwnerToken = async (donoId) => {
+    await db.collection("UserData")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // console.log(doc.data().id);
+          if (doc.data().id == donoId) {
+            setExpoPushToken(doc.data().expoPushToken);
+            setOwnerName(doc.data().nome);
+          };
+        });
+      });
+  }
 
   /*USER DATA*/
-  const handleAdoptClick = (idPet, currentOwner) => {
-    auth;
-    const colectHistory = db.collection("History");
-    const colectPet = db.collection("Pet");
-    const adoptionHistory = colectHistory.doc(auth.currentUser?.uid);
-    const myPet = colectPet.doc(idPet);
-    console.log("----> Eu sou o id do Pet", idPet)
-    // const petPicture = "https://static.thenounproject.com/png/703110-200.png"
-    const historyData = {
-        donoAtual: auth.currentUser?.uid,
-        donoAntigo: currentOwner,
-        id: idPet,
-        statusAdocao: false,
-    }
-
-    const data = {
-      donoId: auth.currentUser?.uid,
-      fotoPet: petProfilePicture,
-      id: idPet,
-      fileNamePicture: fileName,
-      statusAdocao: false,
-    };
-
-    myPet
-      .update(data)
-      .then(() => {
-        adoptionHistory.set(historyData).then(() => {
-            Alert.alert("Informação", "Pet adotado");
-            navigation.navigate('Meus Pets')
-        })
-      })
-      .catch((error) => alert(error.message));
-  };
 
   useEffect(() => {
     getPets();
@@ -128,9 +113,14 @@ export default (object) => {
           <CustomButtonAdoption>
             <CustomButtonText>{data.porte}</CustomButtonText>
           </CustomButtonAdoption>
-          <CustomButton onPress={() => handleAdoptClick(idPet, currentOwner)}>
-            <CustomButtonText>Adotar pet</CustomButtonText>
-          </CustomButton>
+          <Notification
+          expoPushTokenOwner={expoPushToken}
+          ownerName={ownerName}
+          requestingUser={requestingUser}
+          name={name}
+          idPet={idPet}
+          > 
+          </Notification>
         </InputArea>
       </ScrollViewPet>
     </Container>
