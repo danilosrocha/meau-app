@@ -9,7 +9,7 @@ import {
 } from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
-import Notification from '../../Services/Notification'
+import AddToken from '../../Services/AddToken'
 
 import { auth, db } from "../../../firebase";
 
@@ -51,6 +51,7 @@ export default () => {
   return (
     <Container>
       <ViewArea>
+        <AddToken></AddToken>
         <WelcomeSign>
           <Text>Email: {auth.currentUser?.email}</Text>
         </WelcomeSign>

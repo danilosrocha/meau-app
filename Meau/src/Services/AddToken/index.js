@@ -28,6 +28,20 @@ export default ({ expoPushTokenOwner, ownerName, requestingUser, name, idPet }) 
   const notificationListener = useRef();
   const responseListener = useRef();
 
+  const handleTokenInsertAccount = async () => {
+    auth
+    const colect = db.collection("UserData")
+    const myDoc = colect.doc(auth.currentUser?.uid)
+
+    const data = {
+      "expoPushToken" : expoPushToken
+    }
+
+    myDoc.update(data)
+      .then(() => { console.log(">>>>>> Token adicionado"); })
+      .catch(error => alert(error.message))
+  }
+
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
@@ -47,47 +61,12 @@ export default ({ expoPushTokenOwner, ownerName, requestingUser, name, idPet }) 
     };
 
   }, []);
+  handleTokenInsertAccount();
 
-  const handleAdoptClick = (idPet) => {
-
-    // auth;
-    // const colectHistory = db.collection("History");
-    // const colectPet = db.collection("Pet");
-    // const adoptionHistory = colectHistory.doc(auth.currentUser?.uid);
-    // const myPet = colectPet.doc(idPet);
-    console.log("----> Eu sou o id do Pet", idPet)
-    navigation.navigate("Meus Pets")
-    // const petPicture = "https://static.thenounproject.com/png/703110-200.png"
-    // const historyData = {
-    //   donoAtual: auth.currentUser?.uid,
-    //   donoAntigo: currentOwner,
-    //   id: idPet,
-    //   statusAdocao: false,
-    // }
-
-    // const data = {
-    //   donoId: auth.currentUser?.uid,
-    //   id: idPet,
-    //   statusAdocao: false,
-    // };
-
-    // myPet
-    //   .update(data)
-    //   .then(() => {
-    //     adoptionHistory.set(historyData).then(() => {
-    //       navigation.navigate()
-    //     })
-    //   })
-    //   .catch((error) => alert(error.message));
-  };
 
   return (
     <InputArea>
-      <CustomButtonAdoption onPress={async () => {
-        await sendPushNotification(expoPushTokenOwner, ownerName, requestingUser, name, idPet), handleAdoptClick(idPet);
-      }}>
-        <CustomButtonText>Solicitar a adoção do Pet</CustomButtonText>
-      </CustomButtonAdoption>
+
     </InputArea>
   );
 }
