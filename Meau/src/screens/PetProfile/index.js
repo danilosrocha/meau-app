@@ -73,7 +73,7 @@ export default (object) => {
   };
 
   /*USER DATA*/
-  const handleUpdateClick = (idPet) => {
+  const handleUpdateClick = () => {
     auth;
     const colect = db.collection("Pet");
     const myDoc = colect.doc(idPet);
@@ -96,8 +96,10 @@ export default (object) => {
     myDoc
       .update(data)
       .then(() => {
-        Alert.alert("Informação", "Dados do Pet atualizados");
-        navigation.navigate('Meus Pets');
+        Alert.alert("Info","Dados do Pet atualizados");
+        navigation.reset({
+          routes: [{ name: 'RoutesTab' }]
+        });
       })
       .catch((error) => alert(error.message));
   };
@@ -269,7 +271,7 @@ export default (object) => {
             <Picker.Item label="Não disponível" value={false} />
           </Picker>
 
-          <CustomButton onPress={() => handleUpdateClick(idPet)}>
+          <CustomButton onPress={handleUpdateClick}>
             <CustomButtonText>Atualizar dados do pet</CustomButtonText>
           </CustomButton>
 
