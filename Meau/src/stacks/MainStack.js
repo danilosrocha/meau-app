@@ -11,7 +11,18 @@ import NotificationInbox from "../screens/NotificationInbox";
 import Request from "../screens/Request";
 import MainTab from "./MainTab";
 
+import Header from "../components/Header";
+
 const Stack = createStackNavigator();
+
+const screens = {
+  AdoptPet: {
+    screen: AdoptPet,
+    navitionOptions: {
+      headerTitle: () => <Header />
+    }
+  }
+}
 
 export default () => (
   <Stack.Navigator initialRouteName="Preload">
@@ -30,19 +41,16 @@ export default () => (
     </Stack.Group>
 
     <Stack.Group
-      screenOptions={{
-        headerShown: true,
-        unmountOnBlur: true,
-      }}
+      screenOptions={props => <Header {...props}  />}
     >
       <Stack.Screen name="Adotar Pet" component={AdoptPet} />
       <Stack.Screen name="Perfil Pet" component={PetProfile} />
       <Stack.Screen name="Solicitações de adoção" component={NotificationInbox} />
       <Stack.Screen name="Requisição" component={Request} />
-      
+
     </Stack.Group>
 
-  </Stack.Navigator>
+  </Stack.Navigator >
 );
 
 

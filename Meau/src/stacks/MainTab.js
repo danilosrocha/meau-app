@@ -17,7 +17,7 @@ export default () => {
             tabBar={props => <CustomTabBar {...props} />}
             initialRouteName="Inicio"
             screenOptions={{
-                headerShown: true,
+                headerShown: false,
                 unmountOnBlur: true,
             }}
         >

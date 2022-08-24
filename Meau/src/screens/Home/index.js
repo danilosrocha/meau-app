@@ -10,6 +10,7 @@ import {
 
 import { useNavigation } from "@react-navigation/native";
 import AddToken from '../../Services/AddToken'
+import Header from "../../components/Header";
 
 import { auth, db } from "../../../firebase";
 
@@ -50,6 +51,10 @@ export default () => {
 
   return (
     <Container>
+      <Header
+        title = {"Meau App"}
+
+      />
       <ViewArea>
         <AddToken></AddToken>
         <WelcomeSign>
