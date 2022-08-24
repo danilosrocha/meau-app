@@ -3,21 +3,21 @@ import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 
 const FlatlistView = styled.TouchableOpacity`
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   flex: 1;
+  padding: 20px;
   margin-bottom: 20px;
-  border-radius: 30px;
+  border-radius: 20px;
   background-color: #4444;
   justify-content: center;
   align-items: center;
-  margin-left: 4%;
 `;
 
 const TextParam = styled.Text`
   font-size: 20px;
   color: black;
-  margin-bottom: 5px;
+  text-align: justify;
 `;
 
 const ImagePet = styled.Image`
@@ -38,8 +38,8 @@ export default ({ item }) => {
 
   return (
     <FlatlistView onPress={() => handleRequestClick(item.idRequestingUser, item.idPet)}>
-      <TextParam>Texto: {item.body}</TextParam>
-      <TextParam>Idade: {item.title}</TextParam>
+      <TextParam>{item.title}</TextParam>
+      <TextParam>{item.body}</TextParam>
     </FlatlistView>
   );
 };

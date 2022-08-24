@@ -17,12 +17,13 @@ import {
 } from "./styles";
 
 import ButtonRequest from "../../components/ButtonRequest";
-import SignInput from "../../components/SignInput";
+import PetInput from "../../components/PetInput";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import { Alert } from "react-native";
 import { auth, db, storage } from "../../../firebase";
 import * as ImagePicker from "expo-image-picker";
+import Header from "../../components/Header";
 
 export default () => {
   const navigation = useNavigation();
@@ -164,12 +165,14 @@ export default () => {
 
   return (
     <Container>
+      <Header
+        title={"Cadastrar Pet"}
+      />
       <ScrollViewPet>
         <InputArea>
-          <TitleTextBold>Adicione os dados do pet</TitleTextBold>
 
-          <SignInput
-            placeholder="Nome"
+          <PetInput
+            placeholder="Nome do pet"
             value={name}
             onChangeText={(t) => setNameField(t)}
           />
@@ -183,10 +186,10 @@ export default () => {
 
           </ViewArea>
 
-          <ButtonRequest 
-          title={"Cadastrar foto do pet"}
-          onPress={handlePictureResgister}
-          isLoading={loading}
+          <ButtonRequest
+            title={"Adicionar foto do pet"}
+            onPress={handlePictureResgister}
+            isLoading={loading}
           >
 
           </ButtonRequest>
@@ -204,7 +207,7 @@ export default () => {
 
             <SimpleTextBold>Selecione a especie do animal</SimpleTextBold>
             <Picker
-              style={{ height: 50, width: 200 }}
+              style={{ height: 50, width: 150 }}
               selectedValue={specie}
               onValueChange={(itemValue, itemIndex) => setSpecieField(itemValue)}
             >
@@ -214,7 +217,7 @@ export default () => {
 
             <SimpleTextBold>Selecione o porte do animal</SimpleTextBold>
             <Picker
-              style={{ height: 50, width: 200 }}
+              style={{ height: 50, width: 150 }}
               selectedValue={size}
               onValueChange={(itemValue, itemIndex) => setSizeField(itemValue)}
             >
@@ -225,7 +228,7 @@ export default () => {
 
             <SimpleTextBold>Selecione a idade do animal</SimpleTextBold>
             <Picker
-              style={{ height: 50, width: 200 }}
+              style={{ height: 50, width: 150 }}
               selectedValue={age}
               onValueChange={(itemValue, itemIndex) => setAgeField(itemValue)}
             >
@@ -240,8 +243,8 @@ export default () => {
               style={{ height: 50, width: 150 }}
               onValueChange={(itemValue, itemIndex) => setAdoptionStatus(itemValue)}
             >
-              <Picker.Item label="True" value={true} />
-              <Picker.Item label="False" value={false} />
+              <Picker.Item label="Disponível" value={true} />
+              <Picker.Item label="Não disponível" value={false} />
             </Picker>
           </ViewAreaPicker>
 

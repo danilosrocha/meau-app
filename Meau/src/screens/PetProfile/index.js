@@ -6,7 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { Picker } from "@react-native-picker/picker";
-import NotificationInbox from "../NotificationInbox";
+import HeaderBack from "../../components/HeaderBack";
 
 import {
   Container,
@@ -96,7 +96,7 @@ export default (object) => {
     myDoc
       .update(data)
       .then(() => {
-        Alert.alert("Info","Dados do Pet atualizados");
+        Alert.alert("Info", "Dados do Pet atualizados");
         navigation.reset({
           routes: [{ name: 'RoutesTab' }]
         });
@@ -204,6 +204,9 @@ export default (object) => {
 
   return (
     <Container>
+      <HeaderBack
+        title={data.nome}
+      />
       <ScrollViewPet>
         <InputArea>
 

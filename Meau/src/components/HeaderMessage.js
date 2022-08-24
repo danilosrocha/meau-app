@@ -9,22 +9,24 @@ const Container = styled.SafeAreaView`
 
 const StatusBar = styled.StatusBar`
     background-color: #fff;
+    flex: 1;
 `
 
 const HeaderArea = styled.View`
     flex: 1;
     background-color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border-bottom-color: black;
     border-bottom-width: 0.2px;     
 `
 
 const ButtonChat = styled.TouchableOpacity`
-    width: 50px;
-    height: 50px;
-    margin-right: 20px;
+    width: 20px;
+    height: 20px;
     justify-content: center;
     align-items: center;
 `
@@ -44,16 +46,19 @@ const Icon = styled.Image`
 export default ({ title }) => {
     const navigation = useNavigation();
 
-    const handleHome = () => {
-        navigation.navigate("Inicio")
+    const handleGoChat = () => {
+        navigation.navigate("Chat")
     }
 
     return (
         <Container>
             <StatusBar backgroundColor="black" />
 
-            <HeaderArea onPress={() => handleHome()}>
+            <HeaderArea >
                 <Title>{title}</Title>
+                <ButtonChat onPress={() => handleGoChat()}>
+                    <Icon source={require("../../assets/Icons/messenger.png")} />
+                </ButtonChat>
             </HeaderArea>
 
         </Container>

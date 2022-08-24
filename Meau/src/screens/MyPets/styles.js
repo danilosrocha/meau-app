@@ -22,8 +22,9 @@ export const ViewArea = styled.View`
 export const FlatList = styled.FlatList`
     border-radius: 30px;
     margin-bottom: 20px;
+    margin-top: 20px;
     width: 100%;
-    height: 80%;
+    height: 100%;
     
 `;
 

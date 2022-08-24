@@ -3,6 +3,7 @@ import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { auth, db, storage } from "../../../firebase";
 import * as ImagePicker from "expo-image-picker";
+import Header from "../../components/Header";
 
 import {
   Container,
@@ -190,6 +191,10 @@ export default () => {
 
   return (
     <Container>
+      <Header
+        title={"Perfil"}
+
+      />
       < ScrollViewProfile >
         <InputArea>
           <ContentImg onPress={() => handleImageUser()}>

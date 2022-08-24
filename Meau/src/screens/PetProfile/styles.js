@@ -17,7 +17,8 @@ export const ScrollViewPet = styled.ScrollView`
 export const InputArea = styled.View`
   width: 100%;
   flex: 1;
-
+  align-items: center;
+  justify-content: center;
 `;
 
 export const InputFields = styled.View`
@@ -50,8 +51,7 @@ export const ViewArea = styled.View`
 export const Input = styled.TextInput`
   flex: 1;
   font-size: 20px;
-  margin-left: 9px;
-  text-align: left;
+  text-align: center;
   font-weight: bold;
 `;
 
@@ -103,7 +103,7 @@ export const SignMessageButtonTextBold = styled.Text`
 /* BUTTON */
 
 export const CustomButton = styled.TouchableOpacity`
-  width: 100%;
+  width: 85%;
   background-color: #fff;
   border-radius: 30px;
   justify-content: center;

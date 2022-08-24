@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { auth, db, storage } from "../../../firebase";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+import HeaderBack from "../../components/HeaderBack";
 
 import {
   Container,
@@ -21,56 +22,59 @@ import {
   PetPicture,
 } from "./styles";
 
-export default (object) => {
+export default () => {
   const navigation = useNavigation();
 
-  const idPet = object.route.params.idPet;
-  const donoAtual = object.route.params.idRequestingUser;
-  console.log(">>>>>>> idPet", idPet)
-  console.log(">>>>>>> Dono Atual: ", donoAtual)
-  console.log(">>>>>>> Dono Atual: ", object)
+  // const idPet = object.route.params.idPet;
+  // const donoAtual = object.route.params.idRequestingUser;
+  // console.log(">>>>>>> idPet", idPet)
+  // console.log(">>>>>>> Dono Atual: ", donoAtual)
+  // console.log(">>>>>>> Dono Atual: ", object)
 
   /*USER DATA*/
 
-  const handleAcceptClick = () => {
-    auth;
-    const colectHistory = db.collection("History");
-    const adoptionHistory = colectHistory.doc(auth.currentUser?.uid);
-    const colectPet = db.collection("Pet");
-    const myPet = colectPet.doc(idPet);
-    console.log("----> Eu sou o id do Pet", idPet)
+  // const handleAcceptClick = () => {
+  //   auth;
+  //   const colectHistory = db.collection("History");
+  //   const adoptionHistory = colectHistory.doc(auth.currentUser?.uid);
+  //   const colectPet = db.collection("Pet");
+  //   const myPet = colectPet.doc(idPet);
+  //   console.log("----> Eu sou o id do Pet", idPet)
     
-    const historyData = {
-      donoAntigo: auth.currentUser?.uid,
-      donoAtual: donoAtual,
-      id: idPet,
-      statusAdocao: false,
-    }
+  //   const historyData = {
+  //     donoAntigo: auth.currentUser?.uid,
+  //     donoAtual: donoAtual,
+  //     id: idPet,
+  //     statusAdocao: false,
+  //   }
 
-    const data = {
-      donoId: donoAtual,
-      id: idPet,
-      statusAdocao: false,
-    };
+  //   const data = {
+  //     donoId: donoAtual,
+  //     id: idPet,
+  //     statusAdocao: false,
+  //   };
 
-    myPet
-      .update(data)
-      .then(() => {
-        adoptionHistory.set(historyData).then(() => {
-          navigation.navigate("Meus Pets")
-        })
-      })
-      .catch((error) => alert(error.message));
-  };
+  //   myPet
+  //     .update(data)
+  //     .then(() => {
+  //       adoptionHistory.set(historyData).then(() => {
+  //         navigation.navigate("Meus Pets")
+  //       })
+  //     })
+  //     .catch((error) => alert(error.message));
+  // };
 
   return (
     <Container>
+      <HeaderBack
+      title={"Inicie uma conversa"}
+      />
       <ScrollViewPet>
         <InputArea>
 
-          <CustomButton onPress={() => handleAcceptClick()}>
-            <CustomButtonText>Inicie uma conversa</CustomButtonText>
-          </CustomButton>
+          {/* <CustomButton onPress={() => handleAcceptClick()}>
+            <CustomButtonText></CustomButtonText>
+          </CustomButton> */}
 
         </InputArea>
       </ScrollViewPet>

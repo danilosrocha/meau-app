@@ -15,6 +15,7 @@ import { auth, db } from "../../../firebase";
 
 import ItemPets from "./ItemPets";
 import ItemEmpty from "./ItemEmpty";
+import Header from "../../components/Header";
 
 export default () => {
   const navigation = useNavigation();
@@ -52,17 +53,19 @@ export default () => {
   };
 
   const renderItem = ({ item }) => <ItemPets item={item} />;
-  const renderEmpty = () => <ItemEmpty/>;
+  const renderEmpty = () => <ItemEmpty />;
 
   useEffect(() => {
-      getPets()
+    getPets()
   }, []);
 
   return (
     <Container>
+      <Header
+        title={"Meus animais"}
+      />
       <ViewArea>
-        <TitleText>Lista de meus animais</TitleText>
-        {data 
+        {data
           ? <FlatList
             data={data}
             renderItem={renderItem}

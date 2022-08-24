@@ -7,7 +7,7 @@ const TabArea = styled.View`
     background-color: #fff;
 `
 
-const TabItemCenter = styled.TouchableOpacity`
+const TabItemCenter = styled.TouchableHighlight`
     align-items: center;
     justify-content: center;
     height: 70px;
@@ -49,12 +49,12 @@ export default ({ state, navigation }) => {
                 <SmallImage style={{ opacity: state.index === 0 ? 1 : 0.5 }} source={require("../../assets/Icons/profile.png")} />
             </TabSmallItem>
 
-            <TabSmallItem onPress={() => goTo("Meus Pets")}>
+            <TabSmallItem onPress={() => goTo("Meus Pets")} >
                 <SmallImage style={{ opacity: state.index === 1 ? 1 : 0.5 }} source={require("../../assets/Icons/mypets.png")} />
             </TabSmallItem>
 
-            <TabItemCenter onPress={() => goTo("Inicio")}>
-                <LargeImage  source={require("../../assets/Icons/home.png")} />
+            <TabItemCenter onPress={() => goTo("Inicio")} underlayColor="#fff" style={{ opacity: state.index === 2 ? 1 : 0.9 }}>
+                <LargeImage  style={{ opacity: state.index === 2 ? 1 : 0.5 }} source={require("../../assets/Icons/home.png")} />
             </TabItemCenter>
 
             <TabSmallItem onPress={() => goTo("Cadastrar Pet")}>

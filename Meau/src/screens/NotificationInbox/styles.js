@@ -16,15 +16,15 @@ export const ViewArea = styled.View`
     flex:1;
     justify-content: center;
     align-items: center;
-    
+    margin-top: 20px;
 
 `;
 
 export const FlatList = styled.FlatList`
-    border-radius: 30px;
+    border-radius: 20px;
     margin-bottom: 20px;
     width: 100%;
-    height: 80%;
+    height: 100%;
     
 `;
 

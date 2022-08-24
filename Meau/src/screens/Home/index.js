@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
 import {
   Container,
-  WelcomeSign,
   ViewArea,
   FlatList,
   TitleText,
@@ -10,7 +8,7 @@ import {
 
 import { useNavigation } from "@react-navigation/native";
 import AddToken from '../../Services/AddToken'
-import Header from "../../components/Header";
+import Header from "../../components/HeaderMessage";
 
 import { auth, db } from "../../../firebase";
 
@@ -57,15 +55,12 @@ export default () => {
       />
       <ViewArea>
         <AddToken></AddToken>
-        <WelcomeSign>
-          <Text>Email: {auth.currentUser?.email}</Text>
-        </WelcomeSign>
         <TitleText>Lista dos animais</TitleText>
         {data && (
           <FlatList
             data={data}
             renderItem={renderItem}
-            contentContainerStyle={{ marginHorizontal: 30 }}
+            contentContainerStyle={{ marginHorizontal: 20 }}
           />
         )}
 

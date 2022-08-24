@@ -12,7 +12,6 @@ const ButtonRequest = styled.TouchableOpacity`
 
 const Title = styled.Text`
     font-size: 20px;
-    font-weight: bold;
 `;
 
 const IconLoading = styled.ActivityIndicator`

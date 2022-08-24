@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { auth, db, storage } from "../../../firebase";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+import HeaderBack from "../../components/HeaderBack";
 
 import {
   Container,
@@ -63,13 +64,25 @@ export default (object) => {
       .catch((error) => alert(error.message));
   };
 
+  const handleDeclineClick = () => {
+    navigation.goBack()
+  }
+
   return (
     <Container>
+      <HeaderBack 
+      title={"Requisição"}
+      />
+
       <ScrollViewPet>
         <InputArea>
 
           <CustomButton onPress={() => handleAcceptClick()}>
             <CustomButtonText>Autorizar requisição de adoção</CustomButtonText>
+          </CustomButton>
+
+          <CustomButton onPress={() => handleDeclineClick()}>
+            <CustomButtonText>Negar requisição de adoção</CustomButtonText>
           </CustomButton>
 
         </InputArea>

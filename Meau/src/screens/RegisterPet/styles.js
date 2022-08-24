@@ -17,7 +17,6 @@ export const ScrollViewPet = styled.ScrollView`
 
 export const InputArea = styled.View`
     width: 100%;
-    flex: 1;
     padding: 20px;
     justify-content: center;
     align-items: center;
@@ -33,6 +32,8 @@ export const ViewArea = styled.View`
 export const ViewAreaPicker = styled.View`
     flex: 1;
     margin-bottom: 20px;
+    /* align-items: center; */
+    justify-content: center;
 `;
 
 export const CustomViewPicture = styled.View`

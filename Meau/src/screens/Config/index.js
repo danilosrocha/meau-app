@@ -4,8 +4,10 @@ import {
     Container,
     InputArea,
     CustomButton,
-    CustomButtonText
+    CustomButtonText,
+    SimpleText
 } from './styles'
+import Header from "../../components/Header";
 
 export default () => {
 
@@ -23,6 +25,10 @@ export default () => {
 
     return (
         <Container>
+            <Header
+                title={"Configurações"}
+            />
+            <SimpleText>Email: {auth.currentUser?.email}</SimpleText>
             <InputArea>
                 <CustomButton onPress={handleSignOut}>
                     <CustomButtonText>Sign Out</CustomButtonText>

@@ -15,6 +15,7 @@ import { auth, db } from "../../../firebase";
 
 import ItemRequest from "./ItemRequest";
 import ItemEmpty from "./ItemEmpty";
+import HeaderBack from "../../components/HeaderBack";
 
 export default (object) => {
   const navigation = useNavigation();
@@ -59,14 +60,15 @@ export default (object) => {
 
   return (
     <Container>
+      <HeaderBack 
+      title={"Requisições de adoção"}
+      />
       <ViewArea>
-        <TitleText>Lista de requisições</TitleText>
         {data
           ? <FlatList
             data={data}
             renderItem={renderItem}
             ListEmptyComponent={renderEmpty}
-            contentContainerStyle={{ marginHorizontal: 20 }}
           />
           : <LoadingIcon size="large" color="#ffffff" />
         }

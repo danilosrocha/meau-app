@@ -82,8 +82,7 @@ export const SimpleText = styled.Text`
 export const TitleText = styled.Text`
     font-size: 22px;
     color: #000000;
-    
-    height: 60px;
+    margin: 20px;
     text-align: center;    
     font-weight: bold;
 `;
