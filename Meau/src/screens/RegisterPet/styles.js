@@ -13,14 +13,12 @@ export const Container = styled.SafeAreaView`
 export const ScrollViewPet = styled.ScrollView`
     width: 100%;
     height: 100%;
-    flex: 1;
-    padding: 15px;
-    
 `;
 
 export const InputArea = styled.View`
     width: 100%;
     flex: 1;
+    padding: 20px;
     justify-content: center;
     align-items: center;
 `;
@@ -30,6 +28,11 @@ export const ViewArea = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
+`;
+
+export const ViewAreaPicker = styled.View`
+    flex: 1;
+    margin-bottom: 20px;
 `;
 
 export const CustomViewPicture = styled.View`
@@ -50,15 +53,15 @@ export const SimpleTextBold = styled.Text`
     font-size: 20px;
     color: #000000;
     margin-top: 20px;
-    font-weight: bold;
+    /* font-weight: bold; */
 `;
 
 export const TitleTextBold = styled.Text`
     font-size: 22px;
     color: #000000;
-    margin-top: 20px;
     margin-bottom: 20px;
     font-weight: bold;
+    text-align: center;
 `;
 
 export const WelcomeSign = styled.Text`
@@ -104,12 +107,12 @@ export const MessageButton = styled.TouchableOpacity`
 `;
 
 export const CustomButtonPicture = styled.TouchableOpacity`
-    height: 100px; 
-    width: 90%; 
-    border-radius: 10px;  
+    width: 100%;
     background-color: #fff;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 60px;
+    border-radius: 10px;  
 `;
 
 /* IMAGE */

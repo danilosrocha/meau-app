@@ -35,6 +35,7 @@ export default (object) => {
   const [ownerName, setOwnerName] = useState("");
 
   const requestingUser = auth.currentUser?.email
+  const idRequestingUser = auth.currentUser?.uid
   const idPet = object.route.params.idPet;
 
   const getPets = async () => {
@@ -116,6 +117,7 @@ export default (object) => {
           <Notification
           expoPushTokenOwner={expoPushToken}
           ownerName={ownerName}
+          idRequestingUser={idRequestingUser}
           requestingUser={requestingUser}
           name={name}
           idPet={idPet}

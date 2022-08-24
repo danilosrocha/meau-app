@@ -1,10 +1,11 @@
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Button, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { auth } from '../../../firebase'
 import { db } from '../../../firebase'
 import { useNavigation } from "@react-navigation/native";
+import { v4 as uuidv4 } from "uuid";
 import {
   CustomButtonText,
   CustomButtonAdoption,
@@ -19,12 +20,13 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export default ({ expoPushTokenOwner, ownerName, requestingUser, name, idPet }) => {
+export default ({ expoPushTokenOwner, ownerName, idRequestingUser, requestingUser, name, idPet }) => {
 
   const navigation = useNavigation();
 
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
+  const [message, setMessage] = useState();
   const notificationListener = useRef();
   const responseListener = useRef();
 
@@ -48,43 +50,15 @@ export default ({ expoPushTokenOwner, ownerName, requestingUser, name, idPet }) 
 
   }, []);
 
-  const handleAdoptClick = (idPet) => {
-
-    // auth;
-    // const colectHistory = db.collection("History");
-    // const colectPet = db.collection("Pet");
-    // const adoptionHistory = colectHistory.doc(auth.currentUser?.uid);
-    // const myPet = colectPet.doc(idPet);
-    console.log("----> Eu sou o id do Pet", idPet)
+  const handleAdoptClick = () => {
     navigation.navigate("Meus Pets")
-    // const petPicture = "https://static.thenounproject.com/png/703110-200.png"
-    // const historyData = {
-    //   donoAtual: auth.currentUser?.uid,
-    //   donoAntigo: currentOwner,
-    //   id: idPet,
-    //   statusAdocao: false,
-    // }
 
-    // const data = {
-    //   donoId: auth.currentUser?.uid,
-    //   id: idPet,
-    //   statusAdocao: false,
-    // };
-
-    // myPet
-    //   .update(data)
-    //   .then(() => {
-    //     adoptionHistory.set(historyData).then(() => {
-    //       navigation.navigate()
-    //     })
-    //   })
-    //   .catch((error) => alert(error.message));
   };
 
   return (
     <InputArea>
       <CustomButtonAdoption onPress={async () => {
-        await sendPushNotification(expoPushTokenOwner, ownerName, requestingUser, name, idPet), handleAdoptClick(idPet);
+        await sendPushNotification(expoPushTokenOwner, ownerName, idRequestingUser, requestingUser, name, idPet), handleAdoptClick();
       }}>
         <CustomButtonText>Solicitar a adoção do Pet</CustomButtonText>
       </CustomButtonAdoption>
@@ -93,13 +67,14 @@ export default ({ expoPushTokenOwner, ownerName, requestingUser, name, idPet }) 
 }
 
 // Can use this function below, OR use Expo's Push Notification Tool-> https://expo.dev/notifications
-async function sendPushNotification(expoPushTokenOwner, ownerName, requestingUser, name) {
-  // console.log(`>>>>>> Token adicionado ${expoPushTokenOwner}`); 
+async function sendPushNotification(expoPushTokenOwner, ownerName, idRequestingUser, requestingUser, name, idPet) {
+  const idReq = uuidv4()
+  auth;
   const message = {
     to: expoPushTokenOwner,
     sound: 'default',
     title: 'Solicitação de adoção!',
-    body: `Olá ${ownerName}! O usuário ${requestingUser} gostaria de adotar o ${name}`,
+    body: `Olá ${ownerName}! O usuário ${requestingUser} gostaria de adotar: ${name}`,
     data: { someData: 'goes here' },
   };
 
@@ -112,6 +87,26 @@ async function sendPushNotification(expoPushTokenOwner, ownerName, requestingUse
     },
     body: JSON.stringify(message),
   });
+
+
+  const colectAdoptionRequests = db.collection("AdoptionRequests");
+  const adoptionRequests = colectAdoptionRequests.doc(idPet);
+  const requests = adoptionRequests.collection("Requests");
+  const IdReq = requests.doc(idReq);
+
+  const data = {
+    idRequestingUser: idRequestingUser,
+    title: 'Solicitação de adoção!',
+    body: `Olá ${ownerName}! O usuário ${requestingUser} gostaria de adotar: ${name}`,
+  }
+
+  IdReq
+    .set(data)
+    .then(() => {
+      console.log(">>>>>>> Requisicao: requisicao adcionada");
+    })
+
+    .catch((error) => alert(error.message));
 }
 
 async function registerForPushNotificationsAsync() {

@@ -11,7 +11,7 @@ import {
 
 import { useNavigation } from "@react-navigation/native";
 
-import { auth, db, storage } from "../../../firebase";
+import { auth, db } from "../../../firebase";
 
 import ItemPets from "./ItemPets";
 import ItemEmpty from "./ItemEmpty";
@@ -67,7 +67,7 @@ export default () => {
             data={data}
             renderItem={renderItem}
             ListEmptyComponent={renderEmpty}
-            contentContainerStyle={{ marginHorizontal: 30 }}
+            contentContainerStyle={{ marginHorizontal: 10 }}
           />
           : <LoadingIcon size="large" color="#ffffff" />
         }

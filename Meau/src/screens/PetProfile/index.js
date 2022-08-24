@@ -6,6 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { Picker } from "@react-native-picker/picker";
+import NotificationInbox from "../NotificationInbox";
 
 import {
   Container,
@@ -22,7 +23,6 @@ import {
   CustomButtonPicture,
   PetPicture,
 } from "./styles";
-import SignInput from "../../components/SignInput";
 
 export default (object) => {
   const navigation = useNavigation();
@@ -102,6 +102,12 @@ export default (object) => {
       .catch((error) => alert(error.message));
   };
 
+  const handleListRequest = (idPet) => {
+    console.log(`>>>>>>>>>> Pet Profile: ${idPet}`);
+    navigation.navigate('Solicitações de adoção', {
+      idPet: idPet,
+    });
+  }
   /* ------------------------------------------------------------*/
 
   const handlePictureResgister = () => {
@@ -265,6 +271,10 @@ export default (object) => {
 
           <CustomButton onPress={() => handleUpdateClick(idPet)}>
             <CustomButtonText>Atualizar dados do pet</CustomButtonText>
+          </CustomButton>
+
+          <CustomButton onPress={() => handleListRequest(idPet)}>
+            <CustomButtonText>Lista de requisições de adoção</CustomButtonText>
           </CustomButton>
         </InputArea>
       </ScrollViewPet>

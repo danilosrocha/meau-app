@@ -12,7 +12,6 @@ export const Container = styled.SafeAreaView`
 
 export const ViewArea = styled.View`
     width: 100%;
-    height: 60%;
     flex:1;
     justify-content: center;
     align-items: center;
@@ -41,7 +40,7 @@ export const SimpleText = styled.Text`
 export const TitleText = styled.Text`
     font-size: 22px;
     color: #000000;
-    margin-top: 60px;
+    margin-top: 20px;
     height: 60px;
     text-align: center;    
     font-weight: bold;
@@ -74,7 +73,7 @@ export const CustomButton = styled.TouchableOpacity`
     border-radius: 30px;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 `;
 
 export const SignMessageButton = styled.TouchableOpacity`

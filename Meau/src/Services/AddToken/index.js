@@ -1,13 +1,10 @@
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Button, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { auth } from '../../../firebase'
 import { db } from '../../../firebase'
-import { useNavigation } from "@react-navigation/native";
 import {
-  CustomButtonText,
-  CustomButtonAdoption,
   InputArea
 } from "./styles";
 
@@ -21,8 +18,6 @@ Notifications.setNotificationHandler({
 
 export default ({ expoPushTokenOwner, ownerName, requestingUser, name, idPet }) => {
 
-  const navigation = useNavigation();
-
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
@@ -34,7 +29,7 @@ export default ({ expoPushTokenOwner, ownerName, requestingUser, name, idPet }) 
     const myDoc = colect.doc(auth.currentUser?.uid)
 
     const data = {
-      "expoPushToken" : expoPushToken
+      "expoPushToken": expoPushToken
     }
 
     myDoc.update(data)
@@ -63,36 +58,13 @@ export default ({ expoPushTokenOwner, ownerName, requestingUser, name, idPet }) 
   }, []);
   handleTokenInsertAccount();
 
-
   return (
     <InputArea>
 
     </InputArea>
   );
 }
-
 // Can use this function below, OR use Expo's Push Notification Tool-> https://expo.dev/notifications
-async function sendPushNotification(expoPushTokenOwner, ownerName, requestingUser, name) {
-  // console.log(`>>>>>> Token adicionado ${expoPushTokenOwner}`); 
-  const message = {
-    to: expoPushTokenOwner,
-    sound: 'default',
-    title: 'Solicitação de adoção!',
-    body: `Olá ${ownerName}! O usuário ${requestingUser} gostaria de adotar o ${name}`,
-    data: { someData: 'goes here' },
-  };
-
-  await fetch('https://exp.host/--/api/v2/push/send', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Accept-encoding': 'gzip, deflate',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(message),
-  });
-}
-
 async function registerForPushNotificationsAsync() {
   let token;
   if (Device.isDevice) {
@@ -120,7 +92,6 @@ async function registerForPushNotificationsAsync() {
       lightColor: '#FF231F7C',
     });
   }
-
   return token;
 }
 
