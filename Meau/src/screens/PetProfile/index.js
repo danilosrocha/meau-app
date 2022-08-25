@@ -23,6 +23,7 @@ import {
   CustomButtonPicture,
   PetPicture,
 } from "./styles";
+import ImageUploading from "../../components/ImageUploading";
 
 export default (object) => {
   const navigation = useNavigation();
@@ -36,7 +37,9 @@ export default (object) => {
   const [petAvatar, setPetAvatar] = useState("");
   const [fileName, setFileName] = useState("");
   const [petProfilePicture, setPetProfilePicture] = useState("");
+  const [loadingPicture, setLoadingPicture] = useState(false);
   const [data, setData] = useState([]);
+  
 
   const idPet = object.route.params.idPet;
 
@@ -178,8 +181,13 @@ export default (object) => {
       "state_changed",
       (snapshot) => {
         console.log("Upload Image");
-        if (snapshot.bytesTransferred !== 0) {
-          getUrlImage(donoID, fileName);
+        let progress = snapshot.bytesTransferred / snapshot.totalBytes
+        setLoadingPicture(true)
+        if (progress === 1) {
+          console.log(">>>>>>> Imagem Upada com sucesso", progress);
+          setTimeout(function () {
+            getUrlImage(donoID, fileName);
+          }, 1500);
         }
       },
       (error) => {
@@ -193,6 +201,7 @@ export default (object) => {
     imageRef
       .getDownloadURL()
       .then((url) => {
+        setLoadingPicture(false)
         setPetProfilePicture(url);
       })
       .catch((e) => console.log("getting downloadURL of image error => ", e));
@@ -211,7 +220,11 @@ export default (object) => {
         <InputArea>
 
           <CustomButtonPicture onPress={handlePictureResgister}>
-            {!!data.fotoPet && <PetPicture source={{ uri: data.fotoPet }} />}
+            {/* {!!data.fotoPet && <PetPicture source={{ uri: petProfilePicture }} />} */}
+            <ImageUploading 
+            urlPicture={petProfilePicture}
+            isLoading={loadingPicture}
+            />
           </CustomButtonPicture>
 
           <Input

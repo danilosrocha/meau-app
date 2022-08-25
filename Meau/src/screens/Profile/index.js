@@ -154,8 +154,12 @@ export default () => {
       "state_changed",
       (snapshot) => {
         console.log("Upload Image");
-        if (snapshot.bytesTransferred !== 0) {
-          getUrlImage(idUser);
+        let progress = snapshot.bytesTransferred/snapshot.totalBytes
+        if (progress === 1) {
+          console.log(progress);
+          setTimeout(function () {
+            getUrlImage(idUser);
+          }, 1000);
         }
       },
       (error) => {

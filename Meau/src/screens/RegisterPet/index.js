@@ -134,6 +134,7 @@ export default () => {
     // console.log("----> Eu sou Blob", blob)
     const uploadTask = storage
       .ref("profilePetPicture/" + donoID + "/" + fileName)
+      // .ref("profilePetPicture/" + donoID + "/" + fileName)
       .put(blob);
 
     uploadTask.on(
@@ -141,8 +142,12 @@ export default () => {
       (snapshot) => {
         console.log("Upload Image");
         setLoading(true)
-        if (snapshot.bytesTransferred !== 0) {
-          getUrlImage(donoID, fileName);
+        let progress = snapshot.bytesTransferred / snapshot.totalBytes
+        if (progress === 1) {
+          console.log(progress);
+          setTimeout(function () {
+            getUrlImage(donoID, fileName);
+          }, 1000);
         }
       },
       (error) => {
@@ -152,7 +157,7 @@ export default () => {
   }
 
   const getUrlImage = (donoID, fileName) => {
-    let imageRef = storage.ref("profilePetPicture/" + donoID + "/" + fileName);
+    let imageRef = storage.ref("profilePetPicture/" + donoID + "/" + fileName)
     imageRef
       .getDownloadURL()
       .then((url) => {
@@ -173,7 +178,6 @@ export default () => {
 
           <PetInput
             placeholder="Nome do pet"
-            value={name}
             onChangeText={(t) => setNameField(t)}
           />
 
