@@ -28,14 +28,14 @@ import Header from "../../components/Header";
 export default () => {
   const navigation = useNavigation();
 
-  const [name, setNameField] = useState();
+  const [name, setNameField] = useState("Pet");
   const [sex, setSexField] = useState("Macho");
   const [specie, setSpecieField] = useState("Cachorro");
   const [size, setSizeField] = useState("Pequeno");
   const [age, setAgeField] = useState("Filhote");
   const [adoptionStatus, setAdoptionStatus] = useState(true);
   const [avatar, setAvatar] = useState();
-  const [fileName, setFileName] = useState("padrão");
+  const [fileName, setFileName] = useState("ImagemPet");
   const [petProfilePicture, setPetProfilePicture] = useState();
   const [loading, setLoading] = useState(false)
   const idPet = uuidv4();

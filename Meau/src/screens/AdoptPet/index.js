@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { auth, db } from "../../../firebase";
 import "react-native-get-random-values";
 import Notification from '../../Services/Notification'
+import HeaderBack from "../../components/HeaderBack"
 
 import {
   Container,
@@ -95,6 +96,9 @@ export default (object) => {
 
   return (
     <Container>
+      <HeaderBack 
+      title={data.nome}
+      />
       <ScrollViewPet>
         <InputArea>
           <TitleTextBold>Vamos adotar o pet?</TitleTextBold>
