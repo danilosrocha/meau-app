@@ -13,11 +13,12 @@ import Header from "../../components/HeaderMessage";
 import { auth, db } from "../../../firebase";
 
 import Item from "./Item";
-
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export default () => {
   const navigation = useNavigation();
 
   const [data, setData] = useState([]);
+  const [isFetching, setIsFetching] = React.useState(false);
   const getUsers = () => {
     db.collection("Pet")
       .get()
@@ -43,6 +44,12 @@ export default () => {
 
   const renderItem = ({ item }) => <Item item={item} />;
 
+  const onRefresh = async () => {
+    setIsFetching(true);
+    await sleep(2000);
+    setIsFetching(false);
+  };
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -50,7 +57,7 @@ export default () => {
   return (
     <Container>
       <Header
-        title = {"Meau App"}
+        title={"Meau App"}
 
       />
       <ViewArea>
@@ -61,6 +68,8 @@ export default () => {
             data={data}
             renderItem={renderItem}
             contentContainerStyle={{ marginHorizontal: 20 }}
+            onRefresh={onRefresh}
+            refreshing={isFetching}
           />
         )}
 

@@ -16,7 +16,7 @@ import { auth, db } from "../../../firebase";
 import ItemPets from "./ItemPets";
 import ItemEmpty from "./ItemEmpty";
 import Header from "../../components/Header";
-
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export default () => {
   const navigation = useNavigation();
 
@@ -27,6 +27,7 @@ export default () => {
 
   const idUser = auth.currentUser?.uid;
   const [data, setData] = useState();
+  const [isFetching, setIsFetching] = React.useState(false);
 
   const getPets = () => {
     db.collection("Pet")
@@ -54,6 +55,12 @@ export default () => {
 
   const renderItem = ({ item }) => <ItemPets item={item} />;
   const renderEmpty = () => <ItemEmpty />;
+  const onRefresh = async () => {
+    setIsFetching(true);
+    await sleep(2000);
+    getPets();
+    setIsFetching(false);
+  };
 
   useEffect(() => {
     getPets()
@@ -71,6 +78,8 @@ export default () => {
             renderItem={renderItem}
             ListEmptyComponent={renderEmpty}
             contentContainerStyle={{ marginHorizontal: 10 }}
+            onRefresh={onRefresh}
+            refreshing={isFetching}
           />
           : <LoadingIcon size="large" color="#ffffff" />
         }

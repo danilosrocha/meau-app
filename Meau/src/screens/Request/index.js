@@ -35,6 +35,7 @@ export default (object) => {
 
   const handleAcceptClick = () => {
     auth;
+    
     const colectHistory = db.collection("History");
     const adoptionHistory = colectHistory.doc(auth.currentUser?.uid);
     const colectPet = db.collection("Pet");

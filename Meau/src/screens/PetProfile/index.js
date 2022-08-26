@@ -100,9 +100,7 @@ export default (object) => {
       .update(data)
       .then(() => {
         Alert.alert("Info", "Dados do Pet atualizados");
-        navigation.reset({
-          routes: [{ name: 'RoutesTab' }]
-        });
+        navigation.goBack()
       })
       .catch((error) => alert(error.message));
   };
@@ -220,11 +218,11 @@ export default (object) => {
         <InputArea>
 
           <CustomButtonPicture onPress={handlePictureResgister}>
-            {/* {!!data.fotoPet && <PetPicture source={{ uri: petProfilePicture }} />} */}
-            <ImageUploading 
+             {!!data.fotoPet && <PetPicture source={{ uri: petProfilePicture }} />} 
+            {/* <ImageUploading 
             urlPicture={petProfilePicture}
             isLoading={loadingPicture}
-            />
+            />*/}
           </CustomButtonPicture>
 
           <Input

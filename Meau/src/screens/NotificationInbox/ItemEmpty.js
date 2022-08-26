@@ -25,7 +25,7 @@ export default () => {
 
   return (
     <FlatlistView>
-      <TextParam>Você ainda não possui pets</TextParam>
+      <TextParam>Nâo há requisições</TextParam>
     </FlatlistView>
   );
 };
