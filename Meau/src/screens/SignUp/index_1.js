@@ -8,7 +8,8 @@ import {
   CustomButtonText,
   SignMessageButton,
   SignMessageButtonText,
-  SignMessageButtonTextBold
+  SignMessageButtonTextBold,
+  ViewArea,
 
 } from './styles'
 
@@ -22,7 +23,6 @@ export default () => {
 
   const navigation = useNavigation();
 
-  const [name, setNameField] = useState('');
   const [email, setEmailField] = useState('');
   const [password, setPasswordField] = useState('');
 
@@ -32,15 +32,12 @@ export default () => {
       .then(userCredentials => {
         const user = userCredentials.user;
         console.log("Resgistrado com email: ", user.email);
-        navigation.reset({
-          routes: [{ name: 'SignUp_2' }]
-        });
+        navigation.navigate("SignUp_2")
       })
       .catch(error => alert(error.message))
-
   }
 
-  const handleRegisterClick = () => {
+  const handleBackClick = () => {
     navigation.reset({
       routes: [{ name: 'SignIn' }]
     });
@@ -48,35 +45,38 @@ export default () => {
   return (
     <Container>
 
-      <WelcomeSign>Faça seu cadastro!</WelcomeSign>
-      
-      <SimpleText>Etapa 1</SimpleText>
-    
-      <InputArea>
+      <ViewArea>
+        <InputArea>
 
-        <SignInput
-          placeholder="Email"
-          value={email}
-          onChangeText={t => setEmailField(t)}
-        />
+          <WelcomeSign>Faça seu cadastro!</WelcomeSign>
 
-        <SignInput
-          placeholder="Senha"
-          value={password}
-          onChangeText={t => setPasswordField(t)}
-          password={true}
-        />
+          <SimpleText>Etapa 1 de 2</SimpleText>
 
-        <CustomButton onPress={handleSignUpClick}>
-          <CustomButtonText>Continuar</CustomButtonText>
-        </CustomButton>
+          <SignInput
+            placeholder="Email"
+            value={email}
+            onChangeText={t => setEmailField(t)}
+          />
 
-      </InputArea>
+          <SignInput
+            placeholder="Senha"
+            value={password}
+            onChangeText={t => setPasswordField(t)}
+            password={true}
+          />
 
-      <SignMessageButton onPress={handleRegisterClick}>
-        <SignMessageButtonText>Já possui uma conta?</SignMessageButtonText>
-        <SignMessageButtonTextBold>Faça Login</SignMessageButtonTextBold>
-      </SignMessageButton>
+          <CustomButton onPress={handleSignUpClick}>
+            <CustomButtonText>Continuar</CustomButtonText>
+          </CustomButton>
+
+          <SignMessageButton onPress={handleBackClick}>
+            <SignMessageButtonText>Já possui uma conta?</SignMessageButtonText>
+            <SignMessageButtonTextBold>Faça Login</SignMessageButtonTextBold>
+          </SignMessageButton>
+
+        </InputArea>
+      </ViewArea>
+
     </Container>
   );
 }

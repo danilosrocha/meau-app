@@ -12,6 +12,7 @@ import {
 } from './styles'
 
 import SignInput from '../../components/SignInput'
+
 import { useNavigation } from '@react-navigation/native'
 import { auth } from '../../../firebase'
 
@@ -25,7 +26,9 @@ export default () => {
   useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
-          navigation.navigate("Home")
+          navigation.reset({
+            routes: [{ name: 'RoutesTab' }]
+          });
         }
       })
 
@@ -46,7 +49,16 @@ export default () => {
     navigation.reset({
       routes: [{ name: 'SignUp_1' }]
     });
+  };
+  
+/*
+  const handleRegisterClick = () => {
+    navigation.reset({
+      routes: [{ name: 'SignUp_1' }]
+    });
   }
+*/ 
+
   return (
     <Container>
       <WelcomeSign>Bem vindo ao Meau!</WelcomeSign>

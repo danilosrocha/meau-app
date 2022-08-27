@@ -5,62 +5,52 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
     background-color: #58BD97;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
     flex: 1;
-`;
-
-export const ScrollViewSignUp = styled.ScrollView`
-    width: 100%;
-    height: 100%;
-    padding: 30px;
-`;
-
-export const InputArea = styled.View`
-    width: 100%;
-    height: 100%;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    
 `;
 
 export const ViewArea = styled.View`
     width: 100%;
+    flex:1;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    
+
+`;
+
+export const FlatList = styled.FlatList`
+    border-radius: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 100%;
+    height: 100%;
+    
 `;
 
 /* TEXT */
+
+export const SimpleText = styled.Text`
+    font-size: 20px;
+    color: #000000;
+    margin-top: 60px;
+    height: 60px;
+    text-align: center;    
+`;
 
 export const TitleText = styled.Text`
     font-size: 22px;
     color: #000000;
     margin-top: 20px;
-    margin-bottom: 20px;
+    height: 60px;
+    text-align: center;    
     font-weight: bold;
-    text-align: center;
-`;
-
-export const WelcomeSign = styled.Text`
-    font-size: 24px;
-    color: #000000;
-    margin-top: 60px;
-    font-weight: bold;
-`;
-
-export const SimpleText = styled.Text`
-    font-size: 20px;
-    color: #000000;
-    margin-top: 20px;
-    margin-bottom: 20px;
 `;
 
 export const CustomButtonText = styled.Text`
     font-size: 18px;
     color: #000000;
+    
 `;
 
 export const SignMessageButtonText = styled.Text`
@@ -75,17 +65,16 @@ export const SignMessageButtonTextBold = styled.Text`
     margin-left: 5px;
 `;
 
-
-/* BUTTON */
+/* BUTTOM */
 
 export const CustomButton = styled.TouchableOpacity`
-    width: 100%;
     height: 60px;
-    border-radius: 30px;
+    width: 85%;
     background-color: #fff;
     border-radius: 30px;
     justify-content: center;
     align-items: center;
+    margin-bottom: 30px;
 `;
 
 export const SignMessageButton = styled.TouchableOpacity`
@@ -94,6 +83,17 @@ export const SignMessageButton = styled.TouchableOpacity`
     margin-top: 50px;
     margin-bottom: 20px;
 `;
+
+export const LoadingIcon = styled.ActivityIndicator`
+    flex: 1;
+    margin-top: 50px;
+    margin-bottom: 50px
+`;
+
+
+
+
+
 
 
 

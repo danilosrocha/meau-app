@@ -5,8 +5,8 @@ import MainStack from './src/stacks/MainStack';
 export default () => {
 
   return (
-    <NavigationContainer>
+      <NavigationContainer>
         <MainStack />
-    </NavigationContainer>
+      </NavigationContainer>
   );
 }

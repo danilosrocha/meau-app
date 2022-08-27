@@ -11,8 +11,24 @@ export const Container = styled.SafeAreaView`
 export const WelcomeSign = styled.Text`
     font-size: 20px;
     color: #000000;
-    margin-top: 60px;
+    margin-top: 20px;
     height: 60px;
+`;
+
+export const ViewArea = styled.View`
+    width: 100%;
+    height: 100%;
+    flex:1;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const FlatList = styled.FlatList`
+    border-radius: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 80%;
+    
 `;
 
 export const InputArea = styled.View`
@@ -51,4 +67,22 @@ export const SignMessageButtonTextBold = styled.Text`
     color: #000000;
     font-weight: bold;
     margin-left: 5px;
+`;
+
+/* TEXT */
+
+export const SimpleText = styled.Text`
+    font-size: 20px;
+    color: #000000;
+    margin-top: 60px;
+    height: 60px;
+    text-align: center;    
+`;
+
+export const TitleText = styled.Text`
+    font-size: 22px;
+    color: #000000;
+    margin: 20px;
+    text-align: center;    
+    font-weight: bold;
 `;

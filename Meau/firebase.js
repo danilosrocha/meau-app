@@ -1,12 +1,7 @@
 // Import the functions you need from the SDKs you need
 import * as firebase from "firebase";
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// import "firebase/messaging";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCAMwZrL0n_8QL2RZV9rrri74EViWCF-oM",
   authDomain: "meauapp-36487.firebaseapp.com",
@@ -18,13 +13,15 @@ const firebaseConfig = {
 
 // Initialize Firebase
 let app;
-if( firebase.apps.length === 0) {
-    app = firebase.initializeApp(firebaseConfig);
+if (firebase.apps.length === 0) {
+  app = firebase.initializeApp(firebaseConfig);
 } else {
-    app = firebase.app()
+  app = firebase.app()
 }
 
+const storage = firebase.storage()
 const auth = firebase.auth()
 const db = firebase.firestore()
+// const messaging = firebase.messaging();
 
-export { auth, db };
+export { auth, db, storage };
