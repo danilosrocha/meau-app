@@ -19,9 +19,9 @@ if (firebase.apps.length === 0) {
   app = firebase.app()
 }
 
-const storage = firebase.storage()
-const auth = firebase.auth()
-const db = firebase.firestore()
+const storage = firebase.storage(app)
+const auth = firebase.auth(app)
+const db = firebase.firestore(app)
 // const messaging = firebase.messaging();
 
 export { auth, db, storage };

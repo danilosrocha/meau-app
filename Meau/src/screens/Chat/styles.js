@@ -15,8 +15,7 @@ export const ScrollViewPet = styled.ScrollView`
 `;
 
 export const InputArea = styled.View`
-  width: 100%;
-  flex: 1;
+  flex:1 ;
 
 `;
 
