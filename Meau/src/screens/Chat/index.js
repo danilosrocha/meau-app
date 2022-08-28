@@ -34,7 +34,7 @@ export default () => {
       .orderBy("createdAt", "desc")
       .onSnapshot(snapshot => setMessages(snapshot.docs.map(doc => ({
         _id: doc.data()._id,
-        createdAt: doc.data().createdAt,
+        createdAt: doc.data().createdAt.toDate(),
         text: doc.data().text,
         user: doc.data().user
       }))
@@ -69,7 +69,8 @@ export default () => {
           onSend={messages => onSend(messages)}
           user={{
             _id: auth?.currentUser?.email,
-            name: auth?.currentUser?.uid,
+            name: auth?.currentUser?.displayName,
+            avatar: auth?.currentUser?.photoURL
           }}
         />
       </InputArea>

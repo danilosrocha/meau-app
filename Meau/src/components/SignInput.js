@@ -19,7 +19,7 @@ const Input = styled.TextInput`
     margin-left: 10px;
 `;
 
-export default ({placeholder, value, onChangeText, password}) => {
+export default ({placeholder, value, onChangeText, password, keyboardType}) => {
     return (
         <InputArea>
 
@@ -28,8 +28,9 @@ export default ({placeholder, value, onChangeText, password}) => {
                 placeholder={placeholder}
                 value={value}
                 onChangeText={onChangeText}
-                
+                keyboardType={keyboardType}
             />
+            
         </InputArea>
     );
 }

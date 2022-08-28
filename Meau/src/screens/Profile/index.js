@@ -176,7 +176,10 @@ export default () => {
       .getDownloadURL()
       .then((url) => {
         setProfilePicture(url);
-
+        const user = auth.currentUser;
+        user.updateProfile({
+          photoURL: url
+        })
         myDoc
           .update({ fotoUsuario: url })
           .then(() => {

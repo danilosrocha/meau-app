@@ -12,63 +12,112 @@ import {
 
 import SignInput from '../../components/SignInput'
 import { useNavigation } from '@react-navigation/native'
-import { auth } from '../../../firebase'
-import { db } from '../../../firebase'
-
+import { auth, db, storage } from "../../../firebase";
 export default () => {
-
 
   const navigation = useNavigation();
 
-  const [name, setNameField] = useState('');
   const [fone, setFoneField] = useState('');
   const [city, setCityField] = useState('');
   const [adress, setAdressField] = useState('');
   const [birth, setBirthField] = useState('');
 
+  const user = auth.currentUser;
+
   const handleUpdateClick = () => {
     auth
     const colect = db.collection("UserData")
     const myDoc = colect.doc(auth.currentUser?.uid)
-    const profilePicture = "https://sdama.org/wp-content/themes/sama/img/fallback-profile.jpg"
+    handleUpload(auth.currentUser?.photoURL)
 
     const data = {
       "id": auth.currentUser?.uid,
       "email": auth.currentUser?.email,
-      "nome": name,
+      "nome": auth.currentUser?.displayName,
+      "fotoUsuario": auth.currentUser?.photoURL,
       "telefone": fone,
       "cidade": city,
       "endereco": adress,
       "dataNascimento": birth,
-      "fotoUsuario": profilePicture
     }
+
     myDoc.set(data)
       .then(() => {
-        alert("conta criada!")
+        alert("Sua conta foi criada!")
         navigation.reset({
           routes: [{ name: 'RoutesTab' }]
         });
       }).catch(error => alert(error.message))
   }
 
+  async function handleUpload(file) {
+    console.log("-----> Eu sou o file", file);
+    const blob = await (await fetch("file://" + file)).blob();
+    const uploadTask = storage
+      .ref("profilePicture/" + auth.currentUser?.uid + "/")
+      .put(blob, { contentType: file.type });
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        console.log("Upload Image");
+        let progress = snapshot.bytesTransferred / snapshot.totalBytes
+        if (progress === 1) {
+          console.log(progress);
+          setTimeout(function () {
+            getUrlImage(auth.currentUser?.uid);
+          }, 2000);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  const getUrlImage = (idUser) => {
+    const colect = db.collection("UserData");
+    const myDoc = colect.doc(idUser);
+    let imageRef = storage.ref("profilePicture/" + idUser + "/");
+    console.log(">>>>>>>>>>>> GET URL");
+    imageRef
+      .getDownloadURL()
+      .then((url) => {
+        user.updateProfile({
+          photoURL: url
+        }).then(() => {
+          console.log(">>>>>>>>> URL", url);
+        }).catch((error) => {
+          console.log(">>>>>>>>> ERRO", error);
+        });
+        myDoc
+          .update({ fotoUsuario: url })
+          .then(() => {
+            console.log("Imagem atualizada");
+          })
+          .catch((error) => alert(error.message));
+      })
+      .catch((e) => console.log("getting downloadURL of image error => ", e));
+
+    console.log(idUser);
+  };
+
   return (
     <Container>
 
-      <ScrollViewSignUp>
+      <ScrollViewSignUp
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
 
         <InputArea>
 
           <TitleText>Etapa 2 de 2</TitleText>
-          <SignInput
-            placeholder="Nome"
-            value={name}
-            onChangeText={t => setNameField(t)}
-          />
 
           <SignInput
             placeholder="Telefone"
             value={fone}
             onChangeText={t => setFoneField(t)}
+            keyboardType={'phone-pad'}
           />
 
           <SignInput

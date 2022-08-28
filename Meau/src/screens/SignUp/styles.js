@@ -6,15 +6,13 @@ import styled from 'styled-components/native';
 export const Container = styled.SafeAreaView`
     background-color: #58BD97;
     width: 100%;
-    justify-content: center;
-    align-items: center;
     flex: 1;
 `;
 
 export const ScrollViewSignUp = styled.ScrollView`
     width: 100%;
     height: 100%;
-    padding: 30px;
+    /* justify-content: stretch; */
 `;
 
 export const InputArea = styled.View`
@@ -22,15 +20,13 @@ export const InputArea = styled.View`
     height: 100%;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    
+    padding: 20px;
 `;
 
 export const ViewArea = styled.View`
     width: 100%;
     justify-content: center;
     align-items: center;
-    padding: 20px;
 `;
 
 /* TEXT */
@@ -47,15 +43,16 @@ export const TitleText = styled.Text`
 export const WelcomeSign = styled.Text`
     font-size: 24px;
     color: #000000;
-    margin-top: 60px;
+    margin-top: 20px;
     font-weight: bold;
 `;
 
 export const SimpleText = styled.Text`
-    font-size: 20px;
+    font-size: 18px;
     color: #000000;
     margin-top: 20px;
     margin-bottom: 20px;
+    text-align: center;
 `;
 
 export const CustomButtonText = styled.Text`
@@ -94,6 +91,25 @@ export const SignMessageButton = styled.TouchableOpacity`
     margin-top: 50px;
     margin-bottom: 20px;
 `;
+
+export const ContentImg = styled.TouchableOpacity`
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+    border-radius: 100px;  
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+`;
+
+/* IMAGE */
+
+export const Avatar = styled.Image`
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+`;
+
 
 
 
