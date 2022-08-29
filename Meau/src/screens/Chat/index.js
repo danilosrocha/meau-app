@@ -11,98 +11,40 @@ import {
 
 export default (object) => {
 
-
   const [messages, setMessages] = useState([]);
 
   const nameId = object.route.params.userName;
   const idUserRecive = object.route.params.idUser;
   const idUser = auth.currentUser.uid
+
+  const idI = idUserRecive + idUser
+  const idD = idUser + idUserRecive
+
   const temporyData = []
-
-  const collectionMessages = db.collection("Chats")
-
   const [data, setData] = useState()
 
+  const collectionMessages = db.collection("Chats")
+  const chatIDI = collectionMessages.doc(idI)
+  const chatIDD = collectionMessages.doc(idD)
+  const messagesChatI = chatIDI.collection("Messages")
+  const messagesChatD = chatIDD.collection("Messages")
+
   useLayoutEffect(() => {
-    // collectionMessages
-    //   .get()
-    //   .then((snapshot) => snapshot.forEach((doc) => {
-    //     if (idUser == doc.data().idUser && idUserRecive == doc.data().idUserRecive) {
-    //       // const docMessages = db.collection("Chats").doc(doc._delegate._key.path.segments[6]);
-    //       console.log("--------------------------------------------------------------------------------------------");
-    //       console.log(">>>>>>>>>>>> ID MENSSAGE", doc.data()._id);
-    //       console.log(">>>>>>>>>>>> ID", doc._delegate._key.path.segments[6]);
-    //       // console.log(">>>>>>>>>>>> DOC", doc.data());
-    //       console.log("--------------------------------------------------------------------------------------------");
-    //       temporyData.push(doc._delegate._key.path.segments[6])
-    //       // const docs = collectionMessages.doc(doc._delegate._key.path.segments[6])
-    //       const unsubscribe = collectionMessages
-    //         .orderBy("createdAt", "desc")
-    //         .onSnapshot(snapshot => snapshot.docs.map(doc => {
-    //           if (idUser == doc.data().idUser && idUserRecive == doc.data().idUserRecive) {
-    //             console.log(
-    //               ({
-    //                 _id: doc.data()._id,
-    //                 createdAt: doc.data().createdAt.toDate(),
-    //                 text: doc.data().text,
-    //                 user: doc.data().user
-    //               })
-    //             );
-    //           }
-    //         }
-    //         ))
-
-    //       //console.log(unsubscribe);
-    //     }
-
-    // setMessages(
-    //   ({
-    //     _id: doc.data()._id,
-    //     createdAt: doc.data().createdAt.toDate(),
-    //     text: doc.data().text,
-    //     user: doc.data().user
-    //   }))
-    // // return unsubscribe;
-    // console.log(temporyData);
-    // setData(temporyData)
-    // }))
 
 
 
-    /*
-  
-    idClicando
-  
-    array = [chat1, chat2]
-  
-    chat = array.filter(chat => chat.id == idclicando)
-  
-    */
-    // const unsubscribe = collectionMessages
-    //   // .get(data) 
-    //   .orderBy("createdAt", "desc")
-    //   .onSnapshot((snapshot) => snapshot.forEach((doc) => {
-    //     if (idUser == doc.data().idUser && idUserRecive == doc.data().idUserRecive) {
-    //       const collectionMessages = db.collection("Chats").doc(doc._delegate._key.path.segments[6]);
-    //       console.log(">>>>>>>>>>>>>> ENTREI NO IF:", doc.data()._id);
-    //       // doc._delegate._key.path.segments[6]
-    //       const id = doc.data()._id
-    //       setMessages(snapshot.docs.map(doc =>
-    //       ({
-    //         _id: doc.data()._id,
-    //         createdAt: doc.data().createdAt.toDate(),
-    //         text: doc.data().text,
-    //         user: doc.data().user
-    //       })))
+    collectionMessages
+      .get()
+      .then((snapshot) => snapshot.forEach((doc) => {
+        if (idI == doc.id || idD == doc.id) {
+          console.log(">>>>>>>>>>>> DOC", doc.id);
+        }
+      }))
 
-    //       temporyData.push(id)
-    //     }
-    //     setData(temporyData)
-    //   }))
-    // return unsubscribe;
-    const unsubscribe = collectionMessages
+
+    const unsubscribe = messagesChatI
       .orderBy("createdAt", "desc")
-      .onSnapshot(snapshot => 
+      .onSnapshot(snapshot =>
         setMessages(snapshot.docs.map(doc =>
         ({
           _id: doc.data()._id,
@@ -115,32 +57,6 @@ export default (object) => {
         )))
     return unsubscribe;
 
-
-    // const unsubscribe = collectionMessages
-    // "FtiPAA88LzTDNEY7DaxwN7kEeIO2"
-    //   .orderBy("createdAt", "desc")
-    //   .onSnapshot(snapshot => (snapshot.docs.map(doc => {
-    //     console.log(">>>>>>>>>>>>> idUser", doc.data().idUser);
-    //     console.log(">>>>>>>>>>>>> idUserRecive", doc.data().idUserRecive);
-    //     if (idUser == doc.data().idUser && idUserRecive == doc.data().idUserRecive) {
-
-    //         const id = ({
-    //           _id: doc.data()._id,
-    //           idUser: doc.data().idUser,
-    //           idUserRecive: doc.data().idUserRecive,
-    //           createdAt: doc.data().createdAt.toDate(),
-    //           text: doc.data().text,
-    //           user: doc.data().user
-    //         })
-    //         temporyData.push(id)
-    //     }
-    //     console.log(temporyData);
-    //   }
-
-    //   )))
-    //   setMessages(temporyData)
-    // return unsubscribe
-
   }, [])
 
   const onSend = useCallback((messages = []) => {
@@ -151,7 +67,15 @@ export default (object) => {
       createdAt,
       user
     } = messages[0]
-    collectionMessages.add({
+    messagesChatI.add({
+      _id,
+      idUser,
+      idUserRecive,
+      text,
+      createdAt,
+      user
+    })
+    messagesChatD.add({
       _id,
       idUser,
       idUserRecive,
