@@ -10,6 +10,7 @@ import AdoptPet from "../screens/AdoptPet";
 import NotificationInbox from "../screens/NotificationInbox";
 import Request from "../screens/Request";
 import Chat from "../screens/Chat";
+import Messages from "../screens/Messages";
 import MainTab from "./MainTab";
 
 import Header from "../components/HeaderMessage";
@@ -33,6 +34,7 @@ export default () => (
       <Stack.Screen name="Perfil Pet" component={PetProfile} />
       <Stack.Screen name="Solicitações de adoção" component={NotificationInbox} />
       <Stack.Screen name="Requisição" component={Request} />
+      <Stack.Screen name="Messages" component={Messages} />
       <Stack.Screen name="Chat" component={Chat} />
 
     </Stack.Group>

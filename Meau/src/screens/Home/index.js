@@ -56,12 +56,15 @@ export default () => {
 
   return (
     <Container>
+
       <Header
         title={"Meau App"}
-
       />
+
       <ViewArea>
+
         <AddToken></AddToken>
+
         <TitleText>Lista dos animais</TitleText>
         {data && (
           <FlatList
@@ -74,6 +77,7 @@ export default () => {
         )}
 
       </ViewArea>
+
     </Container>
   );
 };

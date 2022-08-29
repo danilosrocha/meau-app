@@ -47,7 +47,7 @@ export default ({ title }) => {
     const navigation = useNavigation();
 
     const handleGoChat = () => {
-        navigation.navigate("Chat")
+        navigation.navigate("Messages")
     }
 
     return (
