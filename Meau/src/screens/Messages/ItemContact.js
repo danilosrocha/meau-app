@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
+import { auth, db } from '../../../firebase'
 
 const Container = styled.View`
   flex: 1;
@@ -63,12 +64,20 @@ const MessageText = styled.Text`
   font-size: 12px;
   margin-bottom: 5px;
 `;
-
-
+const IconLoading = styled.ActivityIndicator`
+`;
 
 export default ({ item }) => {
 
   const navigation = useNavigation();
+  const idUser = auth.currentUser.uid
+  const idD = idUser + item.id
+
+  const collectionMessages = db.collection("Chats")
+  const chatIDD = collectionMessages.doc(idD)
+  const messagesChatD = chatIDD.collection("Messages")
+
+  const [lastObject, setLastObject] = useState([]);
 
   const handleChatClick = (idUser, userName) => {
     navigation.navigate('Chat', {
@@ -76,6 +85,23 @@ export default ({ item }) => {
       userName: userName,
     });
   }
+
+  useLayoutEffect(() => {
+
+    const unsubscribe = messagesChatD
+      .orderBy("createdAt", "desc")
+      .onSnapshot(snapshot =>
+        setLastObject(snapshot.docs.map(doc =>
+        ({
+          createdAt: doc.data().createdAt.toDate().toDateString(),
+          text: doc.data().text,
+        })
+        )))
+    return unsubscribe;
+
+  }, [])
+  
+  const last = lastObject[0]
 
   return (
     <Container>
@@ -87,9 +113,9 @@ export default ({ item }) => {
           <TextSection>
             <UserInfoText>
               <UserName>{item.nome}</UserName>
-              <PostTime>{item.messageTime}</PostTime>
+              {! last ? (<IconLoading size="small" color="black"/>) : (<PostTime>{last.createdAt}</PostTime>)}
             </UserInfoText>
-            <MessageText>{item.messageText}</MessageText>
+            {! last ? (<IconLoading size="small" color="black"/>) : (<MessageText>{last.text}</MessageText>)}
           </TextSection>
         </UserInfo>
       </Card>

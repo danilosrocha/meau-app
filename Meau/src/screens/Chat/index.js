@@ -20,9 +20,6 @@ export default (object) => {
   const idI = idUserRecive + idUser
   const idD = idUser + idUserRecive
 
-  const temporyData = []
-  const [data, setData] = useState()
-
   const collectionMessages = db.collection("Chats")
   const chatIDI = collectionMessages.doc(idI)
   const chatIDD = collectionMessages.doc(idD)
@@ -30,17 +27,6 @@ export default (object) => {
   const messagesChatD = chatIDD.collection("Messages")
 
   useLayoutEffect(() => {
-
-
-
-    collectionMessages
-      .get()
-      .then((snapshot) => snapshot.forEach((doc) => {
-        if (idI == doc.id || idD == doc.id) {
-          console.log(">>>>>>>>>>>> DOC", doc.id);
-        }
-      }))
-
 
     const unsubscribe = messagesChatI
       .orderBy("createdAt", "desc")
