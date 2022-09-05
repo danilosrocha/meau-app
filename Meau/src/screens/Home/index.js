@@ -25,7 +25,7 @@ export default () => {
       .then((querySnapshot) => {
         let temporyData = [];
         querySnapshot.forEach((doc) => {
-          if (doc.data().statusAdocao == true) {
+          if (doc.data().statusAdocao == true && doc.data().donoId!=auth.currentUser?.uid) {
             const user = {
               sexo: doc.data().sexo,
               idade: doc.data().idade,
