@@ -41,7 +41,7 @@ export default (object) => {
     const colectPet = db.collection("Pet");
     const myPet = colectPet.doc(idPet);
     console.log("----> Eu sou o id do Pet", idPet)
-    
+    db.collection("AdoptionRequests").colectAdoptionRequests.doc(idPet).delete();
     const historyData = {
       donoAntigo: auth.currentUser?.uid,
       donoAtual: donoAtual,
