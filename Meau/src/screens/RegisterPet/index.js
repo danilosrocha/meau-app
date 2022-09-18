@@ -24,6 +24,7 @@ import { Alert } from "react-native";
 import { auth, db, storage } from "../../../firebase";
 import * as ImagePicker from "expo-image-picker";
 import Header from "../../components/Header";
+import { Switch } from 'react-native-paper';
 
 export default () => {
   const navigation = useNavigation();
@@ -38,6 +39,7 @@ export default () => {
   const [fileName, setFileName] = useState("ImagemPet");
   const [petProfilePicture, setPetProfilePicture] = useState();
   const [loading, setLoading] = useState(false)
+  const [isSwitchOn, setIsSwitchOn] = useState()
   const idPet = uuidv4();
 
   const handleRegisterClick = () => {
@@ -242,6 +244,11 @@ export default () => {
             </Picker>
 
             <SimpleTextBold>Animal para adoção?</SimpleTextBold>
+            <Switch
+              value={isSwitchOn}
+              onValueChange={(itemValue) => setIsSwitchOn(itemValue)}
+              style={{alignItems: "center"}}
+            />
             <Picker
               selectedValue={adoptionStatus}
               style={{ height: 50, width: 150 }}

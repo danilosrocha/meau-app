@@ -11,7 +11,7 @@ import {
   SignMessageButton,
   SignMessageButtonText,
   SignMessageButtonTextBold,
-  ViewArea,
+  SimpleTextImg,
   ContentImg,
   Avatar,
   ScrollViewSignUp
@@ -123,11 +123,13 @@ export default () => {
             <Avatar source={{ uri: profilePicture }} />
           </ContentImg>
 
+          <SimpleTextImg>Selecione um foto de perfil</SimpleTextImg>
+
           <SignInput
             placeholder="Nome"
             value={name}
             onChangeText={t => setName(t)}
-            
+
           />
 
           <SignInput

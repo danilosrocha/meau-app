@@ -53,7 +53,7 @@ export default ({ state, navigation }) => {
                 <SmallImage style={{ opacity: state.index === 1 ? 1 : 0.5 }} source={require("../../assets/Icons/mypets.png")} />
             </TabSmallItem>
 
-            <TabItemCenter onPress={() => goTo("Inicio")} underlayColor="#fff" style={{ opacity: state.index === 2 ? 1 : 0.9 }}>
+            <TabItemCenter onPress={() => goTo("Inicio")} underlayColor="#fff">
                 <LargeImage  style={{ opacity: state.index === 2 ? 1 : 0.5 }} source={require("../../assets/Icons/home.png")} />
             </TabItemCenter>
 

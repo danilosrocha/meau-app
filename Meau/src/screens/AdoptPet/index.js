@@ -67,11 +67,11 @@ export default (object) => {
             setFileName(pet.fileNamePicture);
             setPetProfilePicture(pet.fotoPet);
             setData(pet);
-            getOwnerToken(pet.donoId);      
+            getOwnerToken(pet.donoId);
           }
         });
       });
-      
+
   };
 
   const getOwnerToken = async (donoId) => {
@@ -89,29 +89,6 @@ export default (object) => {
   }
 
   /*USER DATA*/
-<<<<<<< HEAD
-=======
-  const handleAdoptClick = (idPet,namePet, currentOwner) => {
-    auth;
-    const colectHistory = db.collection("PedidosAdocao");
-    const adoptionHistory = colectHistory.doc();
-    const historyData = {
-        Solicitante: auth.currentUser?.uid,
-        SolicitanteEmail:auth.currentUser?.email,
-        Dono: currentOwner,
-        id: idPet,
-        petName: namePet,
-        statusAdocao: false,
-    }
-
-
-    adoptionHistory
-        .set(historyData).then(() => {
-            Alert.alert("Informação", "Pedido de adoção enviado");
-            navigation.navigate('Meus Pets')
-        }).catch((error) => alert(error.message));
-  };
->>>>>>> Lucas
 
   useEffect(() => {
     getPets();
@@ -119,8 +96,8 @@ export default (object) => {
 
   return (
     <Container>
-      <HeaderBack 
-      title={data.nome}
+      <HeaderBack
+        title={data.nome}
       />
       <ScrollViewPet>
         <InputArea>
@@ -141,21 +118,15 @@ export default (object) => {
           <CustomButtonAdoption>
             <CustomButtonText>{data.porte}</CustomButtonText>
           </CustomButtonAdoption>
-<<<<<<< HEAD
           <Notification
-          expoPushTokenOwner={expoPushToken}
-          ownerName={ownerName}
-          idRequestingUser={idRequestingUser}
-          requestingUser={requestingUser}
-          name={name}
-          idPet={idPet}
-          > 
+            expoPushTokenOwner={expoPushToken}
+            ownerName={ownerName}
+            idRequestingUser={idRequestingUser}
+            requestingUser={requestingUser}
+            name={name}
+            idPet={idPet}
+          >
           </Notification>
-=======
-          <CustomButton onPress={() => handleAdoptClick(idPet,data.nome, currentOwner)}>
-            <CustomButtonText>Adotar pet</CustomButtonText>
-          </CustomButton>
->>>>>>> Lucas
         </InputArea>
       </ScrollViewPet>
     </Container>

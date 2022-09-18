@@ -86,3 +86,9 @@ export const TitleText = styled.Text`
     text-align: center;    
     font-weight: bold;
 `;
+
+export const LoadingIcon = styled.ActivityIndicator`
+    flex: 1;
+    margin-top: 50px;
+    margin-bottom: 50px
+`;

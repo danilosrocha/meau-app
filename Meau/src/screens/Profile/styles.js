@@ -99,6 +99,7 @@ export const Avatar = styled.Image`
 `;
 
 export const LoadingIcon = styled.ActivityIndicator`
+    flex: 1;
     margin-top: 50px;
     margin-bottom: 50px
 `;

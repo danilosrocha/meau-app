@@ -18,7 +18,7 @@ Notifications.setNotificationHandler({
 
 
 export default () => {
-const idUser = auth.currentUser.uid;
+const idUser = auth.currentUser?.uid;
 const [data, setData]=useState("");
 const getSolicitantes = () => {
     db.collection("PedidosAdocao")

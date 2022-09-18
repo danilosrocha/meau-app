@@ -55,6 +55,14 @@ export const SimpleText = styled.Text`
     text-align: center;
 `;
 
+export const SimpleTextImg = styled.Text`
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 20px;
+    text-align: center;
+`;
+
+
 export const CustomButtonText = styled.Text`
     font-size: 18px;
     color: #000000;

@@ -34,12 +34,12 @@ export default () => {
 
   const [data, setData] = useState([]);
   const [profilePicture, setProfilePicture] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   const getUsers = () => {
     db.collection("UserData")
       .get()
       .then((querySnapshot) => {
-        let temporyData = [];
         querySnapshot.forEach((doc) => {
           if (doc.id == idUser) {
             setProfilePicture(doc.data().fotoUsuario);
@@ -58,9 +58,11 @@ export default () => {
             setAdressField(user.endereco);
             setBirthField(user.dataNascimento);
             setData(user);
+            setIsLoading(false)
           }
         });
       });
+    
   };
 
   /*USER DATA*/
@@ -157,7 +159,7 @@ export default () => {
       "state_changed",
       (snapshot) => {
         console.log("Upload Image");
-        let progress = snapshot.bytesTransferred/snapshot.totalBytes
+        let progress = snapshot.bytesTransferred / snapshot.totalBytes
         if (progress === 1) {
           console.log(progress);
           setTimeout(function () {
@@ -196,6 +198,7 @@ export default () => {
   };
 
   useEffect(() => {
+    setIsLoading(true)
     getUsers();
   }, []);
 
@@ -203,54 +206,56 @@ export default () => {
     <Container>
       <Header
         title={"Perfil"}
-
       />
-      < ScrollViewProfile >
-        <InputArea>
-          <ContentImg onPress={() => handleImageUser()}>
-            <Avatar source={{ uri: avatar ? avatar.uri : data.fotoUsuario }} />
-          </ContentImg>
 
-          <InputText>Nome</InputText>
-          <SignInput
-            placeholder={data.nome}
-            value={name}
-            onChangeText={(t) => setNameField(t)}
-          />
+      {isLoading ? (<LoadingIcon size="large" color="black" />) :
+        (< ScrollViewProfile >
+          <InputArea>
+            <ContentImg onPress={() => handleImageUser()}>
+              <Avatar source={{ uri: avatar ? avatar.uri : data.fotoUsuario }} />
+            </ContentImg>
 
-          <InputText>Tefelone</InputText>
-          <SignInput
-            placeholder={data.telefone}
-            value={fone}
-            onChangeText={(t) => setFoneField(t)}
-          />
+            <InputText>Nome</InputText>
+            <SignInput
+              placeholder={data.nome}
+              value={name}
+              onChangeText={(t) => setNameField(t)}
+            />
 
-          <InputText>Cidade</InputText>
-          <SignInput
-            placeholder={data.cidade}
-            value={city}
-            onChangeText={(t) => setCityField(t)}
-          />
+            <InputText>Tefelone</InputText>
+            <SignInput
+              placeholder={data.telefone}
+              value={fone}
+              onChangeText={(t) => setFoneField(t)}
+            />
 
-          <InputText>Endereço</InputText>
-          <SignInput
-            placeholder={data.endereco}
-            value={adress}
-            onChangeText={(t) => setAdressField(t)}
-          />
+            <InputText>Cidade</InputText>
+            <SignInput
+              placeholder={data.cidade}
+              value={city}
+              onChangeText={(t) => setCityField(t)}
+            />
 
-          <InputText>Data de nascimento</InputText>
-          <SignInput
-            placeholder={data.dataNascimento}
-            value={birth}
-            onChangeText={(t) => setBirthField(t)}
-          />
+            <InputText>Endereço</InputText>
+            <SignInput
+              placeholder={data.endereco}
+              value={adress}
+              onChangeText={(t) => setAdressField(t)}
+            />
 
-          <CustomButton onPress={handleUpdateClick}>
-            <CustomButtonText>Salvar</CustomButtonText>
-          </CustomButton>
-        </InputArea>
-      </ScrollViewProfile>
+            <InputText>Data de nascimento</InputText>
+            <SignInput
+              placeholder={data.dataNascimento}
+              value={birth}
+              onChangeText={(t) => setBirthField(t)}
+            />
+
+            <CustomButton onPress={handleUpdateClick}>
+              <CustomButtonText>Salvar</CustomButtonText>
+            </CustomButton>
+          </InputArea>
+        </ScrollViewProfile>)}
+
     </Container >
   );
 };

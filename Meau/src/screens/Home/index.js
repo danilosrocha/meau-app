@@ -4,6 +4,7 @@ import {
   ViewArea,
   FlatList,
   TitleText,
+  LoadingIcon
 } from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
@@ -18,14 +19,15 @@ export default () => {
   const navigation = useNavigation();
 
   const [data, setData] = useState([]);
-  const [isFetching, setIsFetching] = React.useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const getUsers = () => {
     db.collection("Pet")
       .get()
       .then((querySnapshot) => {
         let temporyData = [];
         querySnapshot.forEach((doc) => {
-          if (doc.data().statusAdocao == true && doc.data().donoId!=auth.currentUser?.uid) {
+          if (doc.data().statusAdocao == true && doc.data().donoId != auth.currentUser?.uid) {
             const user = {
               sexo: doc.data().sexo,
               idade: doc.data().idade,
@@ -38,6 +40,7 @@ export default () => {
             temporyData.push(user);
           }
         });
+        setIsLoading(false)
         setData(temporyData);
       });
   };
@@ -51,6 +54,7 @@ export default () => {
   };
 
   useEffect(() => {
+    setIsLoading(true)
     getUsers();
   }, []);
 
@@ -61,22 +65,24 @@ export default () => {
         title={"Meau App"}
       />
 
-      <ViewArea>
+      {isLoading ? (<LoadingIcon size="large" color="black" />) :
 
-        <AddToken></AddToken>
+        (<ViewArea>
 
-        <TitleText>Lista dos animais</TitleText>
-        {data && (
-          <FlatList
-            data={data}
-            renderItem={renderItem}
-            contentContainerStyle={{ marginHorizontal: 20 }}
-            onRefresh={onRefresh}
-            refreshing={isFetching}
-          />
-        )}
+          <AddToken></AddToken>
 
-      </ViewArea>
+          <TitleText>Lista dos animais</TitleText>
+          {data && (
+            <FlatList
+              data={data}
+              renderItem={renderItem}
+              contentContainerStyle={{ marginHorizontal: 20 }}
+              onRefresh={onRefresh}
+              refreshing={isFetching}
+            />
+          )}
+
+        </ViewArea>)}
 
     </Container>
   );

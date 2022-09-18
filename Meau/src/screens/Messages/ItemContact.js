@@ -113,9 +113,9 @@ export default ({ item }) => {
           <TextSection>
             <UserInfoText>
               <UserName>{item.nome}</UserName>
-              {! last ? (<IconLoading size="small" color="black"/>) : (<PostTime>{last.createdAt}</PostTime>)}
+              {! last ? (<PostTime>...</PostTime>) : (<PostTime>{last.createdAt}</PostTime>)}
             </UserInfoText>
-            {! last ? (<IconLoading size="small" color="black"/>) : (<MessageText>{last.text}</MessageText>)}
+            {! last ? (<MessageText>...</MessageText>) : (<MessageText>{last.text}</MessageText>)}
           </TextSection>
         </UserInfo>
       </Card>
