@@ -96,7 +96,7 @@ export const CustomButtonAdoption = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   height: 60px;
-  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
 export const MessageButton = styled.TouchableOpacity`

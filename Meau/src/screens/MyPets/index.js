@@ -27,9 +27,11 @@ export default () => {
 
   const idUser = auth.currentUser?.uid;
   const [data, setData] = useState();
-  const [isFetching, setIsFetching] = React.useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+  const [screenLoading, setScreenLoading] = useState(true);
 
   const getPets = () => {
+
     db.collection("Pet")
       .get()
       .then((querySnapshot) => {
@@ -50,6 +52,7 @@ export default () => {
           }
         });
         setData(temporyData);
+        setScreenLoading(false)
       });
   };
 
@@ -63,6 +66,7 @@ export default () => {
   };
 
   useEffect(() => {
+    setScreenLoading(true)
     getPets()
   }, []);
 
@@ -71,9 +75,9 @@ export default () => {
       <Header
         title={"Meus animais"}
       />
-      <ViewArea>
-        {data
-          ? <FlatList
+      {screenLoading ? (<LoadingIcon size="large" color="black" />) :
+        (<ViewArea>
+          <FlatList
             data={data}
             renderItem={renderItem}
             ListEmptyComponent={renderEmpty}
@@ -81,13 +85,11 @@ export default () => {
             onRefresh={onRefresh}
             refreshing={isFetching}
           />
-          : <LoadingIcon size="large" color="#ffffff" />
-        }
+          <CustomButton onPress={handleUpdatePet}>
+            <CustomButtonText>Adicionar pet</CustomButtonText>
+          </CustomButton>
+        </ViewArea>)}
 
-        <CustomButton onPress={handleUpdatePet}>
-          <CustomButtonText>Adicionar pet</CustomButtonText>
-        </CustomButton>
-      </ViewArea>
     </Container>
   );
 };

@@ -21,13 +21,14 @@ export default () => {
   const [data, setData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  
   const getUsers = () => {
     db.collection("Pet")
       .get()
       .then((querySnapshot) => {
         let temporyData = [];
         querySnapshot.forEach((doc) => {
-          if (doc.data().statusAdocao == true && doc.data().donoId != auth.currentUser?.uid) {
+          if (doc.data().statusAdocao == true) {
             const user = {
               sexo: doc.data().sexo,
               idade: doc.data().idade,

@@ -9,12 +9,17 @@ import HeaderBack from "../../components/HeaderBack"
 import {
   Container,
   InputArea,
+  LoadingIcon,
   ScrollViewPet,
   CustomButton,
   CustomButtonText,
-
+  Input,
+  TextField,
   TitleTextBold,
-  CustomButtonAdoption
+  InputFields,
+  InputField,
+  CustomButtonPicture,
+  PetPicture,
 } from "./styles";
 
 export default (object) => {
@@ -31,9 +36,11 @@ export default (object) => {
   const [fileName, setFileName] = useState("");
   const [currentOwner, setCurrentOwner] = useState("");
   const [petProfilePicture, setPetProfilePicture] = useState("");
+  const [descripton, setDescripton] = useState("");
   const [data, setData] = useState([]);
   const [expoPushToken, setExpoPushToken] = useState('');
   const [ownerName, setOwnerName] = useState("");
+  const [screenLoading, setScreenLoading] = useState(true);
 
   const requestingUser = auth.currentUser?.email
   const idRequestingUser = auth.currentUser?.uid
@@ -56,6 +63,7 @@ export default (object) => {
               id: doc.data().id,
               fileNamePicture: doc.data().fileNamePicture,
               statusAdocao: doc.data().statusAdocao,
+              descripton: doc.data().descripton,
             };
             setCurrentOwner(pet.donoId);
             setNameField(pet.nome);
@@ -66,7 +74,9 @@ export default (object) => {
             setAgeField(pet.idade);
             setFileName(pet.fileNamePicture);
             setPetProfilePicture(pet.fotoPet);
+            setDescripton(pet.descripton);
             setData(pet);
+            setScreenLoading(false)
             getOwnerToken(pet.donoId);
           }
         });
@@ -99,39 +109,73 @@ export default (object) => {
       <HeaderBack
         title={data.nome}
       />
-      <ScrollViewPet>
-        <InputArea>
-          <TitleTextBold>Vamos adotar o pet?</TitleTextBold>
 
-          <CustomButtonAdoption>
-            <CustomButtonText>{data.nome}</CustomButtonText>
-          </CustomButtonAdoption>
-          <CustomButtonAdoption>
-            <CustomButtonText>{data.especie}</CustomButtonText>
-          </CustomButtonAdoption>
-          <CustomButtonAdoption>
-            <CustomButtonText>{data.sexo}</CustomButtonText>
-          </CustomButtonAdoption>
-          <CustomButtonAdoption>
-            <CustomButtonText>{data.idade}</CustomButtonText>
-          </CustomButtonAdoption>
-          <CustomButtonAdoption>
-            <CustomButtonText>{data.porte}</CustomButtonText>
-          </CustomButtonAdoption>
-          <Notification
-            expoPushTokenOwner={expoPushToken}
-            ownerName={ownerName}
-            idRequestingUser={idRequestingUser}
-            requestingUser={requestingUser}
-            name={name}
-            idPet={idPet}
-          >
-          </Notification>
-        </InputArea>
-      </ScrollViewPet>
+      {screenLoading ? (<LoadingIcon size="large" color="black" />) :
+        (<ScrollViewPet>
+          <InputArea>
+
+            <CustomButtonPicture>
+              {!!data.fotoPet && <PetPicture source={{ uri: petProfilePicture }} />}
+
+            </CustomButtonPicture>
+
+            <Input>{data.nome}</Input>
+
+            <InputFields>
+              <InputField>
+                <TitleTextBold>Sexo:</TitleTextBold>
+                <TextField>{data.sexo}</TextField>
+
+              </InputField>
+
+              <InputField>
+                <TitleTextBold>Porte:</TitleTextBold>
+                <TextField>{data.porte}</TextField>
+
+              </InputField>
+
+
+            </InputFields>
+
+            <InputFields>
+              <InputField>
+                <TitleTextBold>Espécie:</TitleTextBold>
+                <TextField>{data.especie}</TextField>
+
+              </InputField>
+
+              <InputField>
+                <TitleTextBold>Idade:</TitleTextBold>
+                <TextField>{data.idade}</TextField>
+
+              </InputField>
+
+            </InputFields>
+
+            <InputField>
+              <TitleTextBold>Descrição:</TitleTextBold>
+              <TextField>{data.descripton}</TextField>
+
+            </InputField>
+
+            <Notification
+              expoPushTokenOwner={expoPushToken}
+              ownerName={ownerName}
+              idRequestingUser={idRequestingUser}
+              requestingUser={requestingUser}
+              name={name}
+              idPet={idPet}
+              request={true}
+            >
+            </Notification>
+          </InputArea>
+        </ScrollViewPet>)}
+
     </Container>
   );
 };
+
+
 
 {
   /* <SimpleTextBold>Selecione o sexo do animal</SimpleTextBold>

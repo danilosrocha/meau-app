@@ -5,8 +5,6 @@ import styled from "styled-components/native";
 export const Container = styled.SafeAreaView`
   background-color: #58bd97;
   width: 100%;
-  justify-content: center;
-  align-items: center;
   flex: 1;
 `;
 
@@ -14,14 +12,34 @@ export const ScrollViewPet = styled.ScrollView`
   width: 100%;
   height: 100%;
   flex: 1;
-  padding: 15px;
 `;
 
 export const InputArea = styled.View`
   width: 100%;
   flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const InputFields = styled.View`
+  width: 100%;
+  flex: 1;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  
+`;
+
+export const InputField = styled.View`
+  width: 100%;
+  flex: 1;
   justify-content: center;
   align-items: center;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 20px;
+  background-color: #4444;
+  
 `;
 
 export const ViewArea = styled.View`
@@ -29,6 +47,13 @@ export const ViewArea = styled.View`
   padding: 10px;
   justify-content: center;
   align-items: center;
+`;
+
+export const Input = styled.Text`
+  flex: 1;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
 `;
 
 /* TEXT */
@@ -40,18 +65,22 @@ export const SimpleText = styled.Text`
 `;
 
 export const SimpleTextBold = styled.Text`
-  font-size: 20px;
-  color: #000000;
-  margin-top: 20px;
+  font-size: 16px;
+  color: #fff;
   font-weight: bold;
+  text-align: center;
+  margin-bottom: auto;
 `;
 
 export const TitleTextBold = styled.Text`
-  font-size: 22px;
-  color: #000000;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  font-size: 18px;
+  color: black;
   font-weight: bold;
+`;
+
+export const TextField = styled.Text`
+  font-size: 16px;
+  color: #fff;
 `;
 
 export const WelcomeSign = styled.Text`
@@ -80,17 +109,7 @@ export const SignMessageButtonTextBold = styled.Text`
 /* BUTTON */
 
 export const CustomButton = styled.TouchableOpacity`
-  width: 100%;
-  background-color: #fff;
-  border-radius: 30px;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-  margin-bottom: 20px;
-`;
-
-export const CustomButtonAdoption = styled.View`
-  width: 100%;
+  width: 85%;
   background-color: #fff;
   border-radius: 30px;
   justify-content: center;
@@ -106,20 +125,24 @@ export const MessageButton = styled.TouchableOpacity`
   margin-bottom: 20px;
 `;
 
-export const CustomButtonPicture = styled.TouchableOpacity`
-  height: 100px;
-  width: 90%;
-  border-radius: 30px;
-  margin-bottom: 20px;
-  background-color: #fff;
+export const CustomButtonPicture = styled.View`
+  height: 200px;
+  width: 100%;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 /* IMAGE */
 
 export const PetPicture = styled.Image`
-  width: 120px;
-  height: 120px;
-  border-radius: 100px;
+  width: 100%;
+  height: 100%;
 `;
+
+export const LoadingIcon = styled.ActivityIndicator`
+    flex: 1;
+    margin-top: 50px;
+    margin-bottom: 50px
+`;
+

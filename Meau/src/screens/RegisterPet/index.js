@@ -6,25 +6,28 @@ import {
   InputArea,
   ViewArea,
   ViewAreaPicker,
+  ViewAreaSwitch,
   ScrollViewPet,
   CustomButton,
   CustomButtonText,
   CustomViewPicture,
   SimpleTextBold,
-  TitleTextBold,
-  CustomButtonPicture,
+  SwitchText,
+  ViewRadioButton,
+  ViewAllRadioButton,
   PetPicture,
+  RadioButtonText,
+  LoadingIcon
 } from "./styles";
 
 import ButtonRequest from "../../components/ButtonRequest";
 import PetInput from "../../components/PetInput";
 import { useNavigation } from "@react-navigation/native";
-import { Picker } from "@react-native-picker/picker";
 import { Alert } from "react-native";
 import { auth, db, storage } from "../../../firebase";
 import * as ImagePicker from "expo-image-picker";
 import Header from "../../components/Header";
-import { Switch } from 'react-native-paper';
+import { Switch, RadioButton, TextInput } from 'react-native-paper';
 
 export default () => {
   const navigation = useNavigation();
@@ -34,11 +37,13 @@ export default () => {
   const [specie, setSpecieField] = useState("Cachorro");
   const [size, setSizeField] = useState("Pequeno");
   const [age, setAgeField] = useState("Filhote");
-  const [adoptionStatus, setAdoptionStatus] = useState(true);
+  const [adoptionStatus, setAdoptionStatus] = useState(false);
   const [avatar, setAvatar] = useState();
   const [fileName, setFileName] = useState("ImagemPet");
+  const [descripton, setDescripton] = useState("");
   const [petProfilePicture, setPetProfilePicture] = useState();
   const [loading, setLoading] = useState(false)
+  const [screenLoading, setScreenLoading] = useState(true);
   const [isSwitchOn, setIsSwitchOn] = useState()
   const idPet = uuidv4();
 
@@ -59,6 +64,7 @@ export default () => {
       id: idPet,
       fileNamePicture: fileName,
       statusAdocao: adoptionStatus,
+      descripton: descripton
     };
 
     myDoc
@@ -170,106 +176,157 @@ export default () => {
       .catch((e) => console.log("getting downloadURL of image error => ", e));
   };
 
+  useEffect(() => {
+    setScreenLoading(false)
+  }, []);
   return (
     <Container>
       <Header
         title={"Cadastrar Pet"}
       />
-      <ScrollViewPet>
-        <InputArea>
 
-          <PetInput
-            placeholder="Nome do pet"
-            onChangeText={(t) => setNameField(t)}
-          />
+      {screenLoading ? (<LoadingIcon size="large" color="black" />) :
+        (<ScrollViewPet>
+          <InputArea>
 
-          <ViewArea>
-            {avatar && (
-              <CustomViewPicture>
-                <PetPicture source={{ uri: petProfilePicture }} />
-              </CustomViewPicture>
-            )}
-
-          </ViewArea>
-
-          <ButtonRequest
-            title={"Adicionar foto do pet"}
-            onPress={handlePictureResgister}
-            isLoading={loading}
-          >
-
-          </ButtonRequest>
-
-          <ViewAreaPicker>
-            <SimpleTextBold>Selecione o sexo do animal</SimpleTextBold>
-            <Picker
-              style={{ height: 50, width: 150 }}
-              selectedValue={sex}
-              onValueChange={(itemValue, itemIndex) => setSexField(itemValue)}
-            >
-              <Picker.Item label="Macho" value="Macho" />
-              <Picker.Item label="Femea" value="Femea" />
-            </Picker>
-
-            <SimpleTextBold>Selecione a especie do animal</SimpleTextBold>
-            <Picker
-              style={{ height: 50, width: 150 }}
-              selectedValue={specie}
-              onValueChange={(itemValue, itemIndex) => setSpecieField(itemValue)}
-            >
-              <Picker.Item label="Cachorro" value="Cachorro" />
-              <Picker.Item label="Gato" value="Gato" />
-            </Picker>
-
-            <SimpleTextBold>Selecione o porte do animal</SimpleTextBold>
-            <Picker
-              style={{ height: 50, width: 150 }}
-              selectedValue={size}
-              onValueChange={(itemValue, itemIndex) => setSizeField(itemValue)}
-            >
-              <Picker.Item label="Pequeno" value="Pequeno" />
-              <Picker.Item label="Médio" value="Médio" />
-              <Picker.Item label="Grande" value="Grande" />
-            </Picker>
-
-            <SimpleTextBold>Selecione a idade do animal</SimpleTextBold>
-            <Picker
-              style={{ height: 50, width: 150 }}
-              selectedValue={age}
-              onValueChange={(itemValue, itemIndex) => setAgeField(itemValue)}
-            >
-              <Picker.Item label="Filhote" value="Filhote" />
-              <Picker.Item label="Adulto" value="Adulto" />
-              <Picker.Item label="Idoso" value="Idoso" />
-            </Picker>
-
-            <SimpleTextBold>Animal para adoção?</SimpleTextBold>
-            <Switch
-              value={isSwitchOn}
-              onValueChange={(itemValue) => setIsSwitchOn(itemValue)}
-              style={{alignItems: "center"}}
+            <PetInput
+              placeholder="Nome do pet"
+              onChangeText={(t) => setNameField(t)}
             />
-            <Picker
-              selectedValue={adoptionStatus}
-              style={{ height: 50, width: 150 }}
-              onValueChange={(itemValue, itemIndex) => setAdoptionStatus(itemValue)}
+
+            <ViewArea>
+              {avatar && (
+                <CustomViewPicture>
+                  <PetPicture source={{ uri: petProfilePicture }} />
+                </CustomViewPicture>
+              )}
+
+            </ViewArea>
+
+            <ButtonRequest
+              title={"Adicionar foto do pet"}
+              onPress={handlePictureResgister}
+              isLoading={loading}
             >
-              <Picker.Item label="Disponível" value={true} />
-              <Picker.Item label="Não disponível" value={false} />
-            </Picker>
-          </ViewAreaPicker>
 
+            </ButtonRequest>
 
+            <ViewAreaPicker>
 
-          <CustomButton onPress={handleRegisterClick}>
-            <CustomButtonText>Cadastrar pet</CustomButtonText>
-          </CustomButton>
+              <SimpleTextBold>Selecione o sexo do animal</SimpleTextBold>
+              <RadioButton.Group
+                onValueChange={value => setSexField(value)}
+                value={sex}
+              >
+                <ViewAllRadioButton>
+                  <ViewRadioButton>
+                    <RadioButton value="Macho" color={"black"} />
+                    <RadioButtonText>Macho</RadioButtonText>
+                  </ViewRadioButton>
 
-          <CustomButton onPress={handleCancelClick}>
-            <CustomButtonText>Cancelar</CustomButtonText>
-          </CustomButton>
-        </InputArea>
-      </ScrollViewPet>
+                  <ViewRadioButton>
+                    <RadioButton value="Fêmea" color={"black"} />
+                    <RadioButtonText>Fêmea</RadioButtonText>
+                  </ViewRadioButton>
+                </ViewAllRadioButton>
+              </RadioButton.Group>
+
+              <SimpleTextBold>Selecione a espécie do animal</SimpleTextBold>
+              <RadioButton.Group
+                onValueChange={value => setSpecieField(value)}
+                value={specie}
+              >
+                <ViewAllRadioButton>
+                  <ViewRadioButton>
+                    <RadioButton value="Cachorro" color={"black"} />
+                    <RadioButtonText>Cachorro</RadioButtonText>
+                  </ViewRadioButton>
+
+                  <ViewRadioButton>
+                    <RadioButton value="Gato" color={"black"} />
+                    <RadioButtonText>Gato</RadioButtonText>
+                  </ViewRadioButton>
+                </ViewAllRadioButton>
+              </RadioButton.Group>
+
+              <SimpleTextBold>Selecione o porte do animal</SimpleTextBold>
+              <RadioButton.Group
+                onValueChange={value => setSizeField(value)}
+                value={size}
+              >
+                <ViewAllRadioButton>
+                  <ViewRadioButton>
+                    <RadioButton value="Pequeno" color={"black"} />
+                    <RadioButtonText>Pequeno</RadioButtonText>
+                  </ViewRadioButton>
+
+                  <ViewRadioButton>
+                    <RadioButton value="Médio" color={"black"} />
+                    <RadioButtonText>Médio</RadioButtonText>
+                  </ViewRadioButton>
+
+                  <ViewRadioButton>
+                    <RadioButton value="Grande" color={"black"} />
+                    <RadioButtonText>Grande</RadioButtonText>
+                  </ViewRadioButton>
+                </ViewAllRadioButton>
+              </RadioButton.Group>
+
+              <SimpleTextBold>Selecione a idade do animal</SimpleTextBold>
+              <RadioButton.Group
+                onValueChange={value => setAgeField(value)}
+                value={age}
+              >
+                <ViewAllRadioButton>
+                  <ViewRadioButton>
+                    <RadioButton value="Filhote" color={"black"} />
+                    <RadioButtonText>Filhote</RadioButtonText>
+                  </ViewRadioButton>
+
+                  <ViewRadioButton>
+                    <RadioButton value="Adulto" color={"black"} />
+                    <RadioButtonText>Adulto</RadioButtonText>
+                  </ViewRadioButton>
+
+                  <ViewRadioButton>
+                    <RadioButton value="Idoso" color={"black"} />
+                    <RadioButtonText>Idoso</RadioButtonText>
+                  </ViewRadioButton>
+                </ViewAllRadioButton>
+              </RadioButton.Group>
+
+              <TextInput
+                label='Descrição do pet'
+                value={descripton}
+                onChangeText={text => setDescripton(text)}
+                style={{ marginTop: 10 }}
+                multiline={true}
+                theme={{ colors: { primary: "black" } }}
+                selectionColor={'black'}
+              />
+
+              <SimpleTextBold>Animal para adoção?</SimpleTextBold>
+              <ViewAreaSwitch>
+                <Switch
+                  value={isSwitchOn}
+                  onValueChange={(itemValue) => (setIsSwitchOn(itemValue), setAdoptionStatus(itemValue))}
+                  color={"black"}
+                />
+                {!!isSwitchOn ? <SwitchText >Disponível</SwitchText> : <SwitchText>Não disponível</SwitchText>}
+              </ViewAreaSwitch>
+
+            </ViewAreaPicker>
+
+            <CustomButton onPress={handleRegisterClick}>
+              <CustomButtonText>Cadastrar pet</CustomButtonText>
+            </CustomButton>
+
+            <CustomButton onPress={handleCancelClick}>
+              <CustomButtonText>Cancelar</CustomButtonText>
+            </CustomButton>
+          </InputArea>
+        </ScrollViewPet>)}
+
     </Container>
   );
 };

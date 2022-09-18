@@ -31,9 +31,37 @@ export const ViewArea = styled.View`
 
 export const ViewAreaPicker = styled.View`
     flex: 1;
+    width: 100%;
     margin-bottom: 20px;
-    /* align-items: center; */
     justify-content: center;
+`;
+
+export const ViewAreaSwitch = styled.View`
+    flex: 1;
+    align-items: center;
+    flex-direction: row;
+    margin-left: 20px;
+`;
+
+export const SwitchText = styled.Text`
+    font-size: 16px;
+    color: #000000;
+`;
+
+export const ViewAllRadioButton = styled.View`
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+`;
+
+export const ViewRadioButton = styled.View`
+    align-items: center;
+    flex-direction: row;
+`;
+
+export const RadioButtonText = styled.Text`
+    font-size: 16px;
+    color: #000000;
 `;
 
 export const CustomViewPicture = styled.View`
@@ -51,10 +79,12 @@ export const SimpleText = styled.Text`
 `;
 
 export const SimpleTextBold = styled.Text`
-    font-size: 20px;
+    font-size: 18px;
+    /* text-align: center; */
     color: #000000;
-    margin-top: 20px;
-    /* font-weight: bold; */
+    margin-left: 10px;
+    margin-top: 10px;
+    font-weight: bold;
 `;
 
 export const TitleTextBold = styled.Text`
@@ -125,3 +155,8 @@ export const PetPicture = styled.Image`
     margin: 5px ;
 `;
 
+export const LoadingIcon = styled.ActivityIndicator`
+    flex: 1;
+    margin-top: 50px;
+    margin-bottom: 50px
+`;

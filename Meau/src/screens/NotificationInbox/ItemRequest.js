@@ -29,15 +29,19 @@ export default ({ item }) => {
 
   const navigation = useNavigation();
 
-  const handleRequestClick = (idRequestingUser, idPet) => {
+  const handleRequestClick = (idRequestingUser, idPet, idReq, request) => {
     navigation.navigate('Requisição', {
       idRequestingUser: idRequestingUser,
       idPet: idPet,
+      idReq: idReq,
+      request: request,
     });
   }
 
+  console.log(">>>>>>>>>>>>> ITEM", item);
+
   return (
-    <FlatlistView onPress={() => handleRequestClick(item.idRequestingUser, item.idPet)}>
+    <FlatlistView onPress={() => handleRequestClick(item.idRequestingUser, item.idPet, item.idReq, item.request)}>
       <TextParam>{item.title}</TextParam>
       <TextParam>{item.body}</TextParam>
     </FlatlistView>

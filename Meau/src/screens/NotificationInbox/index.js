@@ -38,13 +38,18 @@ export default (object) => {
       .then((querySnapshot) => {
         let temporyData = [];
         querySnapshot.forEach((doc) => {
-          const request = {
-            idPet: idPet,
-            idRequestingUser: doc.data().idRequestingUser,
-            title: doc.data().title,
-            body: doc.data().body,
-          };
-          temporyData.push(request)
+          if (doc.data().request) {
+            const request = {
+              idPet: idPet,
+              idRequestingUser: doc.data().idRequestingUser,
+              request: doc.data().request,
+              idReq: doc.data().idReq,
+              title: doc.data().title,
+              body: doc.data().body,
+            };
+            temporyData.push(request)
+          }
+
         });
         setData(temporyData);
       });
@@ -57,11 +62,10 @@ export default (object) => {
     getNotifications()
   }, []);
 
-
   return (
     <Container>
-      <HeaderBack 
-      title={"Requisições de adoção"}
+      <HeaderBack
+        title={"Requisições de adoção"}
       />
       <ViewArea>
         {data

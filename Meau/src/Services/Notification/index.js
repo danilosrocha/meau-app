@@ -20,7 +20,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export default ({ expoPushTokenOwner, ownerName, idRequestingUser, requestingUser, name, idPet }) => {
+export default ({ expoPushTokenOwner, ownerName, idRequestingUser, requestingUser, name, idPet, request }) => {
 
   const navigation = useNavigation();
 
@@ -58,7 +58,7 @@ export default ({ expoPushTokenOwner, ownerName, idRequestingUser, requestingUse
   return (
     <InputArea>
       <CustomButtonAdoption onPress={async () => {
-        await sendPushNotification(expoPushTokenOwner, ownerName, idRequestingUser, requestingUser, name, idPet), handleAdoptClick();
+        await sendPushNotification(expoPushTokenOwner, ownerName, idRequestingUser, requestingUser, name, idPet, request), handleAdoptClick();
       }}>
         <CustomButtonText>Solicitar a adoção do Pet</CustomButtonText>
       </CustomButtonAdoption>
@@ -67,7 +67,7 @@ export default ({ expoPushTokenOwner, ownerName, idRequestingUser, requestingUse
 }
 
 // Can use this function below, OR use Expo's Push Notification Tool-> https://expo.dev/notifications
-async function sendPushNotification(expoPushTokenOwner, ownerName, idRequestingUser, requestingUser, name, idPet) {
+async function sendPushNotification(expoPushTokenOwner, ownerName, idRequestingUser, requestingUser, name, idPet, request) {
   const idReq = uuidv4()
   auth;
   const message = {
@@ -95,7 +95,9 @@ async function sendPushNotification(expoPushTokenOwner, ownerName, idRequestingU
   const IdReq = requests.doc(idReq);
 
   const data = {
+    idReq: idReq,
     idRequestingUser: idRequestingUser,
+    request: request,
     title: 'Solicitação de adoção!',
     body: `Olá ${ownerName}! O usuário ${requestingUser} gostaria de adotar: ${name}`,
   }
