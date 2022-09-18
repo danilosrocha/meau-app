@@ -89,6 +89,29 @@ export default (object) => {
   }
 
   /*USER DATA*/
+<<<<<<< HEAD
+=======
+  const handleAdoptClick = (idPet,namePet, currentOwner) => {
+    auth;
+    const colectHistory = db.collection("PedidosAdocao");
+    const adoptionHistory = colectHistory.doc();
+    const historyData = {
+        Solicitante: auth.currentUser?.uid,
+        SolicitanteEmail:auth.currentUser?.email,
+        Dono: currentOwner,
+        id: idPet,
+        petName: namePet,
+        statusAdocao: false,
+    }
+
+
+    adoptionHistory
+        .set(historyData).then(() => {
+            Alert.alert("Informação", "Pedido de adoção enviado");
+            navigation.navigate('Meus Pets')
+        }).catch((error) => alert(error.message));
+  };
+>>>>>>> Lucas
 
   useEffect(() => {
     getPets();
@@ -118,6 +141,7 @@ export default (object) => {
           <CustomButtonAdoption>
             <CustomButtonText>{data.porte}</CustomButtonText>
           </CustomButtonAdoption>
+<<<<<<< HEAD
           <Notification
           expoPushTokenOwner={expoPushToken}
           ownerName={ownerName}
@@ -127,6 +151,11 @@ export default (object) => {
           idPet={idPet}
           > 
           </Notification>
+=======
+          <CustomButton onPress={() => handleAdoptClick(idPet,data.nome, currentOwner)}>
+            <CustomButtonText>Adotar pet</CustomButtonText>
+          </CustomButton>
+>>>>>>> Lucas
         </InputArea>
       </ScrollViewPet>
     </Container>

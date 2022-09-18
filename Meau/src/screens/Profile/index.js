@@ -134,6 +134,9 @@ export default () => {
 
     const options = {
       noData: true,
+      selectionLimit: 1, // Se deixar 1, será permitido apenas uma foto e 0 várias
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
     };
 
     let result = await ImagePicker.launchCameraAsync(options);
