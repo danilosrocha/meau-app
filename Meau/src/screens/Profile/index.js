@@ -58,11 +58,10 @@ export default () => {
             setAdressField(user.endereco);
             setBirthField(user.dataNascimento);
             setData(user);
-            setIsLoading(false)
           }
         });
       });
-    
+      
   };
 
   /*USER DATA*/
@@ -198,9 +197,13 @@ export default () => {
   };
 
   useEffect(() => {
-    setIsLoading(true)
     getUsers();
+    if (data) {
+      setIsLoading(false)
+    }
   }, []);
+
+
 
   return (
     <Container>

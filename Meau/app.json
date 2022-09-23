@@ -43,7 +43,7 @@
       "package": "Meau.App",
       "googleServicesFile": "./google-services.json",
       "versionCode": 1
-    },
+    },      
     "web": {
       "favicon": "./assets/favicon.png"
     }

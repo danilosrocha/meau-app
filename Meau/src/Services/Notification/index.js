@@ -33,6 +33,9 @@ export default ({ expoPushTokenOwner, ownerName, idRequestingUser, requestingUse
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
+    let uid = auth.currentUser?.uid
+    
+
     // This listener is fired whenever a notification is received while the app is foregrounded
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
       setNotification(notification);
