@@ -1,0 +1,52 @@
+ {
+  "expo": {
+    "name": "MeauApp",
+    "slug": "MeauApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff",
+      "plugins": [
+        [
+          "expo-notifications",
+          {
+            "icon": "./local/assets/notification-icon.png",
+            "color": "#ffffff",
+            "sounds": [
+              "./local/assets/notification-sound.wav",
+              "./local/assets/notification-sound-other.wav"
+            ]
+          }
+        ]
+      ]
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "Meau.App",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "Meau.App",
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 1
+    },      
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+
+}
