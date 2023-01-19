@@ -4,8 +4,6 @@
 
 ## Projeto: Aplicativo Meau
 
-### Links: [Drive com informações do App](https://drive.google.com/drive/folders/15TGfLCMfs-lSO_mYpfqplN8Bdl_qf_MF?usp=sharing)
-
 <b>O aplicativo tem como principal funcionalidade a adoção e doação de animais domésticos
 (especificamente cães e gatos).</b>
 
