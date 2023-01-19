@@ -6,7 +6,8 @@
 
 ### Links: [Drive com informações do App](https://drive.google.com/drive/folders/15TGfLCMfs-lSO_mYpfqplN8Bdl_qf_MF?usp=sharing)
 
-<b>...</b>
+<b>O aplicativo tem como principal funcionalidade a adoção e doação de animais domésticos
+(especificamente cães e gatos).</b>
 
 ![Frame 1](https://user-images.githubusercontent.com/50452655/213350552-ea339b55-0ba7-4ad7-b31d-582dde61e252.png)
 ![Frame 2](https://user-images.githubusercontent.com/50452655/213350558-f118b8f1-9c03-4340-a3b0-3b5d03b700d7.png)
