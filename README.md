@@ -4,11 +4,9 @@
 
 ## Projeto: Aplicativo Meau
 
-<b>O aplicativo Meau é uma plataforma revolucionária para a adoção e doação de animais domésticos, especificamente cães e gatos. Ele foi desenvolvido com as tecnologias React Native, Expo, Styled Components e Firebase, para oferecer uma experiência de usuário fluida e intuitiva.
+<b>O aplicativo Meau é uma plataforma para a adoção e doação de animais domésticos, especificamente cães e gatos. Ele foi desenvolvido com as tecnologias React Native, Expo, Styled Components e Firebase, para oferecer uma experiência de usuário fluida e intuitiva.
 
-A principal funcionalidade do Meau é conectar pessoas que desejam adotar ou doar animais domésticos com organizações de proteção animal e abrigos. Isso é feito por meio de uma interface de busca avançada, que permite que os usuários encontrem animais com base em critérios como raça, idade e localização.
-
-O Meau também oferece recursos para ajudar os usuários a cuidar dos animais adotados, incluindo informações sobre saúde e comportamento, além de dicas para treinamento e cuidado.
+A principal funcionalidade do Meau é conectar pessoas que desejam adotar ou doar animais domésticos. Isso é feito por meio de uma interface de busca, que permite que os usuários encontrem animais com base em critérios como raça, idade e localização.
 
 Além disso, o Meau é projetado para ser uma plataforma social, permitindo que os usuários compartilhem fotos e histórias dos animais adotados e conectem-se com outros usuários para trocar dicas e conselhos.
 
